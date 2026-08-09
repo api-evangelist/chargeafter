@@ -1,0 +1,470 @@
+openapi: 3.0.1
+info:
+  title: Consumers Management
+  termsOfService: https://chargeafter.com/privacy-policy
+  contact:
+    name: Customer Support
+    email: support@chargeafter.com
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.ca-dev.co
+  description: Sandbox Environment
+security:
+- bearerAuth: []
+paths:
+  /v2/post-sale/consumers/{consumerid}:
+    get:
+      tags:
+      - Consumer Management
+      summary: Get consumer info
+      description: Fetching updated information of an existing consumer
+      parameters:
+      - name: consumerid
+        in: path
+        required: true
+        schema:
+          type: string
+          nullable: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetConsumerResponse'
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+  /v2/post-sale/consumers/{consumerid}/legal-info:
+    get:
+      tags:
+      - Consumer Management
+      summary: Get legal info
+      description: Geting legal info from lenders
+      parameters:
+      - name: consumerid
+        in: path
+        required: true
+        schema:
+          type: string
+          nullable: true
+      - name: lenderid
+        in: query
+        schema:
+          type: string
+          nullable: true
+      - name: totalamount
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: promocode
+        in: query
+        schema:
+          type: string
+          nullable: true
+      - name: channel
+        in: query
+        schema:
+          $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.Channel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetLegalDocsResponse'
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+  /v2/post-sale/consumers/{consumerid}/charges:
+    post:
+      tags:
+      - Consumer Management
+      summary: Create a new charge
+      description: Creating a charge with consumer id
+      parameters:
+      - name: consumerid
+        in: path
+        required: true
+        schema:
+          type: string
+          nullable: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Requests.CreateChargeRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.CreateChargeResponse'
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+components:
+  schemas:
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCredit:
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          format: double
+        lender:
+          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender'
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address:
+      type: object
+      properties:
+        city:
+          type: string
+          nullable: true
+        line1:
+          type: string
+          nullable: true
+        line2:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        zipCode:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetConsumerResponse:
+      type: object
+      properties:
+        availableCredit:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCredit'
+          nullable: true
+        billingAddress:
+          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
+        email:
+          type: string
+          nullable: true
+        firstName:
+          type: string
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        mobilePhoneNumber:
+          type: string
+          nullable: true
+        shippingAddress:
+          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ChargeAfter.BFF.Domain.Entities.Warranty:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        sku:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.BFF.Domain.Entities.Item:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: double
+        sku:
+          type: string
+          nullable: true
+        quantity:
+          type: integer
+          format: int32
+        leasable:
+          type: boolean
+          nullable: true
+        productCategory:
+          type: string
+          nullable: true
+        warranty:
+          $ref: '#/components/schemas/ChargeAfter.BFF.Domain.Entities.Warranty'
+      additionalProperties: false
+    ChargeAfter.BFF.Domain.Entities.Discount:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        amount:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.Channel:
+      type: object
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Requests.CreateChargeRequestBody:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.BFF.Domain.Entities.Item'
+          nullable: true
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.BFF.Domain.Entities.Discount'
+          nullable: true
+        taxAmount:
+          type: number
+          format: double
+        shippingAmount:
+          type: number
+          format: double
+        totalAmount:
+          type: number
+          format: double
+        lenderId:
+          type: string
+          nullable: true
+        merchantOrderId:
+          type: string
+          nullable: true
+        promoCode:
+          type: string
+          nullable: true
+        storeId:
+          type: string
+          nullable: true
+        channel:
+          $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.Channel'
+      additionalProperties: false
+    ChargeAfter.Contracts.BuyerType:
+      enum:
+      - Consumer
+      - Organization
+      type: string
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.PaymentPlan:
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.CreateChargeResponse:
+      type: object
+      properties:
+        buyerId:
+          type: string
+          nullable: true
+        buyerType:
+          $ref: '#/components/schemas/ChargeAfter.Contracts.BuyerType'
+        channel:
+          type: string
+          nullable: true
+        consumerId:
+          type: string
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        lender:
+          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender'
+        merchantOrderId:
+          type: string
+          nullable: true
+        paymentPlan:
+          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.PaymentPlan'
+        refundedAmount:
+          type: number
+          format: double
+        state:
+          type: string
+          nullable: true
+        totalAmount:
+          type: number
+          format: double
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Document:
+      type: object
+      properties:
+        mimetype:
+          type: string
+          nullable: true
+        blob:
+          type: string
+          nullable: true
+        filename:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetLegalDocsResponse:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Document'
+          nullable: true
+        lenderId:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: ChargeAfter API uses bearer authentication.

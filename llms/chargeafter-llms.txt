@@ -1,0 +1,113 @@
+# ChargeAfter Documentation
+
+> Documentation for ChargeAfter
+
+## Guides
+- [Overview](https://docs.chargeafter.com/docs/overview.md)
+- [Apply Overview](https://docs.chargeafter.com/docs/apply-overview.md)
+- [Checkout Overview](https://docs.chargeafter.com/docs/checkout-overview.md)
+- [Getting Started for eComm](https://docs.chargeafter.com/docs/getting-started-for-ecomm.md): An overview of the minimum requirements for eCommerce merchants to successfully integrate with ChargeAfter.
+- [SDK User Guide](https://docs.chargeafter.com/docs/sdk-user-guide.md)
+- [SDK Integration](https://docs.chargeafter.com/docs/overview-3.md): Getting started with ChargeAfter SDK
+- [Apply](https://docs.chargeafter.com/docs/use-the-apply-ui.md): How to integrate the Apply flow with the SDK
+- [Checkout](https://docs.chargeafter.com/docs/checkout-ui.md)
+- [Adding the Checkout Button](https://docs.chargeafter.com/docs/add-button.md)
+- [Launching the Checkout Experience](https://docs.chargeafter.com/docs/present.md): How to create a customer/consumer and cart prior to creating a charge.
+- [Direct Lender Payment Option](https://docs.chargeafter.com/docs/present-the-list-of-lenders-available-optional.md)
+- [Creating a Charge](https://docs.chargeafter.com/docs/commit-a-charge.md)
+- [Events (callbacks)](https://docs.chargeafter.com/docs/events.md)
+- [onModalOpen](https://docs.chargeafter.com/docs/onmodalopen.md)
+- [onApplicationCreated](https://docs.chargeafter.com/docs/onapplicationcreated.md)
+- [onDataUpdate](https://docs.chargeafter.com/docs/ondataupdate.md)
+- [onConfirm](https://docs.chargeafter.com/docs/onconfirm.md)
+- [onComplete](https://docs.chargeafter.com/docs/callback.md)
+- [Testing the Integration](https://docs.chargeafter.com/docs/testing-1.md)
+- [Promotional Widgets](https://docs.chargeafter.com/docs/promotional-widget-overview.md): Overview
+- [Widget Structure & Implementation](https://docs.chargeafter.com/docs/promotional-widget-1.md)
+- [Updating Widget Data](https://docs.chargeafter.com/docs/data-update.md)
+- [Widget Samples](https://docs.chargeafter.com/docs/widget-structure-implementation-samples.md)
+- [Plugins](https://docs.chargeafter.com/docs/overview-4.md): Overview
+- [Shopify](https://docs.chargeafter.com/docs/shopify-new-plug-in.md): Integrate ChargeAfter with the Shopify e-commerce platform.
+- [Installation](https://docs.chargeafter.com/docs/installation-new-plug-in.md)
+- [Add Promotional Tools](https://docs.chargeafter.com/docs/adding-promotional-tools-3.md)
+- [Lease-to-Own & Warranty Products](https://docs.chargeafter.com/docs/tagging-a-product-as-non-leasable-warranty-1.md)
+- [Post Sale Operations](https://docs.chargeafter.com/docs/shopify-post-order-operations-1.md): Complete transactions and maintain efficient payment flows post-sale through ChargeAfter.
+- [Magento 2](https://docs.chargeafter.com/docs/magento2.md): Integrate ChargeAfter into the Magento 2 e-commerce platform.
+- [Installation](https://docs.chargeafter.com/docs/installation.md)
+- [Add Promotional Widgets](https://docs.chargeafter.com/docs/magento-add-promotional-tools.md)
+- [Lease-to-Own Support](https://docs.chargeafter.com/docs/magento-lease-to-own-support.md)
+- [Post Sale Operations](https://docs.chargeafter.com/docs/magento-post-sale-operations.md)
+- [Add Warranty to Products](https://docs.chargeafter.com/docs/add-warranty-to-products.md)
+- [NopCommerce](https://docs.chargeafter.com/docs/nopcommerce.md): Integrate ChargeAfter into the NopCommerce e-commerce platform.
+- [Installation](https://docs.chargeafter.com/docs/nopcommerce-installation.md)
+- [Add Promotional Widget](https://docs.chargeafter.com/docs/nopcommerce-add-promotional-widget.md)
+- [Lease-to-Own Support](https://docs.chargeafter.com/docs/nop-lease-to-own-support.md)
+- [Post Sale Operations](https://docs.chargeafter.com/docs/nopcommerce-post-sale-operations.md)
+- [Add Warranty to Products](https://docs.chargeafter.com/docs/nopcommerce-warranty.md)
+- [WooCommerce](https://docs.chargeafter.com/docs/woocommerce.md): Integrate ChargeAfter into the WooCommerce e-commerce platform.
+- [Installation](https://docs.chargeafter.com/docs/woocommerce-installation.md)
+- [Add Promotional Widgets](https://docs.chargeafter.com/docs/woocommerce-add-promotional-tools.md)
+- [Lease-to-Own Support](https://docs.chargeafter.com/docs/woo-lease-to-own-support.md)
+- [Post Sale Operations](https://docs.chargeafter.com/docs/woocommerce-post-sale-operations.md)
+- [Add Warranty to Products](https://docs.chargeafter.com/docs/adding-warranty-to-products.md)
+- [BigCommerce](https://docs.chargeafter.com/docs/bigcommerce.md): Integrate ChargeAfter into the BigCommerce e-commerce platform.
+- [Installation](https://docs.chargeafter.com/docs/bigcommerce-installation.md)
+- [Add Promotional Widgets](https://docs.chargeafter.com/docs/adding-promotional-tools-1.md)
+- [Lease-to-Own Support](https://docs.chargeafter.com/docs/big-lease-to-own-support.md)
+- [Post Sale Operations](https://docs.chargeafter.com/docs/post-order-operations.md)
+- [Add Warranty to Products](https://docs.chargeafter.com/docs/warranty.md)
+- [Shopware](https://docs.chargeafter.com/docs/shopware.md): Integrate ChargeAfter into the Shopware e-commerce platform.
+- [Installation](https://docs.chargeafter.com/docs/shopware-installation.md)
+- [Add Promotional Widget](https://docs.chargeafter.com/docs/shopware-add-promotional-widget.md)
+- [Post Sale Operations](https://docs.chargeafter.com/docs/shopware-post-sale-operations.md)
+- [Miva](https://docs.chargeafter.com/docs/miva.md): Integrate ChargeAfter into the Miva e-commerce platform.
+- [Installation](https://docs.chargeafter.com/docs/miva-installation.md)
+- [Add Promotional Widgets](https://docs.chargeafter.com/docs/miva-add-promotional-widget.md)
+- [Post Sale Operations](https://docs.chargeafter.com/docs/miva-post-sale-operations.md)
+- [Overview](https://docs.chargeafter.com/docs/instore-overview.md)
+- [Getting Started for In-Store/Call Center](https://docs.chargeafter.com/docs/getting-started-for-in-storecall-center.md): An overview of the minimum requirements for In-Store/Call Center merchants to successfully integrate with ChargeAfter.
+- [Integrating with the API](https://docs.chargeafter.com/docs/integrating-with-the-api.md): Starting the Apply and Checkout flows with the `omni-link` API
+- [Integrating with the SDK](https://docs.chargeafter.com/docs/using-the-sdk.md)
+- [Introduction to Operate](https://docs.chargeafter.com/docs/overview-2.md)
+- [Using Data in Operate](https://docs.chargeafter.com/docs/using-data-in-operate.md): How to export, filter, share, sort, and customize the view of data in Operate.
+- [Business Financing and Leasing](https://docs.chargeafter.com/docs/b2b-financing-and-leasing.md)
+- [Supported Browsers](https://docs.chargeafter.com/docs/supported-browsers.md): The list of browsers officially supported by ChargeAfter
+
+## API Reference
+- [Overview](https://docs.chargeafter.com/reference/api-overview.md)
+- [API Environments](https://docs.chargeafter.com/reference/api-environments.md)
+- [Authentication](https://docs.chargeafter.com/reference/authentication.md)
+- [API Changes Guidelines](https://docs.chargeafter.com/reference/api-changes-guidelines.md)
+- [Create a new session](https://docs.chargeafter.com/reference/post_v3-session-1.md): Creates a session with an optional cart, consumer and checkout details.
+- [Get interactive token](https://docs.chargeafter.com/reference/get_v2-checkout-applications-applicationid-token.md): Returns a time-limited interactive session token to resume the Checkout flow for an account associated with the application.
+- [Get lender accounts and offers](https://docs.chargeafter.com/reference/get_v3-session-accounts-1.md)
+- [Get accounts with offers for consumer](https://docs.chargeafter.com/reference/post_v2-checkout-accounts.md): Looks up an existing account and returns relevant offers. If there is no existing account, this creates a new account and returns relevant offers.
+- [Get accounts with offers with existing applicationId](https://docs.chargeafter.com/reference/post_v2-checkout-applications-applicationid-accounts.md): Looks up an existing account and returns relevant offers.
+- [Create new charge with accountToken](https://docs.chargeafter.com/reference/post_v2-accounts-charge.md): Creates a new charge from an existing approved account with an accountToken.
+- [Get status of an application](https://docs.chargeafter.com/reference/get_v2-checkout-applications-applicationid-status.md)
+- [Create a new Charge](https://docs.chargeafter.com/reference/post_v2-post-sale-charges.md): Initiates a new charge transaction, allowing you to securely process payments from customers. This action is typically used to bill for products or services.
+- [Get details of a Charge](https://docs.chargeafter.com/reference/charges-get-details.md): Fetching updated information of an existing Charge
+- [Update a Charge](https://docs.chargeafter.com/reference/charges-update.md)
+- [Update delivery data](https://docs.chargeafter.com/reference/charges-update-data.md): Update delivery data for items in an existing Charge
+- [Refund a Charge](https://docs.chargeafter.com/reference/charges-refund.md): Process a refund for a previously settled amount. This action facilitates the return of funds to the customer for various reasons, such as returned goods or canceled services.
+- [Settle a Charge](https://docs.chargeafter.com/reference/charges-settle.md): Complete a payment transaction by settling a charge. This action confirms the secure transfer of funds according to the authorized terms.
+- [Void a Charge](https://docs.chargeafter.com/reference/charges-void.md): Cancel and invalidate an authorized charge before it is settled. This action prevents the charge from being completed or appearing on the customer's statement. Use voiding for transactions that need to be canceled early in the process.
+- [Consumer Management](https://docs.chargeafter.com/reference/consumer-management-1.md)
+- [Get consumer details](https://docs.chargeafter.com/reference/get_v2-consumers-consumerid-1.md): Returns consumer details
+- [Get accounts by consumerId](https://docs.chargeafter.com/reference/get_v2-consumers-consumerid-accounts.md): Lookup existing accounts by consumerId
+- [Get accounts and account token](https://docs.chargeafter.com/reference/post_v2-consumers-consumer-details.md): Combines account lookup and account token creation for approved accounts
+- [GET funding report](https://docs.chargeafter.com/reference/get_v2-post-sale-fundings-report-1.md): Return funding records based on supplied filters.
+- [Omni-Link](https://docs.chargeafter.com/reference/links.md)
+- [Generate consumer application link](https://docs.chargeafter.com/reference/post_v2-omni-link-consumer-application.md): This endpoint generates a unique URL for a given consumer context that can be used to launch ChargeAfter's Apply experience.
+- [Generate consumer checkout link](https://docs.chargeafter.com/reference/post_v2-omni-link-consumer-checkout.md): This endpoint generates a unique URL for a given consumer context that can be used to launch ChargeAfter's Checkout experience.
+- [Get link data](https://docs.chargeafter.com/reference/get_v2-omni-link-consumer-linkid.md): Enables retrieval of link data for the consumer-associated context.
+- [Event Notifications](https://docs.chargeafter.com/reference/merchants-notifications.md): Descriptions and payloads of webhooks available for subscription via Operate
+
+## Changelog
+- [Changes to Merchant Notifications](https://docs.chargeafter.com/changelog/new-merchant-notifications.md)
+- [Additions to Consumer Confirmation Payload](https://docs.chargeafter.com/changelog/additions-to-consumer-confirmation-payload.md)
+- [GET application status Payload Improvements](https://docs.chargeafter.com/changelog/get-status-of-application-improvements.md)
+- [Consumer Management APIs](https://docs.chargeafter.com/changelog/consumer-management-apis.md)
+- [Funding API](https://docs.chargeafter.com/changelog/funding-api-1.md)
+- [Funding API](https://docs.chargeafter.com/changelog/funding-api.md)
+- [February Announcements](https://docs.chargeafter.com/changelog/february-announcements.md)

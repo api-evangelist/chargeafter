@@ -1,0 +1,87 @@
+generated: '2026-08-09'
+method: searched
+source: https://docs.chargeafter.com/reference/authentication
+docs: https://docs.chargeafter.com/reference/authentication
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  oauth2_flows: []
+  model: >-
+    A single static bearer credential sent in the Authorization header. ChargeAfter provisions two keys per
+    environment — a public API key for client-side SDK use and a private API key for server-to-server calls.
+    There is no OAuth 2.0 flow, no token exchange, and no scope surface on the payments API. All requests
+    must be made over HTTPS; a missing, incorrect, or outdated key returns HTTP 401.
+credentials:
+- name: Public API key
+  usage: client-side
+  description: Used by the ChargeAfter JavaScript SDK in the browser. Safe to expose in public code.
+- name: Private API key
+  usage: server-side
+  description: >-
+    Used for backend REST calls. Must be stored securely on the server and never exposed to the client;
+    it performs API requests without restriction.
+environments:
+- name: production
+  base_url: https://api.chargeafter.com
+  keys: production key pair
+- name: sandbox
+  base_url: https://api-sandbox.ca-dev.co
+  keys: sandbox key pair
+- name: uat
+  base_url: https://api-uat.ca-dev.co
+  keys: UAT key pair
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: >-
+    Declared as an apiKey scheme in the OpenAPI, but the documented wire format is
+    `Authorization: Bearer <PRIVATE_API_KEY>` — the spec models a bearer credential as an apiKey header.
+  sources:
+  - openapi/chargeafter-charge-api-openapi.yml
+  - openapi/chargeafter-checkout-application-status-openapi.yml
+  - openapi/chargeafter-checkout-application-token-openapi.yml
+  - openapi/chargeafter-checkout-session-accounts-openapi.yml
+  - openapi/chargeafter-checkout-session-openapi.yml
+  - openapi/chargeafter-consumer-api-openapi.yml
+  - openapi/chargeafter-consumer-credit-lookup-openapi.yml
+  - openapi/chargeafter-consumer-details-openapi.yml
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml
+  - openapi/chargeafter-distribution-api-openapi.yml
+  - openapi/chargeafter-funding-api-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: ChargeAfter API uses bearer authentication.
+  sources:
+  - openapi/chargeafter-consumers-management-openapi.yml
+- name: Bearer
+  type: http
+  scheme: Bearer
+  bearerFormat: bearerFormat
+  description: >-
+    Capitalized `Bearer` scheme value — a spec defect; RFC 7235 scheme names in OpenAPI `http` schemes are
+    lowercase. Wire behaviour is identical to bearerAuth.
+  sources:
+  - openapi/chargeafter-omni-link-openapi.yml
+notes:
+- >-
+  Three different security-scheme shapes (`apiKey` in header, `bearerAuth`, `Bearer`) describe one credential
+  across ChargeAfter's twelve published definitions. The apiKey scheme's own description says the key is
+  "provided in the `apiKey` HTTP header", which contradicts both its own `name: Authorization` and the
+  documented `Authorization: Bearer` form.
+- >-
+  A separate OAuth 2.0 authorization server is published on the marketing site at
+  https://chargeafter.com/.well-known/oauth-authorization-server with `scopes_supported: [mcp]`. It fronts a
+  WordPress MCP endpoint, not the payments API — see mcp/chargeafter-mcp.yml.
+x-evidence:
+- url: https://docs.chargeafter.com/reference/authentication
+  http_status: 200
+  fetched: '2026-08-09'
+- url: https://docs.chargeafter.com/reference/api-environments
+  http_status: 200
+  fetched: '2026-08-09'

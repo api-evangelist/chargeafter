@@ -1,0 +1,76 @@
+generated: '2026-08-09'
+method: searched
+source: https://docs.chargeafter.com/reference/merchants-notifications
+spec_type: none
+spec_note: >-
+  ChargeAfter publishes no AsyncAPI document. The event surface is documented as a prose webhook reference
+  only, so this artifact captures the webhook catalog verbatim rather than a machine-readable event spec.
+surface: webhooks
+subscription:
+  mechanism: merchant self-service in the Operate back office
+  location: Notifications tab, Company Information module
+  docs: https://docs.chargeafter.com/reference/merchants-notifications
+delivery:
+  transport: HTTPS POST to a merchant-supplied endpoint
+  signature_verification: not documented
+  retry_policy: not documented
+  replay: not documented
+envelope:
+  common_fields:
+  - eventType
+  - createdAt
+  - correlationId
+  - applicationId
+events:
+- name: application.created
+  description: >-
+    An application session has begun. Useful for tracking applications initiated through the OmniLink API.
+  payload_fields: [applicationId, correlationId, createdAt]
+- name: application.prequalified
+  description: >-
+    A lender has prequalified the application. One notification is sent per lender when several prequalify.
+  payload_fields: [applicationId, lenderId, amount, correlationId, createdAt]
+- name: application.approved
+  description: A lender has approved the application.
+  payload_fields: [applicationId, lenderId, amount, correlationId, createdAt]
+- name: application.pending-lender
+  description: The lender has begun reviewing the application.
+  payload_fields: [applicationId, lenderId, reason, correlationId, createdAt]
+- name: application.pending-consumer
+  description: Additional consumer action is required for the review to continue.
+  payload_fields: [applicationId, lenderId, reason, correlationId, createdAt]
+- name: application.pending-merchant
+  description: Additional merchant action is required for the review to continue.
+  payload_fields: [applicationId, lenderId, reason, correlationId, createdAt]
+- name: application.declined
+  description: The lender declined the application.
+  payload_fields: [applicationId, lenderId, correlationId, createdAt]
+- name: application.cancelled
+  description: The lender cancelled the application.
+  payload_fields: [applicationId, lenderId, correlationId, createdAt]
+- name: application.apply-confirmed
+  description: The consumer confirmed the Apply request.
+  status: deprecated
+  payload_fields: [applicationId, lenderId, amount, token, correlationId, createdAt]
+- name: application.checkout-confirmed
+  description: The consumer confirmed the Checkout request at completion of the process.
+  payload_fields: [applicationId, lenderId, amount, token, correlationId, createdAt]
+client_side_events:
+  note: >-
+    Distinct from webhooks — these are browser callbacks fired by the ChargeAfter JavaScript SDK, not
+    server-delivered notifications.
+  docs: https://docs.chargeafter.com/docs/events
+  events:
+  - onModalOpen
+  - onApplicationCreated
+  - onDataUpdate
+  - onConfirm
+  - onComplete
+gaps:
+- No AsyncAPI (or other machine-readable) description of the event surface is published.
+- No webhook signature or verification scheme is documented, so receivers cannot authenticate a delivery.
+- No retry, ordering, or replay guarantees are stated.
+x-evidence:
+- url: https://docs.chargeafter.com/reference/merchants-notifications.md
+  http_status: 200
+  fetched: '2026-08-09'

@@ -1,0 +1,36 @@
+generated: '2026-08-09'
+method: generated
+source: >-
+  openapi/ — 13 published ChargeAfter OpenAPI 3.0.1 definitions, 46 operations — plus
+  conventions/chargeafter-conventions.yml, errors/chargeafter-error-codes.yml and
+  asyncapi/chargeafter-notifications-webhooks.yml
+grounding_note: >-
+  ChargeAfter declares no operationId on any of its 46 published operations. Every step in every skill is
+  anchored on the real METHOD + path from the harvested definition; the operationId names quoted alongside
+  are the derived ids added by overlays/chargeafter-*-overlay.yaml, not provider-published identifiers.
+skills:
+- file: chargeafter-ecommerce-checkout-financing.md
+  name: ChargeAfter ecommerce checkout financing
+  api: openapi/chargeafter-checkout-session-openapi.yml
+  operations: [createANewSession, getLenderAccountsAndOffers, getAccountsWithOffersForConsumer,
+    getStatusOfAnApplication, createConfirmationWithApplicationAndCartDetails, createNewChargeWithAccountToken]
+- file: chargeafter-post-sale-charge-operations.md
+  name: ChargeAfter post-sale charge operations
+  api: openapi/chargeafter-charge-api-openapi.yml
+  operations: [createANewCharge, getDetailsOfACharge, updateACharge, settleACharge, refundACharge, voidACharge,
+    updateDeliveryData, getChargeId, getTransactionByMerchantTransactionId, getTransactionById]
+- file: chargeafter-omnilink-instore-financing.md
+  name: ChargeAfter OmniLink in-store and call-center financing
+  api: openapi/chargeafter-omni-link-openapi.yml
+  operations: [generateConsumerApplicationLink, generateConsumerCheckoutLink, getLinkData,
+    getStatusOfAnApplication, getInteractiveToken]
+- file: chargeafter-funding-reconciliation.md
+  name: ChargeAfter funding reconciliation
+  api: openapi/chargeafter-funding-api-openapi.yml
+  operations: [getFundingReportNew, getTransactionByMerchantTransactionId, getDetailsOfACharge]
+- file: chargeafter-lender-dispute-management.md
+  name: ChargeAfter lender dispute management
+  api: openapi/chargeafter-disputes-management-lenders-openapi.yml
+  operations: [createADispute, getDisputeDetails, assignTheDisputeToMerchantOrLender,
+    addNotesAndOrUploadSupportingDocumentsForADispute, resolveADispute, reopenAResolvedDispute,
+    reverseTheChargebackTransaction]

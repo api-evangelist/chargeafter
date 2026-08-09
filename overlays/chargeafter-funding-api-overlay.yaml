@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for ChargeAfter Funding API
+  version: 1.0.0
+extends: openapi/chargeafter-funding-api-openapi.yml
+x-generated: '2026-08-09'
+x-method: generated
+x-note: The published definition declares no operationId on any operation. These actions add derived, stable operationIds
+  so workflows, agent skills and tool crosswalks can bind to operations by name. The original definition is never
+  mutated.
+actions:
+- target: $.info
+  description: Record the API Evangelist profile and the discovery path this definition was harvested from.
+  update:
+    x-apievangelist-provider: chargeafter
+    x-apievangelist-profile: https://apis.io/provider/chargeafter/
+    x-apievangelist-source: https://docs.chargeafter.com/.well-known/api-catalog
+    x-apievangelist-harvested: '2026-08-09'
+- target: $.paths['/v2/post-sale/fundings/report'].get
+  description: Add a stable operationId; the published definition declares none.
+  update:
+    operationId: getFundingReportNew

@@ -1,0 +1,117 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/ — numeric error codes extracted verbatim from OpenAPI 4xx response descriptions
+envelope:
+  field: errors[].code
+  sibling: errors[].description
+  trace: requestId
+note: 'ChargeAfter publishes no error-reference page. This registry was recovered from the <i>code</i> - <description>
+  lists embedded in the OpenAPI response descriptions, which is the only place the numeric codes appear. Ranges
+  observed: 1xxx generic resource/field errors, 2xxx charge lifecycle errors, 10xxx request-payload and consumer-eligibility
+  errors. The registry is therefore a floor, not a complete list — codes returned by operations that do not enumerate
+  them are not captured.'
+code_count: 12
+codes:
+- code: '1002'
+  message: Resource not found
+  http_status:
+  - 404
+  operation_count: 7
+  example_operations:
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#GET /api/disputes/lenders/{id}
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#POST /api/disputes/lenders/{id}/reopen
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#POST /api/disputes/lenders/{id}/resolve
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#POST /api/disputes/lenders/{id}/update
+- code: '1005'
+  message: Field value is invalid
+  http_status:
+  - 400
+  operation_count: 6
+  example_operations:
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#POST /api/disputes/lenders/{id}/reopen
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#POST /api/disputes/lenders/{id}/resolve
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#POST /api/disputes/lenders/{id}/update
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#PUT /api/disputes/lenders
+- code: '1110'
+  message: <validation error>
+  http_status:
+  - 400
+  operation_count: 2
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/accounts/charge
+  - openapi/chargeafter-charge-api-openapi.yml#PUT /v2/accounts/lookup/account-id
+- code: '2001'
+  message: charge not found
+  http_status:
+  - 400
+  operation_count: 7
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/charges/{chargeid}
+  - openapi/chargeafter-charge-api-openapi.yml#PATCH /v2/post-sale/charges/{chargeid}
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/voids/async
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/{chargeid}/refunds
+- code: '2002'
+  message: charge already has assigned confirmation
+  http_status:
+  - 400
+  operation_count: 2
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/accounts/charge
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges
+- code: '2004'
+  message: confirmation not found
+  http_status:
+  - 400
+  operation_count: 2
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/accounts/charge
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges
+- code: '2006'
+  message: Operation is not permitted at this stage
+  http_status:
+  - 400
+  operation_count: 3
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/{chargeid}/refunds
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/{chargeid}/settles
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/{chargeid}/voids
+- code: '10000'
+  message: Invalid request payload
+  http_status:
+  - 400
+  operation_count: 2
+  example_operations:
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/application
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/checkout
+- code: '10001'
+  message: Field value is required
+  http_status:
+  - 400
+  operation_count: 2
+  example_operations:
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/application
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/checkout
+- code: '10002'
+  message: Field value is invalid
+  http_status:
+  - 400
+  operation_count: 2
+  example_operations:
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/application
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/checkout
+- code: '10101'
+  message: The selected option is not enabled
+  http_status:
+  - 403
+  operation_count: 2
+  example_operations:
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/application
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/checkout
+- code: '10201'
+  message: The specified consumer has opted-out
+  http_status:
+  - 403
+  operation_count: 2
+  example_operations:
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/application
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/checkout

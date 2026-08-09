@@ -1,0 +1,78 @@
+generated: '2026-08-09'
+method: searched
+source: https://docs.chargeafter.com/reference/api-changes-guidelines
+versioning:
+  scheme: uri-path
+  current: v3 (sessions), v2 (everything else)
+  versions_in_use: [v2, v3]
+  unversioned:
+  - /api/disputes/lenders (Disputes Management for Lenders API)
+  docs: https://docs.chargeafter.com/reference/api-changes-guidelines
+  detail: >-
+    Breaking changes are introduced in new major versions. The definitions themselves carry build-stamped
+    semantic versions (e.g. Charge API 1.2.45, Checkout Management 3.0.118, OmniLink API 1.11.8) that are
+    independent of the URI version segment.
+deprecation:
+  policy_url: https://docs.chargeafter.com/reference/api-changes-guidelines
+  policy_published: true
+  sunset_header: false
+  deprecation_header: false
+  notice_period: not specified
+  communication: release notes and mailing list
+  breaking_changes:
+  - endpoint deprecations
+  - changes in data structures
+  - alterations to authentication methods
+  non_breaking_changes:
+  - addition of a response body where none previously existed
+  - reordering of fields
+  - addition of new enum values where a default is defined
+  - addition of optional or read-only fields
+  detail: >-
+    ChargeAfter states it "specif[ies] deprecation timelines and provide[s] alternatives whenever possible"
+    but publishes no concrete notice period, and supports neither RFC 8594 Sunset nor the Deprecation header.
+deprecated_operations:
+- ref: openapi/chargeafter-charge-api-openapi.yml#PATCH /v2/accounts/deprecate
+  note: >-
+    Not a deprecated operation — an operation that deprecates an account by lender loan id. Recorded here to
+    prevent misreading the path.
+deprecated_events:
+- name: application.apply-confirmed
+  surface: webhook
+  note: Documented as "deprecated soon"; no removal date published.
+  source: https://docs.chargeafter.com/reference/merchants-notifications
+superseded_definitions:
+  note: >-
+    The /.well-known/api-catalog linkset advertises 62 OpenAPI definitions, of which roughly a third are
+    superseded builds of the same API (e.g. Charge API 1.1.1950 alongside 1.2.45; OmniLink 1.1.0, 1.7.7 and
+    1.11.8; Consumer API 1.0.0, 2.1.1413, 2.2.9 and 2.3.29). Eight catalog entries now return 404. Nothing
+    in the catalog marks which definition is current, so a consumer reading the catalog cannot tell a live
+    contract from a retired one.
+  observed_404_entries: 12
+  catalog: https://docs.chargeafter.com/.well-known/api-catalog
+status_page: https://chargeafter.statuspage.io/
+status_page_detail:
+  provider: Atlassian Statuspage
+  current: All Systems Operational
+  components:
+  - API (example)
+  - Management Portal (example)
+  - ChargeAfter
+  note: >-
+    Two of the four listed components are still named with the Statuspage default placeholder suffix
+    "(example)", which suggests the page has not been fully configured.
+sla:
+  published: false
+  note: No public SLA or uptime commitment is published.
+changelog: https://docs.chargeafter.com/changelog
+x-evidence:
+- url: https://docs.chargeafter.com/reference/api-changes-guidelines.md
+  http_status: 200
+  fetched: '2026-08-09'
+- url: https://chargeafter.statuspage.io/
+  http_status: 200
+  fetched: '2026-08-09'
+- url: https://status.chargeafter.com/
+  http_status: 0
+  note: host does not resolve — the status page is only reachable at the statuspage.io subdomain
+  fetched: '2026-08-09'

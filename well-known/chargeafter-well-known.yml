@@ -1,0 +1,85 @@
+generated: '2026-08-09'
+method: searched
+source: live probes of every ChargeAfter host in apis.yml and OpenAPI servers[]
+hosts_probed:
+- chargeafter.com
+- www.chargeafter.com
+- docs.chargeafter.com
+- api.chargeafter.com
+- api-sandbox.ca-dev.co
+documents:
+- host: https://docs.chargeafter.com
+  path: /.well-known/api-catalog
+  status: 200
+  content_type: application/linkset+json
+  spec: RFC 9727 (API catalog / linkset)
+  file: chargeafter-api-catalog.json
+  note: >-
+    62 linkset entries, each advertising an OpenAPI service-desc at
+    https://docs.chargeafter.com/openapi/<id>. This is the richest discovery surface ChargeAfter publishes
+    and it exposes definitions that are not linked from the documentation navigation — the Disputes
+    Management for Lenders API and the Consumer credit-lookup API were both found here.
+- host: https://chargeafter.com
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  spec: RFC 8414 (OAuth 2.0 Authorization Server Metadata)
+  file: chargeafter-oauth-authorization-server.json
+  note: >-
+    Authorization code + PKCE (S256), refresh_token, dynamic public clients, single scope `mcp`. This is the
+    WordPress marketing site's MCP authorization server, NOT the payments API's auth surface.
+- host: https://chargeafter.com
+  path: /.well-known/oauth-protected-resource
+  status: 200
+  content_type: application/json
+  spec: RFC 9728 (OAuth 2.0 Protected Resource Metadata)
+  file: chargeafter-oauth-protected-resource.json
+  note: 'resource: https://chargeafter.com/wp-json/mcp/mcp-oauth-server'
+- host: https://chargeafter.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://www.chargeafter.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://docs.chargeafter.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://api.chargeafter.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://chargeafter.com
+  path: /.well-known/agent-card.json
+  status: 404
+- host: https://chargeafter.com
+  path: /.well-known/agent.json
+  status: 404
+- host: https://docs.chargeafter.com
+  path: /.well-known/agent-card.json
+  status: 404
+- host: https://docs.chargeafter.com
+  path: /.well-known/agent.json
+  status: 404
+- host: https://api.chargeafter.com
+  path: /.well-known/agent-card.json
+  status: 404
+- host: https://api.chargeafter.com
+  path: /.well-known/agent.json
+  status: 404
+- host: https://api-sandbox.ca-dev.co
+  path: /.well-known/agent-card.json
+  status: 404
+- host: https://chargeafter.com
+  path: /.well-known/openid-configuration
+  status: 404
+- host: https://chargeafter.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+- host: https://api.chargeafter.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: https://api.chargeafter.com
+  path: /.well-known/api-catalog
+  status: 404
+x-evidence:
+  fetched: '2026-08-09'
+  method: HTTP GET, redirects followed, bodies verified to parse as JSON before being recorded as a hit

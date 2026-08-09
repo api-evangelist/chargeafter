@@ -1,0 +1,64 @@
+generated: '2026-08-09'
+method: searched
+source: https://docs.chargeafter.com/reference/api-environments + https://docs.chargeafter.com/docs/testing-1
+docs: https://docs.chargeafter.com/docs/testing-1
+available: true
+self_serve: false
+environments:
+- name: production
+  api_base_url: https://api.chargeafter.com
+  cdn: https://cdn.chargeafter.com/web/v2/chargeafter.min.js
+  mode: live
+- name: sandbox
+  api_base_url: https://api-sandbox.ca-dev.co
+  cdn: https://cdn-sandbox.ca-dev.co/web/v2/chargeafter.min.js
+  mode: test
+- name: uat
+  api_base_url: https://api-uat.ca-dev.co
+  mode: test
+- name: demo
+  mode: test
+  note: Listed among the testing environments; no base URL published.
+- name: develop
+  api_base_url: https://api-develop.ca-dev.co
+  mode: internal
+  note: >-
+    Appears as a server entry in the published Consumer Credit Lookup definition
+    (openapi/chargeafter-consumer-credit-lookup-openapi.yml). Not documented as a merchant-facing environment.
+key_separation:
+  model: two keys per environment
+  public_key: client-side, used by the JavaScript SDK, safe to expose
+  private_key: server-side only
+  prefixes: none published
+  note: >-
+    ChargeAfter publishes no key prefix convention (no sk_test_/pk_live_ style marker), so test and live
+    credentials are not distinguishable by inspection. Environment separation is carried entirely by the
+    base URL.
+test_data:
+  published: false
+  detail: >-
+    The testing guide states that "ChargeAfter also provides the testing data that you need to use to test
+    specific flows" but directs the reader to "contact your Project Manager or the Solutions Team" to get it.
+    No test consumer identities, test SSNs, test phone numbers, OTP codes, test card numbers, or
+    approve/decline/pending trigger values are published anywhere in the public documentation.
+  gated_by: account-manager request
+test_clocks:
+  supported: false
+fixtures_or_triggers:
+  published: false
+  note: >-
+    There is no documented way to force a lender approval, decline, or pending outcome in sandbox. Because
+    ChargeAfter orchestrates third-party lenders, deterministic outcome simulation is the single most
+    valuable sandbox affordance it could publish and does not.
+gaps:
+- >-
+  Sandbox access is not self-serve. Both the credentials and the test data require a ChargeAfter contact,
+  so no developer can exercise the API from the public documentation alone.
+- No published magic values, test identities, or outcome triggers.
+x-evidence:
+- url: https://docs.chargeafter.com/docs/testing-1.md
+  http_status: 200
+  fetched: '2026-08-09'
+- url: https://docs.chargeafter.com/reference/api-environments.md
+  http_status: 200
+  fetched: '2026-08-09'

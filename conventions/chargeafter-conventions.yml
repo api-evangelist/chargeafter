@@ -1,0 +1,97 @@
+generated: '2026-08-09'
+method: derived
+source: >-
+  openapi/ (13 definitions, 46 operations) + https://docs.chargeafter.com/reference/api-overview,
+  /reference/authentication, /reference/api-environments, /reference/api-changes-guidelines
+docs: https://docs.chargeafter.com/reference/api-overview
+style:
+  architecture: REST
+  resource_oriented: true
+  transport: HTTPS only
+  media_type: application/json
+  spec_version: OpenAPI 3.0.1
+authentication:
+  style: static bearer credential in the Authorization header
+  header: 'Authorization: Bearer <PRIVATE_API_KEY>'
+  key_separation: public (client-side) and private (server-side) key per environment
+  environments: production / sandbox / UAT, each with its own key pair
+  see: authentication/chargeafter-authentication.yml
+idempotency:
+  supported: partial
+  mechanism: client-supplied business key, not a protocol header
+  scope: Disputes Management for Lenders API
+  key_field: lenderDisputeId
+  operation: PUT /api/disputes/lenders (Create a dispute)
+  semantics: >-
+    "This call is idempotent. If there is an existing dispute with the same `lenderDisputeId` sent in a
+    request, its ChargeAfter dispute `id` will be returned." The key must be unique within a single lender.
+  retention: not documented
+  header: none — ChargeAfter defines no Idempotency-Key request header anywhere in its 46 published operations
+  gap: >-
+    Money-moving operations have NO idempotency contract. POST /v2/post-sale/charges,
+    /v2/post-sale/charges/{chargeid}/settles, /refunds and /voids all lack an idempotency key, so a retried
+    request after a timeout can double-charge, double-settle, or double-refund. This is the single largest
+    runtime-semantics gap in the ChargeAfter contract.
+  source: openapi/chargeafter-disputes-management-lenders-openapi.yml
+pagination:
+  supported: false
+  detail: >-
+    No cursor, offset, page, or limit parameter appears in any published operation. Collection-shaped
+    responses (funding report, consumer accounts, dispute lookups) return the full result set filtered by
+    domain parameters (date range, status) rather than paged.
+filtering:
+  style: query parameters specific to each operation
+  examples:
+  - GET /v2/post-sale/fundings/report — date and status filters, showMissing
+  - GET /v2/post-sale/transactions/lookup — merchantTransactionId
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+metadata:
+  supported: false
+  note: >-
+    No generic customer-defined metadata bag. Merchant-side correlation is carried on named domain fields —
+    merchantTransactionId, merchantOrderId, lenderDisputeId.
+request_tracing:
+  request_id_header: none
+  response_field: requestId
+  detail: >-
+    Every documented error envelope carries a `requestId` string ("Associated request id"), so a failed call
+    is traceable to a ChargeAfter-side identifier — but the identifier is only returned on errors and cannot
+    be supplied by the client. Webhook payloads carry an independent `correlationId`.
+versioning:
+  scheme: uri-path
+  versions_in_use: [v2, v3]
+  detail: >-
+    /v2 across accounts, charges, consumers, funding, omni-link and checkout; /v3 for the newer session and
+    session-accounts endpoints. The Disputes API is unversioned (/api/disputes/lenders).
+  breaking_change_policy: https://docs.chargeafter.com/reference/api-changes-guidelines
+  see: lifecycle/chargeafter-lifecycle.yml
+error_envelope:
+  format: proprietary JSON — not RFC 9457 problem+json
+  shapes:
+  - status: 400
+    fields: [requestId, 'errors[].code', 'errors[].description']
+    note: numeric ChargeAfter error codes, e.g. 2002, 2004, 1005
+  - status: 422
+    fields: [requestId, message, 'errors[].field', 'errors[].validationState', 'errors[].error']
+    note: input validation failures, per-field
+  content_types_seen: [application/json, text/plain, text/json]
+  see: errors/chargeafter-problem-types.yml
+rate_limiting:
+  documented: false
+  headers: none documented
+  status_code: no 429 response is declared on any of the 46 published operations
+webhooks:
+  see: asyncapi/chargeafter-notifications-webhooks.yml
+  signature_verification: not documented
+sandbox:
+  see: sandbox/chargeafter-sandbox.yml
+x-evidence:
+- url: https://docs.chargeafter.com/reference/api-overview.md
+  http_status: 200
+  fetched: '2026-08-09'
+- url: https://docs.chargeafter.com/reference/api-changes-guidelines.md
+  http_status: 200
+  fetched: '2026-08-09'

@@ -1,0 +1,105 @@
+generated: '2026-08-09'
+method: searched
+source: >-
+  https://docs.chargeafter.com/docs/overview-3, /docs/sdk-user-guide, /docs/promotional-widget-1,
+  /docs/add-button, /docs/events
+docs: https://docs.chargeafter.com/docs/overview-3
+loader:
+  npm: '@charge-after/sdk'
+  install: npm install @charge-after/sdk
+  cdn_production: https://cdn.chargeafter.com/web/v2/chargeafter.min.js
+  cdn_sandbox: https://cdn-sandbox.ca-dev.co/web/v2/chargeafter.min.js
+  integration_modes:
+  - npm (preferred)
+  - HTML script tag
+families:
+- name: Checkout
+  description: >-
+    Hosted, lender-agnostic financing checkout launched from the merchant's own cart. Renders the offer
+    list, the application flow, and the confirmation, returning a token the merchant server uses to create
+    a charge.
+  docs: https://docs.chargeafter.com/docs/checkout-ui
+  surfaces:
+  - name: Checkout button
+    docs: https://docs.chargeafter.com/docs/add-button
+  - name: Checkout modal
+    docs: https://docs.chargeafter.com/docs/present
+  - name: Direct lender payment option
+    docs: https://docs.chargeafter.com/docs/present-the-list-of-lenders-available-optional
+    description: Presents the list of available lenders rather than a single aggregated entry point.
+- name: Apply
+  description: >-
+    Pre-purchase financing application flow, used to prequalify or approve a consumer ahead of a specific
+    cart.
+  docs: https://docs.chargeafter.com/docs/use-the-apply-ui
+- name: Promotional widgets
+  description: >-
+    Embeddable price-point messaging placed on product, category, and cart pages showing the monthly payment
+    a consumer would qualify for.
+  docs: https://docs.chargeafter.com/docs/promotional-widget-overview
+  container_class: ca-promotional-widget
+  data_attributes:
+  - name: data-widget-type
+    description: 'Template selector; "default-template" for the standard implementation, or empty.'
+  - name: data-widget-item-sku
+    description: Product identifier.
+  - name: data-widget-item-price
+    description: Product price value.
+  - name: data-widget-financing-page-url
+    description: Absolute URL of the merchant's financing information page.
+  - name: data-widget-profile-id
+    description: ChargeAfter configuration reference id.
+  - name: data-widget-item-tag
+    description: Optional; targets a promotion by product category.
+  constraint: >-
+    ChargeAfter states that overriding or changing widget content "is not advised and will create a
+    compliance risk with your financing provider" — the rendered text is lender-regulated disclosure, not
+    merchant copy.
+  update_api: https://docs.chargeafter.com/docs/data-update
+  samples: https://docs.chargeafter.com/docs/widget-structure-implementation-samples
+callbacks:
+  docs: https://docs.chargeafter.com/docs/events
+  events:
+  - name: onModalOpen
+    docs: https://docs.chargeafter.com/docs/onmodalopen
+  - name: onApplicationCreated
+    docs: https://docs.chargeafter.com/docs/onapplicationcreated
+  - name: onDataUpdate
+    docs: https://docs.chargeafter.com/docs/ondataupdate
+  - name: onConfirm
+    docs: https://docs.chargeafter.com/docs/onconfirm
+  - name: onComplete
+    docs: https://docs.chargeafter.com/docs/callback
+platform_plugins:
+  note: >-
+    Prebuilt storefront integrations that wrap the same components. Installed from each platform's
+    marketplace rather than npm.
+  platforms:
+  - name: Shopify
+    docs: https://docs.chargeafter.com/docs/shopify-new-plug-in
+  - name: Magento 2
+    docs: https://docs.chargeafter.com/docs/magento2
+  - name: WooCommerce
+    docs: https://docs.chargeafter.com/docs/woocommerce
+  - name: BigCommerce
+    docs: https://docs.chargeafter.com/docs/bigcommerce
+  - name: NopCommerce
+    docs: https://docs.chargeafter.com/docs/nopcommerce
+  - name: Shopware
+    docs: https://docs.chargeafter.com/docs/shopware
+  - name: Miva
+    docs: https://docs.chargeafter.com/docs/miva
+back_office:
+  name: Operate
+  url: https://operate.chargeafter.com/
+  docs: https://docs.chargeafter.com/docs/overview-2
+  description: >-
+    ChargeAfter's merchant back office — transaction and application data, exports and filtering, webhook
+    subscription configuration, and post-sale operations.
+x-evidence:
+- url: https://docs.chargeafter.com/docs/overview-3.md
+  http_status: 200
+  fetched: '2026-08-09'
+- url: https://docs.chargeafter.com/docs/promotional-widget-1.md
+  http_status: 200
+  fetched: '2026-08-09'

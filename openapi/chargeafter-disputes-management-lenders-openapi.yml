@@ -1,0 +1,1314 @@
+openapi: 3.0.1
+info:
+  title: Disputes Management for Lenders
+  description: Welcome to ChargeAfter API reference!<br/>This API is implemented in a RESTful state of mind, it has straight-forward,
+    resource-oriented endpoints, and produces standard HTTP response codes to communicate back the result of operations.<br/>To
+    get started please contact ChargeAfter support to get your API keys, and get an access to your testing and live environments.
+  termsOfService: https://chargeafter.com/privacy-policy
+  contact:
+    name: Customer Support
+    email: support@chargeafter.com
+  version: lenders
+paths:
+  /api/disputes/lenders:
+    put:
+      tags:
+      - Lenders
+      summary: Create a dispute
+      description: "Returns: New/Existing ChargeAfter Dispute `id`<br />\r\nAfter successful dispute creation, the dispute\
+        \ is automatically assigned to the Merchant.<br />\r\nThis call is idempotent. If there is an existing dispute with\
+        \ the same `lenderDisputeId` sent in a request, its ChargeAfter dispute `id` will be returned.<br />\r\nThis call\
+        \ is a <a href=\"https://swagger.io/docs/specification/describing-request-body/multipart-requests/\">multipart</a>\
+        \ request, which combines the new dispute payload with its supporting documents in a single request to let the SLA\
+        \ start immediately.<br />\r\nWith curl, a file can be passed using the `-F` option.<br />\r\nSupported files extensions:\
+        \ .jpg, .jpeg, .png, .svg, .pdf, .doc, .docx, .txt, .csv, .xls, .xlsx<br />\r\nMax files per upload operation: 10<br\
+        \ />\r\nMax document size: 10mb"
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                dispute:
+                  required:
+                  - details
+                  - lenderCorrelationId
+                  - lenderDisputeId
+                  - reason
+                  - sla
+                  type: object
+                  properties:
+                    lenderNotes:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.NoteContent'
+                      description: To add notes on the dispute, enter free `text`. You can also use the `sku` parameter if
+                        you want to associate your notes with a particular item.
+                      nullable: true
+                    lenderDisputeId:
+                      maxLength: 128
+                      minLength: 1
+                      type: string
+                      description: "An ID used in the Lender system to identify the dispute. Must be unique within a single\
+                        \ Lender.<br />\r\n(used for idempotency check)"
+                    lenderCorrelationId:
+                      maxLength: 128
+                      minLength: 1
+                      type: string
+                      description: An ID used in the Lender system (same ID that is used to identify a disputed order or a
+                        charge).
+                    reason:
+                      $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeReason'
+                    subReason:
+                      $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeSubReason'
+                    lenderCreatedAt:
+                      type: string
+                      description: Dispute creation timestamp in the Lender system in ISO 8601
+                      format: date-time
+                      nullable: true
+                    lenderCaseId:
+                      type: string
+                      description: Lender case identifier that can be used for both parties communication
+                      nullable: true
+                    sla:
+                      $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SLA'
+                    details:
+                      $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeDetails'
+                    lenderMetadata:
+                      type: object
+                      additionalProperties:
+                        type: string
+                      description: Lender metadata can be used extend the dispute with additional information
+                      nullable: true
+                  additionalProperties: false
+                  description: "`NewDispute` -\n See  model."
+                documents:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+            encoding:
+              documents:
+                style: form
+              dispute:
+                contentType: application/json
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad Request:<br/><ul><li><i>1005</i> - Field value is invalid</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1005'
+                    description: Field value is invalid
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found:<br/><ul><li><i>1002</i> - Resource not found</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1002'
+                    description: Resource not found
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+  /api/disputes/lenders/{id}/resolve:
+    post:
+      tags:
+      - Lenders
+      summary: Resolve a dispute
+      description: "Returns the corresponding `ChargeAfterTransactionId` when the chargeback is provided, otherwise it is\
+        \ null.<br />\r\nWhen a dispute is resolved, it becomes read-only.<br />\r\nThe `resolve` call can only be performed\
+        \ to change the `status` of a dispute to:<br />\r\n* `ResolvedMerchantFavor`<br />\r\n* `ResolvedCancelled`<br />\r\
+        \n* `ResolvedCustomerFavorFull`<br />\r\n* `ResolvedCustomerFavorPartial`<br /><br />\r\nThe `status` of `PendingMerchant`\
+        \ or `PendingLender` is invalid."
+      parameters:
+      - name: status
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeStatus'
+      - name: id
+        in: path
+        description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+          \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+      - name: useLenderDisputeId
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.ChargebackBase'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad Request:<br/><ul><li><i>1005</i> - Field value is invalid</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1005'
+                    description: Field value is invalid
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found:<br/><ul><li><i>1002</i> - Resource not found</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1002'
+                    description: Resource not found
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+  /api/disputes/lenders/{id}/reopen:
+    post:
+      tags:
+      - Lenders
+      summary: Reopen a resolved dispute
+      description: "If the reopen status is `PendingLender`, a lender should `update` the dispute by providing additional\
+        \ documents and/or notes and then `assign` the dispute to the Merchant.<br />\r\nThis call can only be performed successfully\
+        \ on a dispute that initially has the status of `ResolvedMerchantFavor`, `ResolvedCancelled`, `ResolvedCustomerFavorFull`,\
+        \ `ResolvedCustomerFavorPartial`."
+      parameters:
+      - name: id
+        in: path
+        description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+          \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+      - name: useLenderDisputeId
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.ReopenDispute'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request:<br/><ul><li><i>1005</i> - Field value is invalid</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1005'
+                    description: Field value is invalid
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found:<br/><ul><li><i>1002</i> - Resource not found</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1002'
+                    description: Resource not found
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+  /api/disputes/lenders/{id}/reverse:
+    put:
+      tags:
+      - Lenders
+      summary: Reverse the chargeback transaction
+      description: "If a dispute was resolved with a chargeback to the customer, this call cancels the chargeback.<br />\r\
+        \nReturns the corresponding `ChargeAfterTransactionId`.<br />  \r\nAfter successfully sending this request, the Lender\
+        \ also needs to either `reopen` or re-`resolve` the dispute with the returned `ChargebackReversal` in a separate call."
+      parameters:
+      - name: id
+        in: path
+        description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+          \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+      - name: useLenderDisputeId
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Reversal'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad Request:<br/><ul><li><i>1005</i> - Field value is invalid</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1005'
+                    description: Field value is invalid
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found:<br/><ul><li><i>1002</i> - Resource not found</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1002'
+                    description: Resource not found
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+  /api/disputes/lenders/{id}/update:
+    post:
+      tags:
+      - Lenders
+      summary: Add notes and/or upload supporting documents for a dispute
+      description: "This call is a <a href=\"https://swagger.io/docs/specification/describing-request-body/multipart-requests/\"\
+        >multipart</a> request, which combines the new dispute payload with its supporting documents in a single request to\
+        \ let the SLA start immediately.<br />\r\nWith curl, a file can be passed using the `-F` option.<br />\r\nSupported\
+        \ files extensions: .jpg, .jpeg, .png, .svg, .pdf, .doc, .docx, .txt, .csv, .xls, .xlsx<br />\r\nMax files per upload\
+        \ operation: 10<br />\r\nMax document size: 10mb"
+      parameters:
+      - name: assign
+        in: query
+        schema:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Party'
+      - name: id
+        in: path
+        description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+          \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+      - name: useLenderDisputeId
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                update:
+                  required:
+                  - notes
+                  type: object
+                  properties:
+                    notes:
+                      minItems: 1
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.NoteContent'
+                  additionalProperties: false
+                  description: "`DisputeUpdate` -\n See  model."
+                documents:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+            encoding:
+              documents:
+                style: form
+              update:
+                contentType: application/json
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request:<br/><ul><li><i>1005</i> - Field value is invalid</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1005'
+                    description: Field value is invalid
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found:<br/><ul><li><i>1002</i> - Resource not found</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1002'
+                    description: Resource not found
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+  /api/disputes/lenders/{id}/assign:
+    put:
+      tags:
+      - Lenders
+      summary: Assign the dispute to Merchant or Lender
+      description: After successfully sending this call, the dispute's status becomes `PendingMerchant` or `PendingLender`
+        accordingly.
+      parameters:
+      - name: party
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Party'
+      - name: id
+        in: path
+        description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+          \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+      - name: useLenderDisputeId
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request:<br/><ul><li><i>1005</i> - Field value is invalid</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1005'
+                    description: Field value is invalid
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found:<br/><ul><li><i>1002</i> - Resource not found</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1002'
+                    description: Resource not found
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+  /api/disputes/lenders/{id}:
+    get:
+      tags:
+      - Lenders
+      summary: Get dispute details
+      description: Get dispute details for a given ChargeAfter dispute `id` or `LenderDisputeId`.
+      parameters:
+      - name: id
+        in: path
+        description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+          \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+      - name: useLenderDisputeId
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Dispute'
+        '400':
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found:<br/><ul><li><i>1002</i> - Resource not found</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1002'
+                    description: Resource not found
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+components:
+  schemas:
+    ChargeAfter.Disputes.WebApi.Contracts.Chargeback:
+      required:
+      - lenderTransactionId
+      - reason
+      - totalAmount
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: ChargeAfter transaction Id associated with the Chargeback
+          nullable: true
+        totalTaxAmount:
+          type: number
+          format: double
+          nullable: true
+        reason:
+          maxLength: 2048
+          minLength: 1
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        lenderTransactionId:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Lender transaction Id associated with this transaction
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.ChargebackBase:
+      required:
+      - lenderTransactionId
+      - reason
+      - totalAmount
+      type: object
+      properties:
+        totalTaxAmount:
+          type: number
+          format: double
+          nullable: true
+        reason:
+          maxLength: 2048
+          minLength: 1
+          type: string
+        totalAmount:
+          minimum: 0
+          exclusiveMinimum: true
+          type: number
+          format: double
+        lenderTransactionId:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Lender transaction Id associated with this transaction
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.DataHeader:
+      required:
+      - createdAt
+      - origin
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        origin:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Party'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.Dispute:
+      required:
+      - createdAt
+      - id
+      - origin
+      - status
+      - statusUpdatedAt
+      - updatedAt
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+        createdAt:
+          type: string
+          description: In ISO 8601
+          format: date-time
+        updatedAt:
+          type: string
+          description: In ISO 8601
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeStatus'
+        origin:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Party'
+        statusUpdatedAt:
+          type: string
+          description: Last status update timestamp in ISO 8601, defaults to `createdAt`
+          format: date-time
+        supportingDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Document'
+          nullable: true
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Note'
+          nullable: true
+        chargeback:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Chargeback'
+        proposedAmount:
+          type: number
+          format: double
+          nullable: true
+        lenderDisputeId:
+          type: string
+          description: "An ID used in the Lender system to identify the dispute. Must be unique within a single Lender.<br\
+            \ />\r\n(used for idempotency check)"
+          nullable: true
+        lenderCorrelationId:
+          type: string
+          description: An ID used in the Lender system (same ID that is used to identify a disputed order or a charge).
+          nullable: true
+        reason:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeReason'
+        subReason:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeSubReason'
+        lenderCreatedAt:
+          type: string
+          description: Dispute creation timestamp in the Lender system in ISO 8601
+          format: date-time
+          nullable: true
+        lenderCaseId:
+          type: string
+          description: Lender case identifier that can be used for both parties communication
+          nullable: true
+        sla:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SLA'
+        details:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeDetails'
+        lenderMetadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Lender metadata can be used extend the dispute with additional information
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.DisputeDetails:
+      required:
+      - currency
+      - description
+      - items
+      - totalAmount
+      type: object
+      properties:
+        currency:
+          minLength: 1
+          type: string
+          description: ISO 4217, alphabetic code. If specified, must match the currency of the corresponding Charge
+        totalAmount:
+          minimum: 0
+          exclusiveMinimum: true
+          type: number
+          format: double
+        totalTaxAmount:
+          type: number
+          format: double
+          nullable: true
+        description:
+          maxLength: 2048
+          minLength: 1
+          type: string
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputedItem'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.DisputeReason:
+      enum:
+      - CancelledByUser
+      - IncorrectAmount
+      - IncorrectLoan
+      - GoodsNeverReceived
+      - GoodsNotAsExpected
+      - GoodsDamaged
+      - GoodsReturned
+      - Other
+      type: string
+      description: "* `CancelledByUser` - user cancelled the purchase according to cancellation policy\r\n* `IncorrectAmount`\
+        \ - user was charged or refunded by a wrong amount. Additional details can be specified in `subReason`\r\n* `IncorrectLoan`\
+        \ - user does not recognize the loan. Additional details can be specified in `subReason`\r\n* `GoodsNeverReceived`\
+        \ - user did not receive the goods\r\n* `GoodsNotAsExpected` - user received unexpected goods\r\n* `GoodsDamaged`\
+        \ - user received damaged goods\r\n* `GoodsReturned` - user received and returned the goods according to return policy\r\
+        \n* `Other` - any other reason not mentioned above"
+    ChargeAfter.Disputes.WebApi.Contracts.DisputeStatus:
+      enum:
+      - PendingMerchant
+      - PendingLender
+      - ResolvedMerchantFavor
+      - ResolvedCancelled
+      - ResolvedCustomerFavorFull
+      - ResolvedCustomerFavorPartial
+      type: string
+      description: "* `PendingMerchant` - pending merchant response\r\n* `PendingLender` - pending lender response or decision.\
+        \ The lender should `assign` or `resolve` the dispute to change the status.\r\n* `ResolvedMerchantFavor` -  in favor\
+        \ of merchant\r\n* `ResolvedCancelled` -  in favor of merchant\r\n* `ResolvedCustomerFavorFull` -  in favor of consumer\r\
+        \n* `ResolvedCustomerFavorPartial` -  in favor of consumer"
+    ChargeAfter.Disputes.WebApi.Contracts.DisputeSubReason:
+      enum:
+      - Duplicate
+      - AlternativePayment
+      type: string
+      description: "* `Duplicate` - duplicate charge or loan\r\n* `AlternativePayment` - the payment was provided in external\
+        \ system"
+    ChargeAfter.Disputes.WebApi.Contracts.DisputeUpdate:
+      required:
+      - notes
+      type: object
+      properties:
+        notes:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.NoteContent'
+      additionalProperties: false
+      description: "`DisputeUpdate` -\n See  model."
+    ChargeAfter.Disputes.WebApi.Contracts.DisputedItem:
+      required:
+      - amount
+      - name
+      type: object
+      properties:
+        sku:
+          type: string
+          nullable: true
+        name:
+          maxLength: 256
+          minLength: 1
+          type: string
+        amount:
+          minimum: 0
+          exclusiveMinimum: true
+          type: number
+          description: Amount without taxes. The total amount = Amount + TaxAmount
+          format: double
+        taxAmount:
+          type: number
+          format: double
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.Document:
+      required:
+      - header
+      - name
+      - url
+      type: object
+      properties:
+        name:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Unique within a dispute
+        mimeType:
+          maxLength: 32
+          type: string
+          nullable: true
+        url:
+          maxLength: 512
+          minLength: 1
+          type: string
+        header:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DataHeader'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.NewDispute:
+      required:
+      - details
+      - lenderCorrelationId
+      - lenderDisputeId
+      - reason
+      - sla
+      type: object
+      properties:
+        lenderNotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.NoteContent'
+          description: To add notes on the dispute, enter free `text`. You can also use the `sku` parameter if you want to
+            associate your notes with a particular item.
+          nullable: true
+        lenderDisputeId:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: "An ID used in the Lender system to identify the dispute. Must be unique within a single Lender.<br\
+            \ />\r\n(used for idempotency check)"
+        lenderCorrelationId:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: An ID used in the Lender system (same ID that is used to identify a disputed order or a charge).
+        reason:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeReason'
+        subReason:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeSubReason'
+        lenderCreatedAt:
+          type: string
+          description: Dispute creation timestamp in the Lender system in ISO 8601
+          format: date-time
+          nullable: true
+        lenderCaseId:
+          type: string
+          description: Lender case identifier that can be used for both parties communication
+          nullable: true
+        sla:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SLA'
+        details:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeDetails'
+        lenderMetadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Lender metadata can be used extend the dispute with additional information
+          nullable: true
+      additionalProperties: false
+      description: "`NewDispute` -\n See  model."
+    ChargeAfter.Disputes.WebApi.Contracts.Note:
+      required:
+      - header
+      - text
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DataHeader'
+        sku:
+          type: string
+          nullable: true
+        text:
+          maxLength: 2048
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.NoteContent:
+      required:
+      - text
+      type: object
+      properties:
+        sku:
+          type: string
+          nullable: true
+        text:
+          maxLength: 2048
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.Party:
+      enum:
+      - Lender
+      - Merchant
+      type: string
+    ChargeAfter.Disputes.WebApi.Contracts.ReopenDispute:
+      required:
+      - sla
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeStatus'
+        sla:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SLA'
+        lenderNotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.NoteContent'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.Reversal:
+      required:
+      - lenderTransactionId
+      - totalAmount
+      type: object
+      properties:
+        totalAmount:
+          minimum: 0
+          exclusiveMinimum: true
+          type: number
+          format: double
+        lenderTransactionId:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Lender transaction Id associated with this transaction
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.SLA:
+      required:
+      - end
+      type: object
+      properties:
+        start:
+          type: string
+          description: If set, must be now or in the future. In ISO 8601.
+          format: date-time
+          nullable: true
+        end:
+          type: string
+          description: In ISO 8601.
+          format: date-time
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.SecurityContext:
+      type: object
+      properties:
+        lenderId:
+          type: string
+          description: '@internal@'
+          nullable: true
+        merchantId:
+          type: string
+          description: '@internal@'
+          nullable: true
+        peerId:
+          type: string
+          description: '@internal@'
+          nullable: true
+          readOnly: true
+        party:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Party'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Controllers.DisputesBaseController.AssignDisputeRequest:
+      required:
+      - id
+      - party
+      type: object
+      properties:
+        party:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Party'
+        id:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        useLenderDisputeId:
+          type: boolean
+        context:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SecurityContext'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Controllers.DisputesBaseController.GetDisputeRequest:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        useLenderDisputeId:
+          type: boolean
+        context:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SecurityContext'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Controllers.Lenders.LendersController.LenderUpdateDisputeRequest:
+      required:
+      - id
+      type: object
+      properties:
+        update:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeUpdate'
+        assign:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Party'
+        documents:
+          type: array
+          items:
+            type: string
+            format: binary
+          nullable: true
+        id:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        useLenderDisputeId:
+          type: boolean
+        context:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SecurityContext'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Controllers.Lenders.LendersController.ReopenDisputeRequest:
+      required:
+      - id
+      - reopen
+      type: object
+      properties:
+        reopen:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.ReopenDispute'
+        id:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        useLenderDisputeId:
+          type: boolean
+        context:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SecurityContext'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Controllers.Lenders.LendersController.ResolveDisputeRequest:
+      required:
+      - id
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeStatus'
+        chargebackBase:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.ChargebackBase'
+        id:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        useLenderDisputeId:
+          type: boolean
+        context:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SecurityContext'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Controllers.Lenders.LendersController.ReverseDisputeRequest:
+      required:
+      - id
+      - reversal
+      type: object
+      properties:
+        reversal:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Reversal'
+        id:
+          minLength: 1
+          type: string
+          description: "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\r\nIf you use the `LenderDisputeId`,\
+            \ you must also send the `useLenderDisputeId` parameter with the value of `true`."
+        useLenderDisputeId:
+          type: boolean
+        context:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SecurityContext'
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+servers:
+- url: https://api-sandbox.ca-dev.co
+  description: Local Environment
+- url: https://api.chargeafter.com
+  description: Production Environment
+security:
+- apiKey: []
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

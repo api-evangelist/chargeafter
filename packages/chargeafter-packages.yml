@@ -1,0 +1,84 @@
+generated: '2026-08-09'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=chargeafter + https://docs.chargeafter.com/docs/overview-3
+docs: https://docs.chargeafter.com/docs/overview-3
+packages:
+- language: javascript
+  registry: npm
+  name: '@charge-after/sdk'
+  version: 1.4.28
+  url: https://www.npmjs.com/package/@charge-after/sdk
+  install: npm install @charge-after/sdk
+  official: true
+  publisher: chargeafter2026
+  first_published: '2026-04-14'
+  last_published: '2026-04-14'
+  note: >-
+    The package name the SDK Integration documentation instructs merchants to install. Note the hyphen —
+    the scope is `@charge-after`, not `@chargeafter`.
+- language: javascript
+  registry: npm
+  name: '@chargeafter/payment-sdk'
+  version: 1.4.20
+  url: https://www.npmjs.com/package/@chargeafter/payment-sdk
+  install: npm install @chargeafter/payment-sdk
+  official: true
+  publisher: kostat
+  first_published: '2021-11-05'
+  last_published: '2025-10-28'
+  note: >-
+    Predecessor scope for the same payment SDK. Not referenced by the current SDK Integration docs, which
+    point at @charge-after/sdk.
+- language: javascript
+  registry: npm
+  name: '@chargeafter/payment-types'
+  version: 0.0.41
+  url: https://www.npmjs.com/package/@chargeafter/payment-types
+  install: npm install @chargeafter/payment-types
+  official: true
+  publisher: kostat
+  description: public interfaces for ChargeAfter SDK
+  note: TypeScript type definitions for the ChargeAfter SDK.
+hosted:
+- kind: cdn-script
+  environment: production
+  url: https://cdn.chargeafter.com/web/v2/chargeafter.min.js
+  install: '<script src="https://cdn.chargeafter.com/web/v2/chargeafter.min.js"></script>'
+  official: true
+- kind: cdn-script
+  environment: sandbox
+  url: https://cdn-sandbox.ca-dev.co/web/v2/chargeafter.min.js
+  official: true
+plugins:
+  note: >-
+    ChargeAfter also distributes first-party ecommerce platform plugins rather than server SDKs. They are
+    installed from each platform's own marketplace, not from a language package registry.
+  platforms:
+  - Shopify
+  - Magento 2
+  - WooCommerce
+  - BigCommerce
+  - NopCommerce
+  - Shopware
+  - Miva
+gaps:
+- >-
+  No first-party server-side SDK is published for any backend language. PyPI, Maven Central, NuGet,
+  pkg.go.dev, RubyGems, Packagist and crates.io return no ChargeAfter-published client library — every
+  server integration is hand-rolled against the REST API.
+registries_searched:
+- npm
+- PyPI
+- Maven Central
+- NuGet
+- pkg.go.dev
+- RubyGems
+- Packagist
+- crates.io
+x-evidence:
+- url: https://registry.npmjs.org/-/v1/search?text=chargeafter
+  http_status: 200
+  fetched: '2026-08-09'
+- url: https://docs.chargeafter.com/docs/overview-3.md
+  http_status: 200
+  fetched: '2026-08-09'

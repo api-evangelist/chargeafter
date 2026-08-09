@@ -1,0 +1,106 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/ — 13 published ChargeAfter OpenAPI 3.0.1 definitions, 46 operations
+format: proprietary
+format_note: ChargeAfter does not use RFC 9457 application/problem+json. Errors are returned as a proprietary JSON
+  envelope keyed on requestId plus an errors[] array; 400 carries numeric ChargeAfter error codes, 422 carries per-field
+  validation failures. Some operations declare text/plain and text/json alongside application/json for error bodies.
+error_code_registry: errors/chargeafter-error-codes.yml
+problems:
+- status: 400
+  title: Bad Request
+  documented_descriptions:
+  - Bad Request
+  - Bad Request Error
+  - 'Bad Request: 10000 - Invalid request payload 10001 - Field value is required 10002 - Field value is invalid'
+  - 'Bad Request: 1005 - Field value is invalid'
+  - 'Bad Request: 1110 - <validation error>'
+  - 'Bad Request: 1110 - <validation error> 2002 - charge already has assigned confirmation 2004 - confirmation
+    not found'
+  - 'Bad Request: 2001 - charge not found'
+  - 'Bad Request: 2001 - charge not found 2006 - Operation is not permitted at this stage'
+  - 'Bad Request: 2002 - charge already has assigned confirmation 2004 - confirmation not found'
+  response_body_schema_declared: true
+  operation_count: 43
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/lookup/lender/account-id
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/credit
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/creditcard
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/charges/{chargeid}
+  envelope: '{ requestId, errors[ { code, description } ] }'
+- status: 401
+  title: Unauthorized
+  documented_descriptions:
+  - Unauthorized
+  response_body_schema_declared: false
+  operation_count: 46
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/lookup/lender/account-id
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/credit
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/creditcard
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/charges/{chargeid}
+- status: 403
+  title: Forbidden
+  documented_descriptions:
+  - Forbidden
+  - 'Forbidden: 10101 - The selected option is not enabled 10201 - The specified consumer has opted-out'
+  response_body_schema_declared: true
+  operation_count: 3
+  example_operations:
+  - openapi/chargeafter-omni-link-openapi.yml#GET /v2/omni-link/consumer/{linkId}
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/application
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/checkout
+- status: 404
+  title: Not Found
+  documented_descriptions:
+  - Account not found
+  - Application for credit card not found
+  - Application not found
+  - Charge not found
+  - Confirmation not found
+  - Consumer is not found or the user is unauthorized to request
+  - 'Not Found: 1002 - Resource not found'
+  - The specified link ID was not found
+  - Transaction not found
+  response_body_schema_declared: true
+  operation_count: 20
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/creditcard
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/charges/{chargeid}
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/orders/{orderId}
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/transactions/lookup
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/transactions/{id}
+- status: 422
+  title: Unprocessable Entity (input validation failure)
+  documented_descriptions:
+  - Input Validation Error
+  - Server unable to process request because it contains invalid data
+  response_body_schema_declared: true
+  operation_count: 37
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/lookup/lender/account-id
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/credit
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/creditcard
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/charges/{chargeid}
+  envelope: '{ requestId, message, errors[ { field, validationState, error } ] }'
+- status: 500
+  title: Internal Server Error
+  documented_descriptions:
+  - General Server Error
+  response_body_schema_declared: true
+  operation_count: 46
+  example_operations:
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/lookup/lender/account-id
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/credit
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/creditcard
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/charges/{chargeid}
+gaps:
+- No 429 response is declared on any operation — rate limiting is neither documented nor modelled.
+- 401, 403 and 500 responses carry a description but no response-body schema on most operations, so an agent cannot
+  parse a failure reason from the contract.
+- No published error reference page exists in the documentation; the numeric codes are only discoverable inside
+  OpenAPI response descriptions.

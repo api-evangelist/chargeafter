@@ -1,0 +1,273 @@
+generated: '2026-08-09'
+method: derived
+source: >-
+  openapi/ — 13 published OpenAPI 3.0.1 definitions, 46 operations, 278 distinct component schemas;
+  entities and relationships recovered from $ref graphs and id-reference field names.
+naming_note: >-
+  ChargeAfter's schema names are .NET CLR type names emitted by the framework, not designed API type names
+  (e.g. ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer,
+  ChargeAfter.PostsaleAdapter.WebApi.Contracts.ChargeCreationResponseDto). The same logical entity appears
+  under several fully-qualified names across definitions — Consumer exists as both
+  ChargeAfter.Libraries.WebApi.Contracts.ConsumerDetails and ChargeAfter.BFF.WebApi.Contracts.Models.ConsumerDetails.
+  Entity names below are the logical names; the CLR names are recorded as aliases.
+identifiers:
+  note: >-
+    ChargeAfter uses opaque identifiers with no type prefix, so an id cannot be typed by inspection. Three
+    distinct id namespaces coexist on most objects — ChargeAfter's own id, the merchant's id
+    (merchant*Id), and the lender's id (lender*Id).
+  namespaces:
+  - prefix_pattern: merchant*
+    owner: merchant
+    fields: [merchantId, merchantOrderId, merchantConsumerId, merchantTransactionId]
+  - prefix_pattern: lender*
+    owner: lender
+    fields: [lenderId, lenderSessionId, lenderReferenceId, lenderTransactionId, lenderAccountId, lenderDisputeId,
+      lenderCorrelationId, lenderCaseId, lenderToken, loanId]
+  - prefix_pattern: none
+    owner: chargeafter
+    fields: [id, consumerId, applicationId, chargeId, linkId, sessionId, confirmationId, transactionId, storeId,
+      posId, brandId, buyerId, balanceId, reconciliationId]
+  tokens:
+    note: Short-lived bearer-style handles, distinct from ids.
+    fields: [accountToken, confirmationToken, prequalifyConfirmationToken, sessionToken, continuationToken]
+entities:
+- name: Consumer
+  key: consumerId
+  merchant_key: merchantConsumerId
+  aliases:
+  - ChargeAfter.Libraries.WebApi.Contracts.ConsumerDetails
+  - ChargeAfter.BFF.WebApi.Contracts.Models.ConsumerDetails
+  - ChargeAfter.BFF.WebApi.Contracts.IdentifyConsumerDetails
+  operations:
+  - openapi/chargeafter-consumer-api-openapi.yml#GET /v2/consumers/{consumerId}
+  - openapi/chargeafter-consumers-management-openapi.yml#GET /v2/post-sale/consumers/{consumerid}
+  - openapi/chargeafter-consumers-management-openapi.yml#GET /v2/post-sale/consumers/{consumerid}/legal-info
+  attributes_of_note: [Address, SpouseInfo, MarriageStatus, ResidenceType, IncomeType, Preferences, Language,
+    AdditionalIds, Claim]
+- name: Session
+  key: sessionId
+  version: v3
+  aliases:
+  - ChargeAfter.BFF.WebApi.Contracts.CreateSessionRequestBodyV3
+  - ChargeAfter.BFF.WebApi.Contracts.GetSessionResponse
+  operations:
+  - openapi/chargeafter-checkout-session-openapi.yml#POST /v3/session
+  - openapi/chargeafter-checkout-session-accounts-openapi.yml#GET /v3/session/accounts
+- name: Application
+  key: applicationId
+  aliases:
+  - ChargeAfter.Libraries.Entities.ConsumerApplicationStatus
+  - ChargeAfter.Libraries.Entities.ApplicationStatusReason
+  operations:
+  - openapi/chargeafter-checkout-application-status-openapi.yml#GET /v2/checkout/applications/{applicationId}/status
+  - openapi/chargeafter-checkout-application-token-openapi.yml#GET /v2/checkout/applications/{applicationId}/token
+  - openapi/chargeafter-distribution-api-openapi.yml#POST /v2/checkout/applications/{applicationId}/accounts
+- name: Lender
+  key: lenderId
+  aliases: [ChargeAfter.Contracts.LenderType]
+  note: >-
+    The independent financing provider. ChargeAfter is an orchestrator — approval, decline, and pricing are
+    lender decisions surfaced through Offer and the application.* webhooks.
+- name: Offer
+  aliases:
+  - ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer
+  - ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferType
+  - ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType
+  attributes_of_note: [Disclosure, OfferDisclosures, DisclosureType, PromoSettings, Eligibility, EligibilityStatus,
+    UsabilityStatus]
+  note: >-
+    Carries regulated disclosure objects. Disclosure/OfferDisclosures are the compliance text a merchant
+    must render unmodified.
+- name: Account
+  key: accountId
+  token: accountToken
+  aliases:
+  - ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account
+  - ChargeAfter.Contracts.AccountStatus
+  - ChargeAfter.Libraries.Entities.LenderAccountStatus
+  - ChargeAfter.Libraries.Entities.AccountStatusReason
+  operations:
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/accounts
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/credit
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/accounts/{accountToken}/creditcard
+  - openapi/chargeafter-charge-api-openapi.yml#PATCH /v2/accounts/deprecate
+- name: Confirmation
+  key: confirmationId
+  token: confirmationToken
+  operations:
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/accounts/confirmation
+  note: >-
+    Binds an approved account to a specific cart. A charge cannot be created twice against the same
+    confirmation — error 2002 "charge already has assigned confirmation".
+- name: Cart
+  aliases:
+  - ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails
+  - ChargeAfter.BFF.WebApi.Contracts.Models.CheckoutDetailsV3
+  children: [Item, Discount, Warranty]
+- name: Charge
+  key: chargeId
+  merchant_key: merchantOrderId
+  aliases: [ChargeAfter.PostsaleAdapter.WebApi.Contracts.ChargeCreationResponseDto]
+  operations:
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/charges/{chargeid}
+  - openapi/chargeafter-charge-api-openapi.yml#PATCH /v2/post-sale/charges/{chargeid}
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/{chargeid}/settles
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/{chargeid}/refunds
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/{chargeid}/voids
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/voids/async
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/{chargeid}/items/delivery
+- name: Transaction
+  key: transactionId
+  merchant_key: merchantTransactionId
+  lender_key: lenderTransactionId
+  aliases: [ChargeAfter.Libraries.Entities.TransactionState]
+  operations:
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/transactions/{id}
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/transactions/lookup
+  - openapi/chargeafter-charge-api-openapi.yml#POST /v2/post-sale/charges/{chargeid}/transactions/synthetic
+- name: Order
+  key: merchantOrderId
+  operations:
+  - openapi/chargeafter-charge-api-openapi.yml#GET /v2/post-sale/orders/{orderId}
+  note: Resolves a merchant order id to a ChargeAfter chargeId.
+- name: Funding
+  key: reconciliationId
+  operations:
+  - openapi/chargeafter-funding-api-openapi.yml#GET /v2/post-sale/fundings/report
+  note: The settlement/reconciliation record tying a charge to money moved by the lender.
+- name: Link
+  key: linkId
+  operations:
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/application
+  - openapi/chargeafter-omni-link-openapi.yml#POST /v2/omni-link/consumer/checkout
+  - openapi/chargeafter-omni-link-openapi.yml#GET /v2/omni-link/consumer/{linkId}
+  note: A single-use consumer URL that launches Apply or Checkout outside the merchant storefront.
+- name: Dispute
+  key: id
+  lender_key: lenderDisputeId
+  operations:
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#PUT /api/disputes/lenders
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#GET /api/disputes/lenders/{id}
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#POST /api/disputes/lenders/{id}/resolve
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#POST /api/disputes/lenders/{id}/reopen
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#PUT /api/disputes/lenders/{id}/reverse
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#POST /api/disputes/lenders/{id}/update
+  - openapi/chargeafter-disputes-management-lenders-openapi.yml#PUT /api/disputes/lenders/{id}/assign
+- name: Merchant
+  key: merchantId
+  aliases: [ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails]
+  children: [Store, PointOfSale, Brand]
+- name: Store
+  key: storeId
+- name: PointOfSale
+  key: posId
+  aliases: [ChargeAfter.Libraries.Entities.PosType]
+relationships:
+- from: Consumer
+  to: Application
+  type: has_many
+  via: consumerId
+- from: Consumer
+  to: Account
+  type: has_many
+  via: consumerId
+  operation: openapi/chargeafter-consumer-api-openapi.yml#GET /v2/consumers/{consumerId}/accounts
+- from: Session
+  to: Offer
+  type: has_many
+  via: sessionId
+  operation: openapi/chargeafter-checkout-session-accounts-openapi.yml#GET /v3/session/accounts
+- from: Application
+  to: Offer
+  type: has_many
+  via: applicationId
+- from: Application
+  to: Account
+  type: has_many
+  via: applicationId
+  operation: openapi/chargeafter-distribution-api-openapi.yml#POST /v2/checkout/applications/{applicationId}/accounts
+- from: Offer
+  to: Lender
+  type: belongs_to
+  via: lenderId
+- from: Account
+  to: Lender
+  type: belongs_to
+  via: lenderId
+- from: Account
+  to: Consumer
+  type: belongs_to
+  via: consumerId
+- from: Confirmation
+  to: Account
+  type: belongs_to
+  via: accountToken
+- from: Confirmation
+  to: Cart
+  type: has_one
+  via: embedded cart details
+- from: Charge
+  to: Confirmation
+  type: belongs_to
+  via: confirmationId
+- from: Charge
+  to: Account
+  type: belongs_to
+  via: accountToken
+- from: Charge
+  to: Transaction
+  type: has_many
+  via: chargeId
+- from: Charge
+  to: Order
+  type: has_one
+  via: merchantOrderId
+- from: Charge
+  to: Funding
+  type: has_many
+  via: chargeId
+- from: Cart
+  to: Item
+  type: has_many
+- from: Cart
+  to: Discount
+  type: has_many
+- from: Cart
+  to: Warranty
+  type: has_many
+- from: Dispute
+  to: Charge
+  type: belongs_to
+  via: chargeId
+- from: Dispute
+  to: Lender
+  type: belongs_to
+  via: lenderId
+- from: Link
+  to: Consumer
+  type: belongs_to
+  via: consumerId
+- from: Merchant
+  to: Store
+  type: has_many
+  via: storeId
+- from: Store
+  to: PointOfSale
+  type: has_many
+  via: posId
+lifecycle_paths:
+- name: ecommerce checkout
+  sequence: [Session, Offer, Application, Account, Confirmation, Charge, Transaction, Funding]
+- name: in-store / call center
+  sequence: [Link, Application, Account, Confirmation, Charge, Transaction, Funding]
+- name: dispute
+  sequence: [Charge, Dispute, Transaction]
+gaps:
+- >-
+  No operationId is declared on any of the 46 operations, so relationships here are anchored on METHOD+path
+  rather than on a stable operation identifier.
+- >-
+  Schema names are framework-emitted CLR type names, which makes the same logical entity appear under
+  several unrelated names and prevents reliable cross-definition schema reuse.

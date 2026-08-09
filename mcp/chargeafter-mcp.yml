@@ -1,0 +1,55 @@
+generated: '2026-08-09'
+method: probed
+status: published
+source: https://chargeafter.com/.well-known/oauth-protected-resource
+server:
+  name: chargeafter-wordpress-mcp
+  transport: http
+  url: https://chargeafter.com/wp-json/mcp/mcp-oauth-server
+  scope: marketing-site
+  description: >-
+    ChargeAfter's WordPress marketing site (chargeafter.com, WP Engine) publishes a Model Context Protocol
+    endpoint with full RFC 8414 + RFC 9728 discovery. This is a content/site MCP server — it is NOT an
+    interface to the ChargeAfter payments, checkout, charge, funding, or dispute APIs. No MCP server is
+    published for the developer platform on docs.chargeafter.com or api.chargeafter.com.
+authorization:
+  authorization_server: https://chargeafter.com
+  metadata: https://chargeafter.com/.well-known/oauth-authorization-server
+  protected_resource_metadata: https://chargeafter.com/.well-known/oauth-protected-resource
+  authorization_endpoint: https://chargeafter.com/oauth/authorize
+  token_endpoint: https://chargeafter.com/oauth/token
+  revocation_endpoint: https://chargeafter.com/oauth/revoke
+  grant_types: [authorization_code, refresh_token]
+  code_challenge_methods: [S256]
+  token_endpoint_auth_methods: [none]
+  client_id_metadata_document_supported: true
+  scopes: [mcp]
+  bearer_methods: [header]
+tools:
+  discovered: false
+  reason: >-
+    tools/list is authentication-gated. An anonymous JSON-RPC POST of
+    {"jsonrpc":"2.0","id":1,"method":"tools/list"} to the resource endpoint returns HTTP 401
+    {"code":"rest_login_required","message":"REST API restricted to authenticated users."}. The real tool
+    set and its inputSchemas require an authenticated introspection; none are recorded here rather than
+    guessed.
+probes:
+- url: https://chargeafter.com/.well-known/oauth-authorization-server
+  method: GET
+  http_status: 200
+- url: https://chargeafter.com/.well-known/oauth-protected-resource
+  method: GET
+  http_status: 200
+- url: https://chargeafter.com/wp-json/mcp/mcp-oauth-server
+  method: POST tools/list
+  http_status: 401
+  body: '{"code":"rest_login_required","message":"REST API restricted to authenticated users.","data":{"status":401}}'
+- url: https://chargeafter.com/mcp
+  method: POST tools/list
+  http_status: 404
+- url: https://mcp.chargeafter.com/
+  method: GET
+  http_status: 0
+  note: host does not resolve
+x-evidence:
+  fetched: '2026-08-09'

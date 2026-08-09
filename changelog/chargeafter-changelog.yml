@@ -1,0 +1,65 @@
+generated: '2026-08-09'
+method: searched
+source: https://docs.chargeafter.com/changelog
+scheme: dated posts, no version numbers
+current_version: not stated on the changelog
+cadence:
+  observed: irregular
+  note: >-
+    Seven entries total, the most recent roughly a year old (mid-2025) and the oldest roughly two and a half
+    years old. The changelog has not tracked the API definition churn visible in the api-catalog, where
+    Charge API, Checkout Management, OmniLink and Consumer API all shipped new builds in 2026.
+entries:
+- title: Changes to Merchant Notifications
+  url: https://docs.chargeafter.com/changelog/new-merchant-notifications
+  relative_date: about 1 year ago
+  breaking: true
+  highlights:
+  - Webhook naming aligned to a new domain/event-type scheme; merchants must adapt to the new names.
+- title: Additions to Consumer Confirmation Payload
+  url: https://docs.chargeafter.com/changelog/additions-to-consumer-confirmation-payload
+  relative_date: almost 2 years ago
+  breaking: false
+  highlights:
+  - Added linkId and consumerId to the confirmation webhook payload.
+- title: GET application status Payload Improvements
+  url: https://docs.chargeafter.com/changelog/get-status-of-application-improvements
+  relative_date: almost 2 years ago
+  breaking: false
+  highlights:
+  - Application status response enriched with account details and confirmed offer information.
+- title: Consumer Management APIs
+  url: https://docs.chargeafter.com/changelog/consumer-management-apis
+  relative_date: almost 2 years ago
+  breaking: true
+  highlights:
+  - New endpoints for retrieving consumer details and consumer accounts.
+  - Legacy consumer endpoints relocated.
+- title: Funding API
+  url: https://docs.chargeafter.com/changelog/funding-api-1
+  relative_date: about 2 years ago
+  breaking: false
+  highlights:
+  - Added merchantTransactionId to the funding report payload.
+- title: Funding API
+  url: https://docs.chargeafter.com/changelog/funding-api
+  relative_date: over 2 years ago
+  breaking: false
+  highlights:
+  - Added ProductType and PromoCode to the funding report payload.
+- title: February Announcements
+  url: https://docs.chargeafter.com/changelog/february-announcements
+  relative_date: over 2 years ago
+  breaking: true
+  highlights:
+  - 'Launched GET /v2/post-sale/fundings/report, replacing the earlier funding endpoints.'
+  - Improved reconciliation status values.
+  - Added the showMissing parameter.
+gaps:
+- Entries are shown with relative dates only; no machine-readable publication date is exposed.
+- No changelog RSS/Atom feed is published.
+- Entries carry no version identifier that can be tied back to an OpenAPI definition build.
+x-evidence:
+- url: https://docs.chargeafter.com/changelog
+  http_status: 200
+  fetched: '2026-08-09'

@@ -1,0 +1,1557 @@
+openapi: 3.0.1
+info:
+  title: Consumer API
+  description: Welcome to ChargeAfter API reference! This API is implemented in a RESTful state of mind, it has straight-forward,
+    resource-oriented endpoints, and produces standard HTTP response codes to communicate back the result of operations. To
+    get started please contact ChargeAfter support to get your API keys, and get an access to your testing and live environments.
+  termsOfService: https://chargeafter.com/privacy-policy
+  contact:
+    name: Customer Support
+    email: support@chargeafter.com
+  version: 1.0.0
+paths:
+  /v2/consumers/consumer-details:
+    post:
+      tags:
+      - ConsumersV2
+      summary: Get accounts and account token
+      description: Combines account lookup and account token creation for approved accounts
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Requests.LookupAccountsByConsumerDetailsRequestBody'
+      responses:
+        '200':
+          description: Request is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.LookupAccountsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+  /v2/consumers/{consumerId}/accounts:
+    get:
+      tags:
+      - ConsumersV2
+      summary: Get accounts by consumerId
+      description: Lookup existing accounts by consumerId
+      parameters:
+      - name: consumerId
+        in: path
+        description: Unique identifier of the consumer.
+        required: true
+        schema:
+          type: string
+          example: lm9u5be2c2bkjeejj01bmfm3
+        example: lm9u5be2c2bkjeejj01bmfm3
+      - name: channel
+        in: query
+        description: "The channel of the original purchase.<br />If not provided, the E_COMMERCE channel will be used.<br\
+          \ />\r\nOther options are IN_STORE / CALL_CENTER / IN_HOME<br />"
+        schema:
+          type: string
+          example: E_COMMERCE
+        example: E_COMMERCE
+      - name: storeId
+        in: query
+        description: The store identifier.
+        schema:
+          type: string
+          example: 123W
+        example: 123W
+      - name: posId
+        in: query
+        description: The point of sale identifier.
+        schema:
+          type: string
+      - name: posType
+        in: query
+        description: The point of sale type.
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PosType'
+      - name: currency
+        in: query
+        description: Optional ISO 4217 currency code. If not provided, the USD currency will be used.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Request is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.LookupAccountsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '404':
+          description: Consumer is not found or the user is unauthorized to request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Libraries.ErrorHandling.Exceptions.V1ApiError'
+        '422':
+          description: Server unable to process request because it contains invalid data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+components:
+  schemas:
+    ChargeAfter.BFF.Domain.Entities.Discount:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        amount:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.BFF.Domain.Entities.Item:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: double
+        sku:
+          type: string
+          nullable: true
+        quantity:
+          type: integer
+          format: int32
+        leasable:
+          type: boolean
+          nullable: true
+        productCategory:
+          type: string
+          nullable: true
+        warranty:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.Domain.Entities.Warranty'
+          nullable: true
+        taxAmount:
+          type: number
+          format: double
+          nullable: true
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.BFF.Domain.Entities.Discount'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.BFF.Domain.Entities.Warranty:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        sku:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails:
+      type: object
+      properties:
+        storeId:
+          type: string
+          nullable: true
+        posId:
+          type: string
+          nullable: true
+        posType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PosType'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.Domain.NoConsumerAccountsException:
+      type: object
+      properties:
+        context:
+          nullable: true
+          readOnly: true
+          deprecated: true
+        message:
+          type: string
+          nullable: true
+        data:
+          type: object
+          additionalProperties: {}
+          nullable: true
+          readOnly: true
+        innerException:
+          nullable: true
+        helpLink:
+          type: string
+          nullable: true
+        source:
+          type: string
+          nullable: true
+        hResult:
+          type: integer
+          format: int32
+        stackTrace:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Models.AccountInfo:
+      required:
+      - account
+      type: object
+      properties:
+        account:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account'
+          description: Consumer account as returned by the configured lender
+        accountToken:
+          type: string
+          description: Account token used for confirmation/charge creation. Returned for approved account
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Models.Failure:
+      required:
+      - lenderId
+      - lenderName
+      type: object
+      properties:
+        lenderId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the lender.
+        lenderName:
+          minLength: 1
+          type: string
+          description: Lender display name.<br /><b>Note:</b> Because this value may change, customers should not bind to
+            this parameter. Instead, bind to the lenderId and set the lenderName in your system.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus'
+          description: Failure status
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Error'
+          description: Failure errors, provided if status is Error
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Models.LenderCreditInfo:
+      type: object
+      properties:
+        lenderId:
+          type: string
+          description: Lender identifier
+          nullable: true
+        lenderName:
+          type: string
+          description: Lender name.<br /><b>Note:</b> Because this value may change, customers should not bind to this parameter.
+            Instead, bind to the lenderId and set the lenderName in your system.
+          nullable: true
+        availableCredit:
+          type: number
+          description: Amount available for the consumer
+          format: double
+        financialProductType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
+          description: Financial product type
+        lenderReferenceId:
+          type: string
+          description: Lender reference identifier
+          nullable: true
+        estimated:
+          type: boolean
+          description: Is CA estimated value
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Models.LenderFailure:
+      type: object
+      properties:
+        lenderId:
+          type: string
+          description: Lender identifier
+          nullable: true
+        lenderName:
+          type: string
+          description: Lender name.<br /><b>Note:</b> Because this value may change, customers should not bind to this parameter.
+            Instead, bind to the lenderId and set the lenderName in your system.
+          nullable: true
+        code:
+          type: string
+          description: Error code
+          nullable: true
+        description:
+          type: string
+          description: Error description
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Models.LookupCreditConsumerDetails:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: The first name of the consumer.
+          nullable: true
+          example: Tomes
+        lastName:
+          type: string
+          description: The last name of the consumer.
+          nullable: true
+          example: Tasio
+        email:
+          type: string
+          description: Consumer email.
+          nullable: true
+          example: john.doe@gmail.com
+        dateOfBirth:
+          type: string
+          description: Date of birth in ISO 8601 format
+          format: date-time
+          nullable: true
+          example: '1994-05-12T00:00:00Z'
+        socialSecurityNumber:
+          type: string
+          description: "US Social security number (SSN).<br />\r\n9-digits number without dashes."
+          nullable: true
+          example: '123456789'
+        last4SsnDigits:
+          type: string
+          description: "US Social security number (SSN) last 4 digits.<br />\r\n4-digits number without dashes.\r\nIf provided\
+            \ together with full SSN it must match its last 4 digits."
+          nullable: true
+          example: '6789'
+        mobilePhoneNumber:
+          type: string
+          description: The mobile phone number of the consumer.
+          nullable: true
+          example: '52342358765'
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Models.LookupCreditMerchantDetails:
+      type: object
+      properties:
+        storeId:
+          type: string
+          description: The store identifier
+          nullable: true
+        channel:
+          type: string
+          description: "Optional Channel. If not provided, the E_COMMERCE channel will be used.<br />\r\nOther options are\
+            \ IN_STORE / CALL_CENTER / IN_HOME"
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Requests.ConsumerAccountsCheckoutDetails:
+      type: object
+      properties:
+        currency:
+          type: string
+          description: Optional ISO 4217 currency code. If not provided, the USD currency will be used.
+          nullable: true
+        channel:
+          type: string
+          description: "Optional Channel. If not provided, the E_COMMERCE channel will be used.<br />\r\nOther options are\
+            \ IN_STORE / CALL_CENTER / IN_HOME"
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Requests.CreateChargeRequestBody:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.BFF.Domain.Entities.Item'
+          description: Line items.
+          nullable: true
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.BFF.Domain.Entities.Discount'
+          description: Optional discounts.
+          nullable: true
+        taxAmount:
+          type: number
+          description: Total tax amount.
+          format: double
+          example: 199
+        shippingAmount:
+          type: number
+          description: Shipping amount.
+          format: double
+          example: 19
+        totalAmount:
+          type: number
+          description: "Total amount.<br />\r\nMust be equal to the sum of all items - discounts + tax and shipping."
+          format: double
+          example: 4297.9
+        lenderId:
+          type: string
+          description: The lender identifier.
+          nullable: true
+          example: b6725be2c2b04ee9901bb82f
+        merchantOrderId:
+          type: string
+          description: The merchant order ID of the original order associated with the reported funding.
+          nullable: true
+          example: '12345'
+        promoCode:
+          type: string
+          description: The promo code of the original lender's offer for the purchase.
+          nullable: true
+          example: '123'
+        storeId:
+          type: string
+          description: The store identifier.
+          nullable: true
+          example: 123W
+        channel:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.Channel'
+          description: "The channel of the original purchase.<br />If not provided, the E_COMMERCE channel will be used.<br\
+            \ />\r\nOther options are IN_STORE / CALL_CENTER / IN_HOME<br />"
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Requests.LookupAccountsByConsumerDetailsRequestBody:
+      required:
+      - consumerDetails
+      type: object
+      properties:
+        consumerDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.ConsumerDetails'
+          description: Consumer details
+        checkoutDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Requests.ConsumerAccountsCheckoutDetails'
+          description: Optional checkout details
+          nullable: true
+        merchantDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails'
+          description: Optional merchant details
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Requests.LookupCreditRequestBody:
+      required:
+      - consumerDetails
+      type: object
+      properties:
+        consumerDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Models.LookupCreditConsumerDetails'
+        merchantDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Models.LookupCreditMerchantDetails'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AdditionalIds:
+      type: object
+      properties:
+        socialInsuranceNumber:
+          type: string
+          nullable: true
+          example: '454654654'
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address:
+      type: object
+      properties:
+        city:
+          type: string
+          nullable: true
+          example: Springfield
+        line1:
+          type: string
+          nullable: true
+          example: 273 Lee Avenue
+        line2:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+          example: MA
+        zipCode:
+          type: string
+          nullable: true
+          example: '01104'
+        country:
+          type: string
+          nullable: true
+          example: US
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCredit:
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          description: The credit amount.
+          format: double
+          example: 1245.1
+        lender:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender'
+          description: Lender information.
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCreditExtended:
+      type: object
+      properties:
+        lender:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCreditLender'
+          nullable: true
+        creditAmount:
+          type: number
+          description: The credit amount.
+          format: double
+          example: 1245.1
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCreditLender:
+      type: object
+      properties:
+        isUpsaleEnabled:
+          type: boolean
+        id:
+          type: string
+          description: Lender identifier.
+          nullable: true
+          example: mn9u5be2c2bk35aa601bmfjf
+        name:
+          type: string
+          description: Lender name.
+          nullable: true
+          example: Synchrony
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCreditResponse:
+      type: object
+      properties:
+        availableCredit:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCreditExtended'
+          nullable: true
+        prequalifyConfirmationToken:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.ConsumerAccount:
+      type: object
+      properties:
+        lenderId:
+          type: string
+          description: Lender id
+          nullable: true
+        lenderName:
+          type: string
+          description: Lender name.<br /><b>Note:</b> Because this value may change, customers should not bind to this parameter.
+            Instead, bind to the lenderId and set the lenderName in your system.
+          nullable: true
+        creditInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.CreditInfo'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.ConsumerApplication:
+      type: object
+      properties:
+        consumerId:
+          type: string
+          nullable: true
+        accountToken:
+          type: string
+          nullable: true
+        applicationId:
+          type: string
+          nullable: true
+        lenderId:
+          type: string
+          nullable: true
+        updated:
+          type: string
+          format: date-time
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ConsumerApplicationStatus'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.ConsumerApplicationsResponse:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.ConsumerApplication'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.ConsumerResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique consumer id
+          nullable: true
+          example: 63126524b97bd7d254c71041
+        firstName:
+          type: string
+          nullable: true
+          example: John
+        lastName:
+          type: string
+          nullable: true
+          example: Arlen
+        email:
+          type: string
+          nullable: true
+          example: someone@example.com
+        shippingAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
+          nullable: true
+        billingAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
+          nullable: true
+        netMonthlyIncome:
+          type: number
+          format: double
+          nullable: true
+          example: 5000
+        grossMonthlyIncome:
+          type: number
+          format: double
+          nullable: true
+        dateOfBirth:
+          type: string
+          format: date-time
+          nullable: true
+        socialSecurityNumber:
+          type: string
+          nullable: true
+          example: '324620074'
+        additionalIds:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AdditionalIds'
+          nullable: true
+        mobilePhoneNumber:
+          type: string
+          nullable: true
+        housingStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ResidenceType'
+          nullable: true
+        merchantConsumerId:
+          type: string
+          nullable: true
+          example: 624d519bde8287d9542d4484
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.CreateChargeResponse:
+      type: object
+      properties:
+        buyerId:
+          type: string
+          description: Buyer identifier.
+          nullable: true
+          example: mm9u5be2c2bkjee9601bmf53
+        buyerType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.BuyerType'
+          description: The type of the supported buyer, Consumer or Organization.
+          example: Consumer
+        channel:
+          type: string
+          description: "The channel of the original purchase.<br />If not provided, the E_COMMERCE channel will be used.<br\
+            \ />\r\nOther options are IN_STORE / CALL_CENTER / IN_HOME<br />"
+          nullable: true
+          example: E_COMMERCE
+        consumerId:
+          type: string
+          description: Consumer identifier.
+          nullable: true
+          example: mn9u5be2c2bk35e9601bmfjf
+        id:
+          type: string
+          description: Charge identifier.
+          nullable: true
+          example: 33nu5be2c2bk35e96ajfm9ag
+        lender:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender'
+          description: Lender information.
+          nullable: true
+        merchantOrderId:
+          type: string
+          description: The merchant order ID of the original order associated with the reported funding.
+          nullable: true
+          example: '12345'
+        paymentPlan:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.PaymentPlan'
+          description: The return offer from lender.
+          nullable: true
+        refundedAmount:
+          type: number
+          description: The amount that was refunded on the charge.
+          format: double
+          example: 123.4
+        state:
+          type: string
+          description: The state of the charge.
+          nullable: true
+          example: SETTLED
+        totalAmount:
+          type: number
+          description: The total amount of the purchase.
+          format: double
+          example: 1232.4
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.CreditInfo:
+      type: object
+      properties:
+        availableAmount:
+          type: number
+          description: Available credit amount
+          format: double
+          example: 2780.25
+        originalAmount:
+          type: number
+          description: Original credit amount
+          format: double
+          example: 5000
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Document:
+      type: object
+      properties:
+        mimetype:
+          type: string
+          nullable: true
+        blob:
+          type: string
+          nullable: true
+        filename:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetConsumerResponse:
+      type: object
+      properties:
+        availableCredit:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCredit'
+          description: Array of lenders with the available credit amount.
+          nullable: true
+        billingAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
+          description: The billing address of the consumer.
+          nullable: true
+        email:
+          type: string
+          description: The email name of the consumer.
+          nullable: true
+          example: hello@gmail.com
+        firstName:
+          type: string
+          description: The first name of the consumer.
+          nullable: true
+          example: Tomes
+        id:
+          type: string
+          description: Consumer identifier.
+          nullable: true
+          example: mn9u5be2c2bk35aa601bmfjf
+        lastName:
+          type: string
+          description: The last name of the consumer.
+          nullable: true
+          example: Tasio
+        mobilePhoneNumber:
+          type: string
+          description: The mobile phone number of the consumer.
+          nullable: true
+          example: '52342358765'
+        shippingAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
+          description: The billing address of the consumer.
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        schemaVersion:
+          type: integer
+          format: int64
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetLegalDocsResponse:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Document'
+          nullable: true
+        lenderId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Lender identifier.
+          nullable: true
+          example: mn9u5be2c2bk35aa601bmfjf
+        name:
+          type: string
+          description: Lender name.
+          nullable: true
+          example: Synchrony
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.LookupAccountsResponse:
+      required:
+      - applicationId
+      type: object
+      properties:
+        accountsInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Models.AccountInfo'
+          description: Consumer accounts with additional information
+          nullable: true
+        applicationId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the application
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Models.Failure'
+          description: List of failed lookups and unusable accounts
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.LookupCreditResponse:
+      type: object
+      properties:
+        credits:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Models.LenderCreditInfo'
+          nullable: true
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Models.LenderFailure'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.PaymentPlan:
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          description: The available credit.
+          format: double
+      additionalProperties: false
+    ChargeAfter.Contracts.AccountStatus:
+      enum:
+      - None
+      - New
+      - NotFound
+      - PreApproved
+      - Approved
+      - Banned
+      - Declined
+      - Error
+      - Pending
+      - PartiallyApproved
+      - Frozen
+      - PreDeclined
+      - PendingConsumer
+      - Cancelled
+      type: string
+    ChargeAfter.Contracts.LenderType:
+      enum:
+      - Unknown
+      - Fortiva
+      - Genesis
+      - Katapult
+      - Progressive
+      - Synchrony
+      - SynchronyRloc
+      - SynchronySetPay
+      - Citizens
+      - PreferredLease
+      - Visa
+      - Aff
+      - Acima
+      - SplitIt
+      - ZipCo
+      - Milan
+      - Behalf
+      - LendingPoint
+      - Vive
+      - CoveredCare
+      - Ally
+      - Koalafi
+      - MerchantGrowth
+      - Wells_Fargo
+      - Flexiti
+      type: string
+    ChargeAfter.Libraries.Entities.AccountStatusReason:
+      enum:
+      - ApplicationNotCompleted
+      - MissingStips
+      - MissingESign
+      - MissingConfirmation
+      - MissingStipsVerification
+      - MissingStipsReview
+      - LoanAlreadyUsed
+      - NoCreditAvailable
+      - FailedCardValidation
+      - CardValidationExpired
+      type: string
+    ChargeAfter.Libraries.Entities.ApplicationStatusReason:
+      enum:
+      - ConsumerApplicationNotCompleted
+      - AccountFrozen
+      - ConsumerBanned
+      - MissingESign
+      - PendingLenderDocumentReview
+      - Error
+      - PendingCallLenderToResolve
+      - PendingUploadDocumentToResolve
+      type: string
+    ChargeAfter.Libraries.Entities.BuyerType:
+      enum:
+      - Consumer
+      - Organization
+      type: string
+    ChargeAfter.Libraries.Entities.Channel:
+      type: object
+      properties:
+        channelStr:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.Claim:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ClaimType'
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.ClaimType:
+      enum:
+      - DriverLicense
+      - StateId
+      type: string
+    ChargeAfter.Libraries.Entities.ConsumerApplicationStatus:
+      enum:
+      - New
+      - Prequalified
+      - CheckoutInProgress
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Approved
+      - Authorized
+      - Declined
+      - Expired
+      - Cancelled
+      type: string
+    ChargeAfter.Libraries.Entities.IncomeType:
+      enum:
+      - MonthlyNet
+      - MonthlyGross
+      - AnnualNet
+      - AnnualGross
+      type: string
+    ChargeAfter.Libraries.Entities.IntentSafe:
+      enum:
+      - ExistingAccount
+      - Authenticate
+      - ConfirmPayment
+      - StandaloneLookup
+      - ConsumerAdditionalAction
+      - ModifyLoan
+      - PrequalLookup
+      type: string
+    ChargeAfter.Libraries.Entities.LenderAccountStatus:
+      enum:
+      - Inactive
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Active
+      type: string
+    ChargeAfter.Libraries.Entities.PeriodType:
+      enum:
+      - Day
+      - Month
+      - Week
+      - BiWeek
+      type: string
+    ChargeAfter.Libraries.Entities.PosType:
+      enum:
+      - Kiosk
+      - Retail
+      - GenericMerchantDevice
+      - GenericConsumerDevice
+      - SelfServiceTerminal
+      type: string
+    ChargeAfter.Libraries.Entities.ResidenceType:
+      enum:
+      - OWN
+      - RENT
+      - OTHER
+      type: string
+    ChargeAfter.Libraries.ErrorHandling.Exceptions.V1ApiError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          nullable: true
+        code:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.AdditionalIds:
+      type: object
+      properties:
+        socialInsuranceNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Address:
+      required:
+      - city
+      - country
+      - line1
+      - state
+      - zipCode
+      type: object
+      properties:
+        country:
+          minLength: 1
+          type: string
+        state:
+          minLength: 1
+          type: string
+        city:
+          minLength: 1
+          type: string
+        line1:
+          minLength: 1
+          type: string
+        line2:
+          type: string
+          nullable: true
+        zipCode:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.BoolType:
+      enum:
+      - 'NO'
+      - 'YES'
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.ConsumerDetails:
+      required:
+      - billingAddress
+      - dateOfBirth
+      - email
+      - firstName
+      - lastName
+      - netMonthlyIncome
+      - shippingAddress
+      type: object
+      properties:
+        firstName:
+          minLength: 1
+          type: string
+        lastName:
+          minLength: 1
+          type: string
+        email:
+          minLength: 1
+          type: string
+        shippingAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Address'
+        billingAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Address'
+        spouseInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.SpouseInfo'
+          nullable: true
+        marriageStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.MarriageStatus'
+          nullable: true
+        netMonthlyIncome:
+          type: number
+          format: double
+        annualNetIncome:
+          type: number
+          format: double
+          nullable: true
+        annualGrossIncome:
+          type: number
+          format: double
+          nullable: true
+        updatedIncomeType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.IncomeType'
+          nullable: true
+        monthlyHousingPaymentIncome:
+          type: number
+          format: double
+          nullable: true
+        grossMonthlyIncome:
+          type: number
+          format: double
+          nullable: true
+        dateOfBirth:
+          type: string
+          format: date-time
+        socialSecurityNumber:
+          type: string
+          nullable: true
+        additionalIds:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.AdditionalIds'
+          nullable: true
+        mobilePhoneNumber:
+          type: string
+          nullable: true
+        housingStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ResidenceType'
+          nullable: true
+        preferences:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Preferences'
+          nullable: true
+        merchantConsumerId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Language:
+      enum:
+      - En
+      - Fr
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.MarriageStatus:
+      enum:
+      - Not Married
+      - Married
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Preferences:
+      type: object
+      properties:
+        language:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Language'
+          nullable: true
+        marketingOptIn:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account:
+      required:
+      - id
+      - lenderId
+      - lenderName
+      - offers
+      - status
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+        lenderId:
+          minLength: 1
+          type: string
+        lenderName:
+          minLength: 1
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Contracts.AccountStatus'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer'
+        creditInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo'
+          nullable: true
+        applicationStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ConsumerApplicationStatus'
+          nullable: true
+        applicationStatusReason:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ApplicationStatusReason'
+          nullable: true
+        accountStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.LenderAccountStatus'
+          nullable: true
+        accountStatusReason:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.AccountStatusReason'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.ApplicationType:
+      enum:
+      - Unknown
+      - New
+      - Prequalification
+      - Application
+      - Error
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
+      type: object
+      properties:
+        availableCredit:
+          type: number
+          format: double
+        maxAmount:
+          type: number
+          format: double
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType'
+        url:
+          type: string
+          nullable: true
+        mimeType:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType:
+      enum:
+      - Link
+      - Hosted
+      - Template
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus'
+        ineligibilityReason:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus:
+      enum:
+      - Eligible
+      - Ineligible
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Error:
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties: {}
+          nullable: true
+        applicationType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.ApplicationType'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus:
+      enum:
+      - None
+      - NotFound
+      - PreApproved
+      - Approved
+      - Banned
+      - Declined
+      - NonUsable
+      - Error
+      - Pending
+      - Ineligible
+      - Cancelled
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
+      enum:
+      - LineOfCredit
+      - Installments
+      - LeaseToOwn
+      - MerchantSelfFinancing
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer:
+      required:
+      - amount
+      - code
+      - defaultAPR
+      - financialProductType
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+        financialProductType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
+        defaultAPR:
+          type: number
+          format: double
+        amount:
+          type: number
+          format: double
+        promoSettings:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings'
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties: {}
+          nullable: true
+        expirationDate:
+          type: string
+          format: date-time
+          nullable: true
+        checkoutMinimumAmount:
+          type: number
+          format: double
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        eligibility:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility'
+          nullable: true
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        disclosures:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures'
+          nullable: true
+        offerType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferType'
+        texts:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures:
+      type: object
+      properties:
+        apply:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+          nullable: true
+        confirm:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferType:
+      enum:
+      - Regular
+      - Sample
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings:
+      type: object
+      properties:
+        isPromo:
+          type: boolean
+        numberOfPeriods:
+          type: integer
+          format: int32
+          nullable: true
+        periodicPayment:
+          type: number
+          format: double
+          nullable: true
+        periodType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
+          nullable: true
+        apr:
+          type: number
+          format: double
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.UsabilityStatus:
+      enum:
+      - Unknown
+      - Usable
+      - AvailableLimitExceeded
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.SpouseInfo:
+      type: object
+      properties:
+        spouseSameAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.BoolType'
+          nullable: true
+        spouseAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Address'
+          nullable: true
+        spouseFirstName:
+          type: string
+          nullable: true
+        spouseLastName:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      description: ChargeAfter API supports an API key based authentication, provided in the `apiKey` HTTP header.
+      name: Authorization
+      in: header
+servers:
+- url: https://api-sandbox.ca-dev.co
+  description: Sandbox Environment
+- url: https://api.chargeafter.com
+  description: Production Environment
+security:
+- apiKey: []
