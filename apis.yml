@@ -33,180 +33,129 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- name: ChargeAfter Charge API
-  description: >-
-    Accounts and post-sale charge lifecycle — create an account, create a charge from an approved account
-    token, look up accounts and credit cards, then settle, refund, void, update delivery data, and look up
-    orders and transactions.
+- aid: chargeafter:chargeafter-accounts-api
+  name: ChargeAfter Accounts API
+  description: The Accounts API from ChargeAfter — 10 operation(s) for accounts.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
+  baseURL: https://api.chargeafter.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/chargeafter-accounts-api-openapi.yml
+- aid: chargeafter:chargeafter-applicationsv3-api
+  name: ChargeAfter Applications V3 API
+  description: The ApplicationsV3 API from ChargeAfter — 2 operation(s) for applicationsv3.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
+  baseURL: https://api.chargeafter.com
+  tags:
+  - ApplicationsV3
+  properties:
+  - type: OpenAPI
+    url: openapi/chargeafter-applicationsv3-api-openapi.yml
+- aid: chargeafter:chargeafter-charges-api
+  name: ChargeAfter Charges API
+  description: The Charges API from ChargeAfter — 8 operation(s) for charges.
   humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
   baseURL: https://api.chargeafter.com
   tags:
   - Charges
-  - Accounts
-  - Transactions
   properties:
   - type: OpenAPI
-    url: openapi/chargeafter-charge-api-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-charge-api-overlay.yaml
-- name: ChargeAfter Checkout Session API
-  description: Creates a checkout session with an optional cart, consumer, and checkout details (v3).
-  humanURL: https://docs.chargeafter.com/reference/post_v3-session-1
+    url: openapi/chargeafter-charges-api-openapi.yml
+- aid: chargeafter:chargeafter-checkout-api
+  name: ChargeAfter Checkout API
+  description: The Checkout API from ChargeAfter — 2 operation(s) for checkout.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
   baseURL: https://api.chargeafter.com
   tags:
   - Checkout
-  - Sessions
   properties:
   - type: OpenAPI
-    url: openapi/chargeafter-checkout-session-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-checkout-session-overlay.yaml
-- name: ChargeAfter Checkout Session Accounts API
-  description: Returns lender accounts and the financing offers available for a checkout session (v3).
-  humanURL: https://docs.chargeafter.com/reference/get_v3-session-accounts-1
+    url: openapi/chargeafter-checkout-api-openapi.yml
+- aid: chargeafter:chargeafter-consumer-management-api
+  name: ChargeAfter Consumer Management API
+  description: The Consumer Management API from ChargeAfter — 3 operation(s) for consumer management.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
   baseURL: https://api.chargeafter.com
   tags:
-  - Checkout
-  - Offers
+  - Consumer Management
   properties:
   - type: OpenAPI
-    url: openapi/chargeafter-checkout-session-accounts-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-checkout-session-accounts-overlay.yaml
-- name: ChargeAfter Checkout Application Token API
-  description: >-
-    Returns a time-limited interactive session token used to resume the Checkout flow for the account
-    associated with an application.
-  humanURL: https://docs.chargeafter.com/reference/get_v2-checkout-applications-applicationid-token
+    url: openapi/chargeafter-consumer-management-api-openapi.yml
+- aid: chargeafter:chargeafter-consumersv2-api
+  name: ChargeAfter Consumers V2 API
+  description: The ConsumersV2 API from ChargeAfter — 4 operation(s) for consumersv2.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
   baseURL: https://api.chargeafter.com
   tags:
-  - Checkout
-  - Applications
+  - ConsumersV2
   properties:
   - type: OpenAPI
-    url: openapi/chargeafter-checkout-application-token-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-checkout-application-token-overlay.yaml
-- name: ChargeAfter Checkout Application Status API
-  description: Returns the status of a financing application, including account and confirmed-offer detail.
-  humanURL: https://docs.chargeafter.com/reference/get_v2-checkout-applications-applicationid-status
+    url: openapi/chargeafter-consumersv2-api-openapi.yml
+- aid: chargeafter:chargeafter-fundings-api
+  name: ChargeAfter Fundings API
+  description: The Fundings API from ChargeAfter — 1 operation(s) for fundings.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
   baseURL: https://api.chargeafter.com
   tags:
-  - Checkout
-  - Applications
+  - Fundings
   properties:
   - type: OpenAPI
-    url: openapi/chargeafter-checkout-application-status-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-checkout-application-status-overlay.yaml
-- name: ChargeAfter Distribution API
-  description: >-
-    Looks up an existing consumer account and returns the relevant financing offers, creating a new account
-    when none exists; also resolves offers against an existing applicationId.
-  humanURL: https://docs.chargeafter.com/reference/post_v2-checkout-accounts
+    url: openapi/chargeafter-fundings-api-openapi.yml
+- aid: chargeafter:chargeafter-lenders-api
+  name: ChargeAfter Lenders API
+  description: The Lenders API from ChargeAfter — 7 operation(s) for lenders.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
   baseURL: https://api.chargeafter.com
   tags:
-  - Checkout
-  - Offers
-  - Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/chargeafter-distribution-api-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-distribution-api-overlay.yaml
-- name: ChargeAfter Consumer API
-  description: Returns consumer details and looks up the financing accounts held by a consumerId.
-  humanURL: https://docs.chargeafter.com/reference/get_v2-consumers-consumerid-1
-  baseURL: https://api.chargeafter.com
-  tags:
-  - Consumers
-  - Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/chargeafter-consumer-api-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-consumer-api-overlay.yaml
-- name: ChargeAfter Consumer Details API
-  description: Combines account lookup and account-token creation for a consumer's approved accounts.
-  humanURL: https://docs.chargeafter.com/reference/post_v2-consumers-consumer-details
-  baseURL: https://api.chargeafter.com
-  tags:
-  - Consumers
-  - Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/chargeafter-consumer-details-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-consumer-details-overlay.yaml
-- name: ChargeAfter Consumer Credit Lookup API
-  description: Performs a credit lookup for a consumer against the ChargeAfter lender network.
-  humanURL: https://docs.chargeafter.com/reference/api-overview
-  baseURL: https://api.chargeafter.com
-  tags:
-  - Consumers
-  - Credit
-  properties:
-  - type: OpenAPI
-    url: openapi/chargeafter-consumer-credit-lookup-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-consumer-credit-lookup-overlay.yaml
-- name: ChargeAfter Consumers Management API
-  description: Post-sale consumer record access — consumer info, legal info, and creating a charge for a consumer.
-  humanURL: https://docs.chargeafter.com/reference/consumer-management-1
-  baseURL: https://api.chargeafter.com
-  tags:
-  - Consumers
-  - Post Sale
-  properties:
-  - type: OpenAPI
-    url: openapi/chargeafter-consumers-management-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-consumers-management-overlay.yaml
-- name: ChargeAfter Funding API
-  description: >-
-    Returns funding records for reconciliation, filtered by date and status, including merchant transaction
-    id, product type, and promo code.
-  humanURL: https://docs.chargeafter.com/reference/get_v2-post-sale-fundings-report-1
-  baseURL: https://api.chargeafter.com
-  tags:
-  - Funding
-  - Reconciliation
-  properties:
-  - type: OpenAPI
-    url: openapi/chargeafter-funding-api-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-funding-api-overlay.yaml
-- name: ChargeAfter OmniLink API
-  description: >-
-    Generates single-use consumer links that launch the ChargeAfter Apply or Checkout experience outside the
-    merchant site, for in-store and call-center flows, and retrieves the data behind a generated link.
-  humanURL: https://docs.chargeafter.com/reference/links
-  baseURL: https://api.chargeafter.com
-  tags:
-  - Omni Link
-  - In Store
-  properties:
-  - type: OpenAPI
-    url: openapi/chargeafter-omni-link-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-omni-link-overlay.yaml
-- name: ChargeAfter Disputes Management for Lenders API
-  description: >-
-    Lender-facing dispute and chargeback lifecycle — create a dispute (idempotent on lenderDisputeId),
-    resolve, reopen, reverse the chargeback transaction, add notes or supporting documents, assign between
-    merchant and lender, and read dispute details.
-  humanURL: https://docs.chargeafter.com/.well-known/api-catalog
-  baseURL: https://api.chargeafter.com
-  tags:
-  - Disputes
-  - Chargebacks
   - Lenders
   properties:
   - type: OpenAPI
-    url: openapi/chargeafter-disputes-management-lenders-openapi.yml
-  - type: Overlay
-    url: overlays/chargeafter-disputes-management-lenders-overlay.yaml
+    url: openapi/chargeafter-lenders-api-openapi.yml
+- aid: chargeafter:chargeafter-links-api
+  name: ChargeAfter Links API
+  description: The Links API from ChargeAfter — 3 operation(s) for links.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
+  baseURL: https://api.chargeafter.com
+  tags:
+  - Links
+  properties:
+  - type: OpenAPI
+    url: openapi/chargeafter-links-api-openapi.yml
+- aid: chargeafter:chargeafter-orders-api
+  name: ChargeAfter Orders API
+  description: The Orders API from ChargeAfter — 1 operation(s) for orders.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
+  baseURL: https://api.chargeafter.com
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/chargeafter-orders-api-openapi.yml
+- aid: chargeafter:chargeafter-sessionsv3-api
+  name: ChargeAfter Sessions V3 API
+  description: The SessionsV3 API from ChargeAfter — 1 operation(s) for sessionsv3.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
+  baseURL: https://api.chargeafter.com
+  tags:
+  - SessionsV3
+  properties:
+  - type: OpenAPI
+    url: openapi/chargeafter-sessionsv3-api-openapi.yml
+- aid: chargeafter:chargeafter-transactions-api
+  name: ChargeAfter Transactions API
+  description: The Transactions API from ChargeAfter — 2 operation(s) for transactions.
+  humanURL: https://docs.chargeafter.com/reference/post_v2-post-sale-charges
+  baseURL: https://api.chargeafter.com
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/chargeafter-transactions-api-openapi.yml
 common:
+- type: Overlay
+  url: overlays/chargeafter-charge-api-overlay.yaml
 - type: Website
   url: https://chargeafter.com/
 - type: DeveloperPortal
