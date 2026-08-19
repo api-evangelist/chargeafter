@@ -1,0 +1,2794 @@
+openapi: 3.2.0
+info:
+  title: Distribution Checkout API
+  description: Welcome to ChargeAfter API reference! This API is implemented in a RESTful state of mind, it has straight-forward, resource-oriented endpoints, and produces standard HTTP response codes to communicate back the result of operations. To get started please contact ChargeAfter support to get your API keys, and get an access to your testing and live environments.
+  termsOfService: https://chargeafter.com/privacy-policy
+  contact:
+    name: Customer Support
+    email: support@chargeafter.com
+  version: 0.0.5+bf6238465dcb01cfc82360350426730cb9363c90
+servers:
+- url: https://api-sandbox.ca-dev.co
+  description: Local Environment
+- url: https://api.chargeafter.com
+  description: Production Environment
+security:
+- apiKey: []
+tags:
+- name: Checkout
+paths:
+  /v2/checkout/accounts:
+    post:
+      tags:
+      - Checkout
+      summary: Get accounts with offers for consumer
+      description: Looks up an existing account and returns relevant offers. If there is no existing account, this creates a new account and returns relevant offers.
+      parameters:
+      - name: lookupOnly
+        in: query
+        description: Optional flag to indicate that only account lookup should be performed. If TRUE, then if there is no existing account, a new account will not be created.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Requests.GetAccountsRequestBody'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Requests.GetAccountsRequestBody'
+          text/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Requests.GetAccountsRequestBody'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Requests.GetAccountsRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Responses.GetAccountsResponse'
+              examples:
+                Prequal:
+                  summary: Prequal account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c401fc
+                      lenderId: 66fa53165e2c589770c401fb
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: PreApproved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c401fe
+                        code: 53165e2c589770c401ff
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4214276Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c40200
+                        code: 53165e2c589770c40201
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4214351Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c40202
+                        code: 53165e2c589770c40203
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.421437Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c401fd
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c40205
+                    applicationId: 66fa53165e2c589770c40204
+                Approved:
+                  summary: Approved account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c40207
+                      lenderId: 66fa53165e2c589770c40206
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: Approved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c40209
+                        code: 53165e2c589770c4020a
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4218391Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4020b
+                        code: 53165e2c589770c4020c
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4218424Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4020d
+                        code: 53165e2c589770c4020e
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4218451Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c40208
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c40210
+                    applicationId: 66fa53165e2c589770c4020f
+                Declined:
+                  summary: Declined account response
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40213
+                      lenderName: Finara
+                      status: Declined
+                      errors: []
+                      ineligibility: null
+                      disclosures:
+                        decline:
+                          type: Hosted
+                          url: null
+                          mimeType: null
+                    consumerId: 66fa53165e2c589770c40212
+                    applicationId: 66fa53165e2c589770c40211
+                ErrorAuthentication:
+                  summary: No account, authentication required
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40216
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1260'
+                        description: Authentication required
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40215
+                    applicationId: 66fa53165e2c589770c40214
+                ErrorLender:
+                  summary: No account, unknown lender error
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40219
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1000'
+                        description: Unknown error occurred
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40218
+                    applicationId: 66fa53165e2c589770c40217
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Responses.GetAccountsResponse'
+              examples:
+                Prequal:
+                  summary: Prequal account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c401fc
+                      lenderId: 66fa53165e2c589770c401fb
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: PreApproved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c401fe
+                        code: 53165e2c589770c401ff
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4214276Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c40200
+                        code: 53165e2c589770c40201
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4214351Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c40202
+                        code: 53165e2c589770c40203
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.421437Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c401fd
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c40205
+                    applicationId: 66fa53165e2c589770c40204
+                Approved:
+                  summary: Approved account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c40207
+                      lenderId: 66fa53165e2c589770c40206
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: Approved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c40209
+                        code: 53165e2c589770c4020a
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4218391Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4020b
+                        code: 53165e2c589770c4020c
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4218424Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4020d
+                        code: 53165e2c589770c4020e
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4218451Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c40208
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c40210
+                    applicationId: 66fa53165e2c589770c4020f
+                Declined:
+                  summary: Declined account response
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40213
+                      lenderName: Finara
+                      status: Declined
+                      errors: []
+                      ineligibility: null
+                      disclosures:
+                        decline:
+                          type: Hosted
+                          url: null
+                          mimeType: null
+                    consumerId: 66fa53165e2c589770c40212
+                    applicationId: 66fa53165e2c589770c40211
+                ErrorAuthentication:
+                  summary: No account, authentication required
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40216
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1260'
+                        description: Authentication required
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40215
+                    applicationId: 66fa53165e2c589770c40214
+                ErrorLender:
+                  summary: No account, unknown lender error
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40219
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1000'
+                        description: Unknown error occurred
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40218
+                    applicationId: 66fa53165e2c589770c40217
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Responses.GetAccountsResponse'
+              examples:
+                Prequal:
+                  summary: Prequal account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c401fc
+                      lenderId: 66fa53165e2c589770c401fb
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: PreApproved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c401fe
+                        code: 53165e2c589770c401ff
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4214276Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c40200
+                        code: 53165e2c589770c40201
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4214351Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c40202
+                        code: 53165e2c589770c40203
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.421437Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c401fd
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c40205
+                    applicationId: 66fa53165e2c589770c40204
+                Approved:
+                  summary: Approved account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c40207
+                      lenderId: 66fa53165e2c589770c40206
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: Approved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c40209
+                        code: 53165e2c589770c4020a
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4218391Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4020b
+                        code: 53165e2c589770c4020c
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4218424Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4020d
+                        code: 53165e2c589770c4020e
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4218451Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c40208
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c40210
+                    applicationId: 66fa53165e2c589770c4020f
+                Declined:
+                  summary: Declined account response
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40213
+                      lenderName: Finara
+                      status: Declined
+                      errors: []
+                      ineligibility: null
+                      disclosures:
+                        decline:
+                          type: Hosted
+                          url: null
+                          mimeType: null
+                    consumerId: 66fa53165e2c589770c40212
+                    applicationId: 66fa53165e2c589770c40211
+                ErrorAuthentication:
+                  summary: No account, authentication required
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40216
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1260'
+                        description: Authentication required
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40215
+                    applicationId: 66fa53165e2c589770c40214
+                ErrorLender:
+                  summary: No account, unknown lender error
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40219
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1000'
+                        description: Unknown error occurred
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40218
+                    applicationId: 66fa53165e2c589770c40217
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+              examples:
+                ErrorValidationIncome:
+                  summary: Error response, missing application details
+                  value:
+                    requestId: BFF_63bd692f-28c3-442f-9575-0aeeaa96c697
+                    errors:
+                    - serviceCode: bff
+                      domainCode: Core
+                      code: '1121'
+                      description: Application details missing
+                      internalDescription: null
+                      metadata:
+                        propertyName: Body.ConsumerDetails.NetMonthlyIncome
+                ErrorValidationAddress:
+                  summary: Error response, missing consumer details
+                  value:
+                    requestId: BFF_dcf3bd14-bb80-44c2-8337-212d32261333
+                    errors:
+                    - serviceCode: bff
+                      domainCode: Core
+                      code: '1110'
+                      description: '''Billing Address'' must not be empty.'
+                      internalDescription: null
+                      metadata:
+                        propertyName: Body.ConsumerDetails.BillingAddress
+        '401':
+          description: Unauthorized
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+  /v2/checkout/applications/{applicationId}/accounts:
+    post:
+      tags:
+      - Checkout
+      summary: Get accounts with offers with existing applicationId
+      description: Looks up an existing account and returns relevant offers.
+      parameters:
+      - name: applicationId
+        in: path
+        description: Unique identifier of the application
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Responses.GetAccountsResponse'
+              examples:
+                Prequal:
+                  summary: Prequal account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c4021b
+                      lenderId: 66fa53165e2c589770c4021a
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: PreApproved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c4021d
+                        code: 53165e2c589770c4021e
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.426024Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4021f
+                        code: 53165e2c589770c40220
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4260298Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c40221
+                        code: 53165e2c589770c40222
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4260316Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c4021c
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c40224
+                    applicationId: 66fa53165e2c589770c40223
+                Approved:
+                  summary: Approved account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c40226
+                      lenderId: 66fa53165e2c589770c40225
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: Approved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c40228
+                        code: 53165e2c589770c40229
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4264015Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4022a
+                        code: 53165e2c589770c4022b
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4264047Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4022c
+                        code: 53165e2c589770c4022d
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4264083Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c40227
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c4022f
+                    applicationId: 66fa53165e2c589770c4022e
+                Declined:
+                  summary: Declined account response
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40232
+                      lenderName: Finara
+                      status: Declined
+                      errors: []
+                      ineligibility: null
+                      disclosures:
+                        decline:
+                          type: Hosted
+                          url: null
+                          mimeType: null
+                    consumerId: 66fa53165e2c589770c40231
+                    applicationId: 66fa53165e2c589770c40230
+                ErrorAuthentication:
+                  summary: No account, authentication required
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40235
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1260'
+                        description: Authentication required
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40234
+                    applicationId: 66fa53165e2c589770c40233
+                ErrorLender:
+                  summary: No account, unknown lender error
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40238
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1000'
+                        description: Unknown error occurred
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40237
+                    applicationId: 66fa53165e2c589770c40236
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Responses.GetAccountsResponse'
+              examples:
+                Prequal:
+                  summary: Prequal account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c4021b
+                      lenderId: 66fa53165e2c589770c4021a
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: PreApproved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c4021d
+                        code: 53165e2c589770c4021e
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.426024Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4021f
+                        code: 53165e2c589770c40220
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4260298Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c40221
+                        code: 53165e2c589770c40222
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4260316Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c4021c
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c40224
+                    applicationId: 66fa53165e2c589770c40223
+                Approved:
+                  summary: Approved account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c40226
+                      lenderId: 66fa53165e2c589770c40225
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: Approved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c40228
+                        code: 53165e2c589770c40229
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4264015Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4022a
+                        code: 53165e2c589770c4022b
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4264047Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4022c
+                        code: 53165e2c589770c4022d
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4264083Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c40227
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c4022f
+                    applicationId: 66fa53165e2c589770c4022e
+                Declined:
+                  summary: Declined account response
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40232
+                      lenderName: Finara
+                      status: Declined
+                      errors: []
+                      ineligibility: null
+                      disclosures:
+                        decline:
+                          type: Hosted
+                          url: null
+                          mimeType: null
+                    consumerId: 66fa53165e2c589770c40231
+                    applicationId: 66fa53165e2c589770c40230
+                ErrorAuthentication:
+                  summary: No account, authentication required
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40235
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1260'
+                        description: Authentication required
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40234
+                    applicationId: 66fa53165e2c589770c40233
+                ErrorLender:
+                  summary: No account, unknown lender error
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40238
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1000'
+                        description: Unknown error occurred
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40237
+                    applicationId: 66fa53165e2c589770c40236
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Distribution.WebApi.Contracts.Responses.GetAccountsResponse'
+              examples:
+                Prequal:
+                  summary: Prequal account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c4021b
+                      lenderId: 66fa53165e2c589770c4021a
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: PreApproved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c4021d
+                        code: 53165e2c589770c4021e
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.426024Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4021f
+                        code: 53165e2c589770c40220
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4260298Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c40221
+                        code: 53165e2c589770c40222
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4260316Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c4021c
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c40224
+                    applicationId: 66fa53165e2c589770c40223
+                Approved:
+                  summary: Approved account response
+                  value:
+                    accountsInfo:
+                    - id: 66fa53165e2c589770c40226
+                      lenderId: 66fa53165e2c589770c40225
+                      lenderName: Finara
+                      lenderType: Unknown
+                      status: Approved
+                      usabilityStatus: Usable
+                      offers:
+                      - id: 165e2c589770c40228
+                        code: 53165e2c589770c40229
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1200
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4264015Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4022a
+                        code: 53165e2c589770c4022b
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 2000
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4264047Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      - id: 165e2c589770c4022c
+                        code: 53165e2c589770c4022d
+                        defaultCode: null
+                        financialProductType: LineOfCredit
+                        defaultAPR: 13.99
+                        amount: 1500
+                        promoSettings:
+                          isPromo: true
+                          period: null
+                          numberOfPeriods: 6
+                          periodicPayment: 500
+                          periodType: Month
+                          apr: 13.99
+                          type: null
+                        metadata: {}
+                        lateFeeAmountTierOne: null
+                        annualFeeAmount: 0
+                        dailyPeriodicRate: 0
+                        lateFeeMinimumAmount: null
+                        minFinanceCharge: null
+                        returnedPaymentFeeAmount: null
+                        minimumPaymentDue: null
+                        expirationDate: '2024-10-30T07:28:22.4264083Z'
+                        checkoutMinimumAmount: 300
+                        description: No Interest if Paid in Full in 6 Months
+                        eligibility:
+                          status: Eligible
+                          ineligibilityReason: null
+                        tags: {}
+                        disclosures:
+                          apply:
+                            type: Hosted
+                            url: null
+                            mimeType: null
+                          confirm:
+                            type: Link
+                            url: http://test
+                            mimeType: html
+                      metadata: {}
+                      isHighRisk: false
+                      pendingSignature: false
+                      lenderReturningConsumer: true
+                      loanId: 66fa53165e2c589770c40227
+                      creditInfo:
+                        availableCredit: 1500
+                        maxAmount: 1500
+                    failures: []
+                    consumerId: 66fa53165e2c589770c4022f
+                    applicationId: 66fa53165e2c589770c4022e
+                Declined:
+                  summary: Declined account response
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40232
+                      lenderName: Finara
+                      status: Declined
+                      errors: []
+                      ineligibility: null
+                      disclosures:
+                        decline:
+                          type: Hosted
+                          url: null
+                          mimeType: null
+                    consumerId: 66fa53165e2c589770c40231
+                    applicationId: 66fa53165e2c589770c40230
+                ErrorAuthentication:
+                  summary: No account, authentication required
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40235
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1260'
+                        description: Authentication required
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40234
+                    applicationId: 66fa53165e2c589770c40233
+                ErrorLender:
+                  summary: No account, unknown lender error
+                  value:
+                    accountsInfo: []
+                    failures:
+                    - lenderId: 66fa53165e2c589770c40238
+                      lenderName: Finara
+                      status: Error
+                      errors:
+                      - code: '1000'
+                        description: Unknown error occurred
+                        metadata: null
+                      ineligibility: null
+                      disclosures: null
+                    consumerId: 66fa53165e2c589770c40237
+                    applicationId: 66fa53165e2c589770c40236
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+              examples:
+                ErrorValidationIncome:
+                  summary: Error response, missing application details
+                  value:
+                    requestId: BFF_37645386-eddb-4434-9b80-74083cca6f65
+                    errors:
+                    - serviceCode: bff
+                      domainCode: Core
+                      code: '1121'
+                      description: Application details missing
+                      internalDescription: null
+                      metadata:
+                        propertyName: Body.ConsumerDetails.NetMonthlyIncome
+                ErrorValidationAddress:
+                  summary: Error response, missing consumer details
+                  value:
+                    requestId: BFF_3a685747-ad5b-4615-b547-e13cb1913988
+                    errors:
+                    - serviceCode: bff
+                      domainCode: Core
+                      code: '1110'
+                      description: '''Billing Address'' must not be empty.'
+                      internalDescription: null
+                      metadata:
+                        propertyName: Body.ConsumerDetails.BillingAddress
+        '401':
+          description: Unauthorized
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+components:
+  schemas:
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureDisclosures:
+      type: object
+      properties:
+        decline:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus:
+      enum:
+      - Eligible
+      - Ineligible
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings:
+      type: object
+      properties:
+        isPromo:
+          type: boolean
+        numberOfPeriods:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        periodicPayment:
+          type:
+          - number
+          - 'null'
+          format: double
+        periodType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
+        apr:
+          type:
+          - number
+          - 'null'
+          format: double
+        type:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account:
+      required:
+      - id
+      - lenderId
+      - lenderName
+      - offers
+      - status
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+        lenderId:
+          minLength: 1
+          type: string
+        lenderName:
+          minLength: 1
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Contracts.AccountStatus'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer'
+        creditInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Language:
+      enum:
+      - En
+      - Fr
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.MarriageStatus:
+      enum:
+      - Not Married
+      - Married
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType:
+      enum:
+      - Link
+      - Hosted
+      type: string
+    ChargeAfter.Contracts.AccountStatus:
+      enum:
+      - None
+      - New
+      - NotFound
+      - PreApproved
+      - Approved
+      - Banned
+      - Declined
+      - Error
+      - Pending
+      - PartiallyApproved
+      - Frozen
+      - PreDeclined
+      - PendingConsumer
+      type: string
+    ChargeAfter.Distribution.WebApi.Contracts.Responses.GetAccountsResponse:
+      type: object
+      properties:
+        accountsInfo:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account'
+          description: 'Contain usable accounts with statuses<br />
+
+            Approved<br />
+
+            PreApproved<br />
+
+            Pending<br />
+
+            PendingConsumer<br />
+
+            PartiallyApproved<br />
+
+            New'
+        failures:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Failure'
+          description: 'Contain failures to create or retrieve usable accounts with statuses<br />
+
+            Error<br />
+
+            NotFound<br />
+
+            Declined<br />
+
+            Banned<br />
+
+            Frozen'
+        consumerId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the consumer
+        applicationId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the application
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.PeriodType:
+      enum:
+      - Day
+      - Month
+      - Week
+      - BiWeek
+      type: string
+    ChargeAfter.Libraries.Entities.ResidenceType:
+      enum:
+      - OWN
+      - RENT
+      - OTHER
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures:
+      type: object
+      properties:
+        apply:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+        confirm:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item:
+      required:
+      - price
+      - quantity
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        price:
+          type: number
+          format: double
+        sku:
+          type:
+          - string
+          - 'null'
+        quantity:
+          type: integer
+          format: int32
+        leasable:
+          type:
+          - boolean
+          - 'null'
+        productCategory:
+          type:
+          - string
+          - 'null'
+        warranty:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty'
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        discounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
+      additionalProperties: false
+    ChargeAfter.Distribution.WebApi.Contracts.Requests.GetAccountsRequestBody:
+      type: object
+      properties:
+        consumerDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.ConsumerDetails'
+        checkoutDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.CheckoutDetails'
+        merchantDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails'
+      additionalProperties: false
+    ChargeAfter.BFF.WebApi.Contracts.Models.ConsumerDetails:
+      required:
+      - billingAddress
+      - dateOfBirth
+      - email
+      - firstName
+      - lastName
+      - netMonthlyIncome
+      - shippingAddress
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        firstName:
+          minLength: 1
+          type: string
+        lastName:
+          minLength: 1
+          type: string
+        email:
+          minLength: 1
+          type: string
+        shippingAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Address'
+        billingAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Address'
+        spouseInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.SpouseInfo'
+        marriageStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.MarriageStatus'
+        netMonthlyIncome:
+          type: number
+          format: double
+        annualNetIncome:
+          type:
+          - number
+          - 'null'
+          format: double
+        annualGrossIncome:
+          type:
+          - number
+          - 'null'
+          format: double
+        monthlyHousingPaymentIncome:
+          type:
+          - number
+          - 'null'
+          format: double
+        grossMonthlyIncome:
+          type:
+          - number
+          - 'null'
+          format: double
+        dateOfBirth:
+          type: string
+          format: date-time
+        socialSecurityNumber:
+          type:
+          - string
+          - 'null'
+        additionalIds:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.AdditionalIds'
+        mobilePhoneNumber:
+          type:
+          - string
+          - 'null'
+        housingStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ResidenceType'
+        preferences:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Preferences'
+        merchantConsumerId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus'
+        ineligibilityReason:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.AdditionalIds:
+      type: object
+      properties:
+        socialInsuranceNumber:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
+      enum:
+      - Prequalify
+      - Apply
+      - Checkout
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.SpouseInfo:
+      type: object
+      properties:
+        spouseSameAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.BoolType'
+        spouseAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Address'
+        spouseFirstName:
+          type:
+          - string
+          - 'null'
+        spouseLastName:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
+      enum:
+      - LineOfCredit
+      - Installments
+      - LeaseToOwn
+      - MerchantSelfFinancing
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Error:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Address:
+      required:
+      - city
+      - country
+      - line1
+      - state
+      - zipCode
+      type: object
+      properties:
+        country:
+          minLength: 1
+          type: string
+        state:
+          minLength: 1
+          type: string
+        city:
+          minLength: 1
+          type: string
+        line1:
+          minLength: 1
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        zipCode:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus:
+      enum:
+      - None
+      - NotFound
+      - PreApproved
+      - Approved
+      - Banned
+      - Declined
+      - NonUsable
+      - Error
+      - Pending
+      - Ineligible
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails:
+      required:
+      - items
+      - totalAmount
+      type: object
+      properties:
+        merchantOrderId:
+          type:
+          - string
+          - 'null'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item'
+        discounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
+        taxAmount:
+          type: number
+          format: double
+        shippingTaxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        shippingAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        totalAmount:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Failure:
+      required:
+      - lenderId
+      - lenderName
+      type: object
+      properties:
+        lenderId:
+          minLength: 1
+          type: string
+        lenderName:
+          minLength: 1
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus'
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Error'
+        disclosures:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureDisclosures'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType'
+        url:
+          type:
+          - string
+          - 'null'
+        mimeType:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.BFF.WebApi.Contracts.Models.CheckoutDetails:
+      required:
+      - cartDetails
+      - channel
+      - flowType
+      type: object
+      properties:
+        cartDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails'
+        channel:
+          minLength: 1
+          type: string
+        currency:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        flowType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType'
+        requestedLoanAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Preferences:
+      type: object
+      properties:
+        language:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Language'
+        marketingOptIn:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount:
+      required:
+      - amount
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer:
+      required:
+      - amount
+      - code
+      - defaultAPR
+      - financialProductType
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+        financialProductType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
+        defaultAPR:
+          type: number
+          format: double
+        amount:
+          type: number
+          format: double
+        promoSettings:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+        expirationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        checkoutMinimumAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        description:
+          type:
+          - string
+          - 'null'
+        eligibility:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility'
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        disclosures:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures'
+      additionalProperties: false
+    ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails:
+      type: object
+      properties:
+        storeId:
+          type:
+          - string
+          - 'null'
+        posId:
+          type:
+          - string
+          - 'null'
+        posType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PosType'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
+      required:
+      - price
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        sku:
+          type:
+          - string
+          - 'null'
+        price:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
+      type: object
+      properties:
+        availableCredit:
+          type: number
+          format: double
+        maxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.PosType:
+      enum:
+      - Kiosk
+      - Retail
+      - GenericMerchantDevice
+      - GenericConsumerDevice
+      - SelfServiceTerminal
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.BoolType:
+      enum:
+      - 'NO'
+      - 'YES'
+      type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header

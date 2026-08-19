@@ -1,0 +1,938 @@
+{
+  "item": [
+    {
+      "id": "fefcc363-6243-40fc-844e-c390b0939fd7",
+      "name": "Consumer Management",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "118216d9-6ce5-456d-8859-2acb6bb41b3c",
+          "name": "Get consumer info",
+          "request": {
+            "name": "Get consumer info",
+            "description": {
+              "content": "Fetching updated information of an existing consumer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "consumers",
+                ":consumerid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string,null>",
+                  "key": "consumerid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "138a11b1-dc63-4694-8511-281e1619a2f1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"availableCredit\": null,\n  \"billingAddress\": {\n    \"city\": \"string\",\n    \"line1\": \"string\",\n    \"line2\": null,\n    \"state\": null,\n    \"zipCode\": null\n  },\n  \"email\": \"string\",\n  \"firstName\": \"string\",\n  \"id\": null,\n  \"lastName\": null,\n  \"mobilePhoneNumber\": null,\n  \"shippingAddress\": {\n    \"city\": null,\n    \"line1\": \"string\",\n    \"line2\": null,\n    \"state\": null,\n    \"zipCode\": \"string\"\n  },\n  \"createdAt\": \"1948-11-27T14:11:14.206Z\",\n  \"updatedAt\": \"1995-06-28T13:10:40.727Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2c5099c-40dd-47c6-83b4-215ae5109c26",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cdeb5b5a-b731-402e-9ff7-ef0ce787f807",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14e83463-44bd-4ea8-aab1-2e53d41fe770",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3055834-ce18-435c-82a1-c633a66f76f1",
+          "name": "Get legal info",
+          "request": {
+            "name": "Get legal info",
+            "description": {
+              "content": "Geting legal info from lenders",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "consumers",
+                ":consumerid",
+                "legal-info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lenderid",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "totalamount",
+                  "value": "<double>"
+                },
+                {
+                  "disabled": false,
+                  "key": "promocode",
+                  "value": "<string,null>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string,null>",
+                  "key": "consumerid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4267e939-8965-40fc-bc44-d05f51e07ed3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid",
+                    "legal-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lenderid",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "totalamount",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "promocode",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    \"\",\n    \"\"\n  ],\n  \"lenderId\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e397d321-8749-44fa-b801-0717965db05c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid",
+                    "legal-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lenderid",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "totalamount",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "promocode",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8a47cab5-fab6-40e7-9dcf-8a058c759392",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid",
+                    "legal-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lenderid",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "totalamount",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "promocode",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc45ebb6-6287-446d-9dc3-9e3900e9b04f",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid",
+                    "legal-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lenderid",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "totalamount",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "promocode",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92a61942-4a66-4dca-a60e-38d23a189949",
+          "name": "Create a new charge",
+          "request": {
+            "name": "Create a new charge",
+            "description": {
+              "content": "Creating a charge with consumer id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "consumers",
+                ":consumerid",
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string,null>",
+                  "key": "consumerid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": \"<array,null>\",\n  \"discounts\": \"<array,null>\",\n  \"taxAmount\": \"<double>\",\n  \"shippingAmount\": \"<double>\",\n  \"totalAmount\": \"<double>\",\n  \"lenderId\": \"<string,null>\",\n  \"merchantOrderId\": \"<string,null>\",\n  \"promoCode\": \"<string,null>\",\n  \"storeId\": \"<string,null>\",\n  \"channel\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c6ed3e7-164b-456c-90e1-eb302075161a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": \"<array,null>\",\n  \"discounts\": \"<array,null>\",\n  \"taxAmount\": \"<double>\",\n  \"shippingAmount\": \"<double>\",\n  \"totalAmount\": \"<double>\",\n  \"lenderId\": \"<string,null>\",\n  \"merchantOrderId\": \"<string,null>\",\n  \"promoCode\": \"<string,null>\",\n  \"storeId\": \"<string,null>\",\n  \"channel\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buyerId\": \"string\",\n  \"buyerType\": \"Consumer\",\n  \"channel\": null,\n  \"consumerId\": \"string\",\n  \"id\": null,\n  \"lender\": {\n    \"id\": null,\n    \"name\": \"string\"\n  },\n  \"merchantOrderId\": null,\n  \"paymentPlan\": {\n    \"creditAmount\": 4763.740341412833\n  },\n  \"refundedAmount\": 5221.638450218837,\n  \"state\": null,\n  \"totalAmount\": 6994.243740792535,\n  \"updatedAt\": \"1990-11-24T17:38:41.787Z\",\n  \"createdAt\": \"1987-12-30T16:47:28.577Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44931452-08f9-4bd8-ac78-44ed69b5aac2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": \"<array,null>\",\n  \"discounts\": \"<array,null>\",\n  \"taxAmount\": \"<double>\",\n  \"shippingAmount\": \"<double>\",\n  \"totalAmount\": \"<double>\",\n  \"lenderId\": \"<string,null>\",\n  \"merchantOrderId\": \"<string,null>\",\n  \"promoCode\": \"<string,null>\",\n  \"storeId\": \"<string,null>\",\n  \"channel\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3594eece-1495-483a-9091-628da3eb4d2a",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": \"<array,null>\",\n  \"discounts\": \"<array,null>\",\n  \"taxAmount\": \"<double>\",\n  \"shippingAmount\": \"<double>\",\n  \"totalAmount\": \"<double>\",\n  \"lenderId\": \"<string,null>\",\n  \"merchantOrderId\": \"<string,null>\",\n  \"promoCode\": \"<string,null>\",\n  \"storeId\": \"<string,null>\",\n  \"channel\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d77eee4-4fab-4219-94d7-af97af77812f",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "consumers",
+                    ":consumerid",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "consumerid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": \"<array,null>\",\n  \"discounts\": \"<array,null>\",\n  \"taxAmount\": \"<double>\",\n  \"shippingAmount\": \"<double>\",\n  \"totalAmount\": \"<double>\",\n  \"lenderId\": \"<string,null>\",\n  \"merchantOrderId\": \"<string,null>\",\n  \"promoCode\": \"<string,null>\",\n  \"storeId\": \"<string,null>\",\n  \"channel\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f4e90c54-143b-4ac2-a60f-e562d68e3194",
+    "name": "Consumers Management Consumer Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Customer Support\n Email: support@chargeafter.com",
+      "type": "text/plain"
+    }
+  }
+}

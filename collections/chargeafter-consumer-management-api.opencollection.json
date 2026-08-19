@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consumers Management Consumer Management API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Consumer Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get consumer info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/consumers/:consumerid",
+            "params": [
+              {
+                "name": "consumerid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetching updated information of an existing consumer"
+        },
+        {
+          "info": {
+            "name": "Get legal info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/consumers/:consumerid/legal-info",
+            "params": [
+              {
+                "name": "consumerid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lenderid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "totalamount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "promocode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Geting legal info from lenders"
+        },
+        {
+          "info": {
+            "name": "Create a new charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/consumers/:consumerid/charges",
+            "params": [
+              {
+                "name": "consumerid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a charge with consumer id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

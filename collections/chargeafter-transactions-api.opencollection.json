@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Charge Transactions API",
+    "version": "1.2.45+20181a21407d1df1b163085f2b159570f697241a"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get transaction by merchantTransactionId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/transactions/lookup",
+            "params": [
+              {
+                "name": "merchantTransactionId",
+                "value": "",
+                "type": "query",
+                "description": "The merchant transaction ID."
+              }
+            ]
+          },
+          "docs": "Get transaction by merchantTransactionId"
+        },
+        {
+          "info": {
+            "name": "Get transaction by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID."
+              }
+            ]
+          },
+          "docs": "Get transaction by Id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

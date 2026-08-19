@@ -1,0 +1,1736 @@
+{
+  "item": [
+    {
+      "id": "ab620286-1008-4470-b43a-a31f0c515744",
+      "name": "ConsumersV2",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9edab475-4ec4-4324-afc9-368f665779ac",
+          "name": "Get consumer details",
+          "request": {
+            "name": "Get consumer details",
+            "description": {
+              "content": "Returns consumer details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "consumers",
+                ":consumerId"
+              ],
+              "host": [
+                "{{v2-consumers-consumerId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channel",
+                  "value": "<string>",
+                  "description": "Optional Channel. If not provided, the E_COMMERCE channel will be used.<br />\nOther options are IN_STORE / CALL_CENTER / IN_HOME"
+                },
+                {
+                  "disabled": false,
+                  "key": "storeId",
+                  "value": "<string>",
+                  "description": "The store identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "posId",
+                  "value": "<string>",
+                  "description": "The point of sale identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "posType",
+                  "value": "<string>",
+                  "description": "The point of sale type"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Optional ISO 4217 currency code. If not provided, the USD currency will be used."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "consumerId",
+                  "description": "(Required) Unique identifier of the consumer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14559051-3597-4d29-8cd1-785d414ac279",
+              "name": "Consumer is found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"63126524b97bd7d254c71041\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Arlen\",\n  \"email\": \"someone@example.com\",\n  \"shippingAddress\": {\n    \"city\": \"Springfield\",\n    \"line1\": \"273 Lee Avenue\",\n    \"line2\": null,\n    \"state\": \"MA\",\n    \"zipCode\": \"01104\",\n    \"country\": \"US\"\n  },\n  \"billingAddress\": {\n    \"city\": \"Springfield\",\n    \"line1\": \"273 Lee Avenue\",\n    \"line2\": \"string\",\n    \"state\": \"MA\",\n    \"zipCode\": \"01104\",\n    \"country\": \"US\"\n  },\n  \"netMonthlyIncome\": 5000,\n  \"grossMonthlyIncome\": null,\n  \"dateOfBirth\": \"1971-07-18T02:48:28.659Z\",\n  \"socialSecurityNumber\": \"324620074\",\n  \"additionalIds\": {\n    \"socialInsuranceNumber\": \"454654654\"\n  },\n  \"mobilePhoneNumber\": null,\n  \"housingStatus\": \"OTHER\",\n  \"merchantConsumerId\": \"624d519bde8287d9542d4484\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03c2429f-3ab1-4b84-bb74-9bb2d3d05256",
+              "name": "Bad Request Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2159a9c5-bc56-4ea3-9cae-2a4dc8e94d29",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ecbf3fa-3173-4094-a279-487c50f6d027",
+              "name": "Consumer is not found or the user is unauthorized to request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98b85f12-7dca-468c-8563-c5731726bf13",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f055ea2-61aa-4c56-9e49-8666d9930e59",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d02d73ed-1fae-47b9-8a54-c0a81c0a8d41",
+          "name": "Get accounts by consumerId",
+          "request": {
+            "name": "Get accounts by consumerId",
+            "description": {
+              "content": "Lookup existing accounts by consumerId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "consumers",
+                ":consumerId",
+                "accounts"
+              ],
+              "host": [
+                "{{v2-consumers-consumerId-accounts-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channel",
+                  "value": "<string>",
+                  "description": "Optional Channel. If not provided, the E_COMMERCE channel will be used.<br />\nOther options are IN_STORE / CALL_CENTER / IN_HOME"
+                },
+                {
+                  "disabled": false,
+                  "key": "storeId",
+                  "value": "<string>",
+                  "description": "The store identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "posId",
+                  "value": "<string>",
+                  "description": "The point of sale identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "posType",
+                  "value": "<string>",
+                  "description": "The point of sale type"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Optional ISO 4217 currency code. If not provided, the USD currency will be used."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "consumerId",
+                  "description": "(Required) Unique identifier of the consumer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68a29509-b9da-4d32-8f6e-afe406e73b48",
+              "name": "Request is successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationId\": \"string\",\n  \"accountsInfo\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "576538f2-94f1-4a6b-a82e-e28ddf0037d3",
+              "name": "Bad Request Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b020032a-db48-4069-926e-74572fb9b974",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a5d2a07-a42f-4027-a641-ecbd4608bf1c",
+              "name": "Consumer is not found or the user is unauthorized to request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3599a180-3420-48b6-adbd-0b6e4b594313",
+              "name": "Server unable to process request because it contains invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d46afe95-fdb8-41e9-862a-199685043641",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    ":consumerId",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumerId-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "consumerId",
+                      "description": "(Required) Unique identifier of the consumer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e29c51d-8f70-4389-b923-99670a2178a1",
+          "name": "Credit Lookup",
+          "request": {
+            "name": "Credit Lookup",
+            "description": {
+              "content": "Returns the consumer's available credit based on limited PII info",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "consumers",
+                "credit",
+                "lookup"
+              ],
+              "host": [
+                "{{v2-consumers-credit-lookup-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"consumerDetails\": {\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"dateOfBirth\": \"<string,null-date-time>\",\n    \"socialSecurityNumber\": \"<string,null>\",\n    \"last4SsnDigits\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e528beb8-3c2d-46d6-a7d9-e88802187bef",
+              "name": "Request is successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "credit",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{v2-consumers-credit-lookup-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"firstName\": \"Tomes\",\n    \"lastName\": \"Tasio\",\n    \"email\": \"john.doe@gmail.com\",\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"last4SsnDigits\": \"6789\",\n    \"mobilePhoneNumber\": \"52342358765\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credits\": null,\n  \"failures\": [\n    \"\",\n    \"\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61046526-05bf-4856-aee0-6c9ca95f424b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "credit",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{v2-consumers-credit-lookup-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"firstName\": \"Tomes\",\n    \"lastName\": \"Tasio\",\n    \"email\": \"john.doe@gmail.com\",\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"last4SsnDigits\": \"6789\",\n    \"mobilePhoneNumber\": \"52342358765\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fdc18a7-0033-4307-b482-9017db2d138f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "credit",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{v2-consumers-credit-lookup-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"firstName\": \"Tomes\",\n    \"lastName\": \"Tasio\",\n    \"email\": \"john.doe@gmail.com\",\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"last4SsnDigits\": \"6789\",\n    \"mobilePhoneNumber\": \"52342358765\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "81ab9306-7767-40b4-8e38-e45160af964b",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "credit",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{v2-consumers-credit-lookup-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"firstName\": \"Tomes\",\n    \"lastName\": \"Tasio\",\n    \"email\": \"john.doe@gmail.com\",\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"last4SsnDigits\": \"6789\",\n    \"mobilePhoneNumber\": \"52342358765\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b001e218-b25e-4231-aedd-cd8453a81861",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "credit",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{v2-consumers-credit-lookup-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"firstName\": \"Tomes\",\n    \"lastName\": \"Tasio\",\n    \"email\": \"john.doe@gmail.com\",\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"last4SsnDigits\": \"6789\",\n    \"mobilePhoneNumber\": \"52342358765\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e942421-a19d-4714-8e24-5932fa1c0985",
+          "name": "Get accounts and account token",
+          "request": {
+            "name": "Get accounts and account token",
+            "description": {
+              "content": "Combines account lookup and account token creation for approved accounts",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "consumers",
+                "consumer-details"
+              ],
+              "host": [
+                "{{v2-consumers-consumer-details-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"dateOfBirth\": \"<dateTime>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"netMonthlyIncome\": \"<double>\",\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"<string,null>\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4a4c47f-563a-4767-ae31-9f81b827462e",
+              "name": "Request is successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "consumer-details"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumer-details-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"dateOfBirth\": \"<dateTime>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"netMonthlyIncome\": \"<double>\",\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"<string,null>\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationId\": \"string\",\n  \"accountsInfo\": null,\n  \"failures\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "677f2e50-3347-48fb-ac8e-034253d7e6fb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "consumer-details"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumer-details-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"dateOfBirth\": \"<dateTime>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"netMonthlyIncome\": \"<double>\",\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"<string,null>\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48e7879c-d562-436b-b79b-f6b5f93b5990",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "consumer-details"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumer-details-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"dateOfBirth\": \"<dateTime>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"netMonthlyIncome\": \"<double>\",\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"<string,null>\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2058407e-9566-40f6-adfb-0de34db6089f",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "consumer-details"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumer-details-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"dateOfBirth\": \"<dateTime>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"netMonthlyIncome\": \"<double>\",\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"<string,null>\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2519a468-b5c3-440a-ac59-d21886697181",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "consumers",
+                    "consumer-details"
+                  ],
+                  "host": [
+                    "{{v2-consumers-consumer-details-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"dateOfBirth\": \"<dateTime>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"netMonthlyIncome\": \"<double>\",\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"<string,null>\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"channel\": \"<string,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-consumers-consumerId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-consumers-consumerId-accounts-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-develop.ca-dev.co",
+      "key": "v2-consumers-credit-lookup-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-consumers-consumer-details-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fdd98894-06b6-46fb-98be-8f1dd6f72d04",
+    "name": "Chargeafter Consumers V2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged ConsumersV2 across 3 of this provider's published API definitions: chargeafter-consumer-api-openapi.yml, chargeafter-consumer-credit-lookup-openapi.yml, chargeafter-consumer-details-openapi.yml. Each path carries the servers of the definition it was published in.\n\nContact Support:\n Name: Customer Support\n Email: support@chargeafter.com",
+      "type": "text/plain"
+    }
+  }
+}

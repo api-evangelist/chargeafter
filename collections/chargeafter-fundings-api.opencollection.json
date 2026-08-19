@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Funding Fundings API",
+    "version": "1.1.2382+7198366761a28c8d853ed62373f94bd6a1f05b4e"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fundings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET funding report (new)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/fundings/report",
+            "params": [
+              {
+                "name": "offset",
+                "value": "24000",
+                "type": "query",
+                "description": "(Optional) The starting point of the records to be retrieved.\n            \nMust be greater than or equal to 0 if supplied.\nDefault: 0"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "(Optional) The maximum number of records to be retrieved.\n            \nMust be greater than 0 if supplied.\nDefault: 1000"
+              },
+              {
+                "name": "fromDate",
+                "value": "2023-11-11",
+                "type": "query",
+                "description": "(Optional) Additional limit on the funding's date.\n            \nIf supplied only records with a funding date that are greater than or equal will be retrieved."
+              },
+              {
+                "name": "toDate",
+                "value": "2023-11-11",
+                "type": "query",
+                "description": "(Optional) Additional limit on the funding's date.\n            \nIf supplied only records with a funding date that are greater than or equal will be retrieved."
+              },
+              {
+                "name": "showMissing",
+                "value": "true",
+                "type": "query",
+                "description": "(Optional) Show unmatched reports\n            \nIf true, display details of fundings that couldn't be matched to existing transactions."
+              }
+            ]
+          },
+          "docs": "Return funding records based on supplied filters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

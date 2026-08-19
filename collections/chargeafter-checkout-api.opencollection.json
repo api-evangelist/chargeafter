@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Distribution Checkout API",
+    "version": "0.0.5+bf6238465dcb01cfc82360350426730cb9363c90"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checkout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get accounts with offers for consumer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/checkout/accounts",
+            "params": [
+              {
+                "name": "lookupOnly",
+                "value": "",
+                "type": "query",
+                "description": "Optional flag to indicate that only account lookup should be performed. If TRUE, then if there is no existing account, a new account will not be created."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Looks up an existing account and returns relevant offers. If there is no existing account, this creates a new account and returns relevant offers."
+        },
+        {
+          "info": {
+            "name": "Get accounts with offers with existing applicationId",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/checkout/applications/:applicationId/accounts",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the application"
+              }
+            ]
+          },
+          "docs": "Looks up an existing account and returns relevant offers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,3523 @@
+{
+  "item": [
+    {
+      "id": "c3443200-d52a-441a-be61-81d7324d34d5",
+      "name": "Accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "39bcb80f-5a70-446e-bdae-74524d8d8efd",
+          "name": "Create new charge with accountToken",
+          "request": {
+            "name": "Create new charge with accountToken",
+            "description": {
+              "content": "Creates a new charge from an existing approved account with an accountToken.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                "charge"
+              ],
+              "host": [
+                "{{v2-accounts-charge-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountToken\": \"<string>\",\n  \"checkoutDetails\": {\n    \"cartDetails\": {\n      \"items\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"totalAmount\": \"<double>\",\n      \"merchantOrderId\": \"<string,null>\",\n      \"discounts\": \"<array,null>\",\n      \"taxAmount\": \"<double>\",\n      \"shippingTaxAmount\": \"<number,null-double>\",\n      \"shippingAmount\": \"<number,null-double>\"\n    },\n    \"channel\": \"<string>\",\n    \"promoCode\": \"<string,null>\",\n    \"tags\": \"<object,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"merchantTransactionId\": \"<string,null>\"\n  },\n  \"settle\": \"<boolean,null>\",\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a546c16-edad-4eea-a52d-405039a5c183",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{v2-accounts-charge-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"checkoutDetails\": {\n    \"cartDetails\": {\n      \"items\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"totalAmount\": \"<double>\",\n      \"merchantOrderId\": \"<string,null>\",\n      \"discounts\": \"<array,null>\",\n      \"taxAmount\": \"<double>\",\n      \"shippingTaxAmount\": \"<number,null-double>\",\n      \"shippingAmount\": \"<number,null-double>\"\n    },\n    \"channel\": \"E_COMMERCE\",\n    \"promoCode\": \"<string,null>\",\n    \"tags\": \"<object,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"store1\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"merchantOrderId\": \"order123\",\n    \"merchantTransactionId\": \"1a13423d\"\n  },\n  \"settle\": true,\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationId\": \"6624efdd60c853bc11a56c61\",\n  \"channel\": \"E_COMMERCE\",\n  \"consumerId\": \"66f69f97702dc5226f7acccc\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"9c34bcd1aaf3a1000712da86\",\n  \"merchantOrderId\": \"string\",\n  \"offer\": {\n    \"lender\": {\n      \"id\": \"\",\n      \"name\": \"Finara\"\n    },\n    \"paymentPlan\": {\n      \"creditAmount\": 900\n    }\n  },\n  \"orderReferenceId\": \"104264\",\n  \"state\": \"Voided\",\n  \"totalAmount\": 864.93,\n  \"transactionsData\": {\n    \"lenderAuthorizeReferenceId\": \"123456\",\n    \"lenderSettleReferenceId\": \"123457\"\n  },\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"storeId\": \"store1\",\n  \"approvalCode\": \"385789\",\n  \"metadata\": {\n    \"foo\": \"bar\"\n  },\n  \"transactionState\": \"Accepted\",\n  \"settleTransactionState\": \"Accepted\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f813bddf-4039-4941-9365-012127dcc194",
+              "name": "Charge created, failed to settle",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{v2-accounts-charge-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"checkoutDetails\": {\n    \"cartDetails\": {\n      \"items\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"totalAmount\": \"<double>\",\n      \"merchantOrderId\": \"<string,null>\",\n      \"discounts\": \"<array,null>\",\n      \"taxAmount\": \"<double>\",\n      \"shippingTaxAmount\": \"<number,null-double>\",\n      \"shippingAmount\": \"<number,null-double>\"\n    },\n    \"channel\": \"E_COMMERCE\",\n    \"promoCode\": \"<string,null>\",\n    \"tags\": \"<object,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"store1\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"merchantOrderId\": \"order123\",\n    \"merchantTransactionId\": \"1a13423d\"\n  },\n  \"settle\": true,\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationId\": \"6624efdd60c853bc11a56c61\",\n  \"channel\": \"E_COMMERCE\",\n  \"consumerId\": \"66f69f97702dc5226f7acccc\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"9c34bcd1aaf3a1000712da86\",\n  \"merchantOrderId\": \"string\",\n  \"offer\": {\n    \"lender\": {\n      \"id\": \"\",\n      \"name\": \"Finara\"\n    },\n    \"paymentPlan\": {\n      \"creditAmount\": 900\n    }\n  },\n  \"orderReferenceId\": \"104264\",\n  \"state\": \"Voided\",\n  \"totalAmount\": 864.93,\n  \"transactionsData\": {\n    \"lenderAuthorizeReferenceId\": \"123456\",\n    \"lenderSettleReferenceId\": \"123457\"\n  },\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"storeId\": \"store1\",\n  \"approvalCode\": \"385789\",\n  \"metadata\": {\n    \"foo\": \"bar\"\n  },\n  \"transactionState\": \"Accepted\",\n  \"settleTransactionState\": \"Accepted\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b8292b9-6f0a-4b57-a616-4d1058c8b921",
+              "name": "Bad Request:<br/><ul><li><i>1110</i> - &lt;validation error&gt;</li><li><i>2002</i> - charge already has assigned confirmation</li><li><i>2004</i> - confirmation not found</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{v2-accounts-charge-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"checkoutDetails\": {\n    \"cartDetails\": {\n      \"items\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"totalAmount\": \"<double>\",\n      \"merchantOrderId\": \"<string,null>\",\n      \"discounts\": \"<array,null>\",\n      \"taxAmount\": \"<double>\",\n      \"shippingTaxAmount\": \"<number,null-double>\",\n      \"shippingAmount\": \"<number,null-double>\"\n    },\n    \"channel\": \"E_COMMERCE\",\n    \"promoCode\": \"<string,null>\",\n    \"tags\": \"<object,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"store1\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"merchantOrderId\": \"order123\",\n    \"merchantTransactionId\": \"1a13423d\"\n  },\n  \"settle\": true,\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2245d7b-2045-4c4c-86fe-3256b56cfe8d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{v2-accounts-charge-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"checkoutDetails\": {\n    \"cartDetails\": {\n      \"items\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"totalAmount\": \"<double>\",\n      \"merchantOrderId\": \"<string,null>\",\n      \"discounts\": \"<array,null>\",\n      \"taxAmount\": \"<double>\",\n      \"shippingTaxAmount\": \"<number,null-double>\",\n      \"shippingAmount\": \"<number,null-double>\"\n    },\n    \"channel\": \"E_COMMERCE\",\n    \"promoCode\": \"<string,null>\",\n    \"tags\": \"<object,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"store1\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"merchantOrderId\": \"order123\",\n    \"merchantTransactionId\": \"1a13423d\"\n  },\n  \"settle\": true,\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64a767e7-cabb-4c52-ae53-9df70a87c00b",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{v2-accounts-charge-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"checkoutDetails\": {\n    \"cartDetails\": {\n      \"items\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"totalAmount\": \"<double>\",\n      \"merchantOrderId\": \"<string,null>\",\n      \"discounts\": \"<array,null>\",\n      \"taxAmount\": \"<double>\",\n      \"shippingTaxAmount\": \"<number,null-double>\",\n      \"shippingAmount\": \"<number,null-double>\"\n    },\n    \"channel\": \"E_COMMERCE\",\n    \"promoCode\": \"<string,null>\",\n    \"tags\": \"<object,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"store1\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"merchantOrderId\": \"order123\",\n    \"merchantTransactionId\": \"1a13423d\"\n  },\n  \"settle\": true,\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae1699d8-c6d4-4ada-a646-ff31b155f5cc",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{v2-accounts-charge-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"checkoutDetails\": {\n    \"cartDetails\": {\n      \"items\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"totalAmount\": \"<double>\",\n      \"merchantOrderId\": \"<string,null>\",\n      \"discounts\": \"<array,null>\",\n      \"taxAmount\": \"<double>\",\n      \"shippingTaxAmount\": \"<number,null-double>\",\n      \"shippingAmount\": \"<number,null-double>\"\n    },\n    \"channel\": \"E_COMMERCE\",\n    \"promoCode\": \"<string,null>\",\n    \"tags\": \"<object,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"store1\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"merchantOrderId\": \"order123\",\n    \"merchantTransactionId\": \"1a13423d\"\n  },\n  \"settle\": true,\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b69c1a3b-ea07-4579-92f7-85401369e89d",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{v2-accounts-charge-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"checkoutDetails\": {\n    \"cartDetails\": {\n      \"items\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"totalAmount\": \"<double>\",\n      \"merchantOrderId\": \"<string,null>\",\n      \"discounts\": \"<array,null>\",\n      \"taxAmount\": \"<double>\",\n      \"shippingTaxAmount\": \"<number,null-double>\",\n      \"shippingAmount\": \"<number,null-double>\"\n    },\n    \"channel\": \"E_COMMERCE\",\n    \"promoCode\": \"<string,null>\",\n    \"tags\": \"<object,null>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"store1\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"merchantOrderId\": \"order123\",\n    \"merchantTransactionId\": \"1a13423d\"\n  },\n  \"settle\": true,\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dcf91f9-2edf-4917-bbbe-c9c1502a276f",
+          "name": "Create account",
+          "request": {
+            "name": "Create account",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "accounts"
+              ],
+              "host": [
+                "{{v2-accounts-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"<string>\",\n  \"lenderId\": \"<string>\",\n  \"lenderSessionId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"consumerId\": \"<string>\",\n  \"merchantConsumerId\": \"<string>\",\n  \"storeId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"confirm\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"creditInfo\": {\n    \"availableCredit\": \"<double>\",\n    \"maxAmount\": \"<number,null-double>\"\n  },\n  \"flowType\": \"<string>\",\n  \"promotionDetails\": {\n    \"fundingDate\": \"<string,null-date-time>\",\n    \"merchantPromoType\": \"<string>\",\n    \"merchantPromoCode\": \"<string>\",\n    \"deferredFundingSupportType\": \"<string>\"\n  },\n  \"lenderReturningConsumer\": \"<boolean>\",\n  \"lenderLoanId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\",\n  \"autoAccount\": \"<boolean,null>\",\n  \"accountStatus\": \"<string>\",\n  \"accountStatusReason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e73878d7-f234-4074-a47a-d5f56733ff9f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-accounts-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"lenderId\": \"<string>\",\n  \"lenderSessionId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"consumerId\": \"<string>\",\n  \"merchantConsumerId\": \"<string>\",\n  \"storeId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"confirm\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"creditInfo\": {\n    \"availableCredit\": \"<double>\",\n    \"maxAmount\": \"<number,null-double>\"\n  },\n  \"flowType\": \"<string>\",\n  \"promotionDetails\": {\n    \"fundingDate\": \"<string,null-date-time>\",\n    \"merchantPromoType\": \"<string>\",\n    \"merchantPromoCode\": \"<string>\",\n    \"deferredFundingSupportType\": \"<string>\"\n  },\n  \"lenderReturningConsumer\": \"<boolean>\",\n  \"lenderLoanId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\",\n  \"autoAccount\": \"<boolean,null>\",\n  \"accountStatus\": \"<string>\",\n  \"accountStatusReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountToken\": \"string\",\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": \"Day\",\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": \"Ineligible\",\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mimeType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"confirm\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mimeType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"account\": {\n    \"id\": \"string\",\n    \"lenderId\": \"string\",\n    \"lenderName\": \"string\",\n    \"offers\": [\n      {\n        \"amount\": \"<double>\",\n        \"code\": \"<string>\",\n        \"defaultAPR\": \"<double>\",\n        \"financialProductType\": \"<string>\",\n        \"promoSettings\": {\n          \"isPromo\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numberOfPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"periodicPayment\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"periodType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"apr\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"metadata\": {\n          \"key_0\": {}\n        },\n        \"expirationDate\": \"<string,null-date-time>\",\n        \"checkoutMinimumAmount\": \"<number,null-double>\",\n        \"description\": \"<string>\",\n        \"eligibility\": {\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ineligibilityReason\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tags\": \"<object,null>\",\n        \"disclosures\": {\n          \"apply\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"confirm\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"offerType\": \"<string>\",\n        \"texts\": \"<object,null>\"\n      },\n      {\n        \"amount\": \"<double>\",\n        \"code\": \"<string>\",\n        \"defaultAPR\": \"<double>\",\n        \"financialProductType\": \"<string>\",\n        \"promoSettings\": {\n          \"isPromo\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numberOfPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"periodicPayment\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"periodType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"apr\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"metadata\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {}\n        },\n        \"expirationDate\": \"<string,null-date-time>\",\n        \"checkoutMinimumAmount\": \"<number,null-double>\",\n        \"description\": \"<string>\",\n        \"eligibility\": {\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ineligibilityReason\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tags\": \"<object,null>\",\n        \"disclosures\": {\n          \"apply\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"confirm\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"offerType\": \"<string>\",\n        \"texts\": \"<object,null>\"\n      }\n    ],\n    \"status\": \"Banned\",\n    \"creditInfo\": {\n      \"availableCredit\": \"<double>\",\n      \"maxAmount\": \"<number,null-double>\"\n    },\n    \"applicationStatus\": \"Authorized\",\n    \"applicationStatusReason\": \"UnderReview\",\n    \"accountStatus\": \"<string>\",\n    \"accountStatusReason\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1aa647a-c70a-439b-bd89-6f6d55044dbb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-accounts-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"lenderId\": \"<string>\",\n  \"lenderSessionId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"consumerId\": \"<string>\",\n  \"merchantConsumerId\": \"<string>\",\n  \"storeId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"confirm\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"creditInfo\": {\n    \"availableCredit\": \"<double>\",\n    \"maxAmount\": \"<number,null-double>\"\n  },\n  \"flowType\": \"<string>\",\n  \"promotionDetails\": {\n    \"fundingDate\": \"<string,null-date-time>\",\n    \"merchantPromoType\": \"<string>\",\n    \"merchantPromoCode\": \"<string>\",\n    \"deferredFundingSupportType\": \"<string>\"\n  },\n  \"lenderReturningConsumer\": \"<boolean>\",\n  \"lenderLoanId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\",\n  \"autoAccount\": \"<boolean,null>\",\n  \"accountStatus\": \"<string>\",\n  \"accountStatusReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4bfc13b-17f0-4650-be37-47215e8e9dd6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-accounts-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"lenderId\": \"<string>\",\n  \"lenderSessionId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"consumerId\": \"<string>\",\n  \"merchantConsumerId\": \"<string>\",\n  \"storeId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"confirm\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"creditInfo\": {\n    \"availableCredit\": \"<double>\",\n    \"maxAmount\": \"<number,null-double>\"\n  },\n  \"flowType\": \"<string>\",\n  \"promotionDetails\": {\n    \"fundingDate\": \"<string,null-date-time>\",\n    \"merchantPromoType\": \"<string>\",\n    \"merchantPromoCode\": \"<string>\",\n    \"deferredFundingSupportType\": \"<string>\"\n  },\n  \"lenderReturningConsumer\": \"<boolean>\",\n  \"lenderLoanId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\",\n  \"autoAccount\": \"<boolean,null>\",\n  \"accountStatus\": \"<string>\",\n  \"accountStatusReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ac172a6-3be1-4a33-aa30-3fa2432581b8",
+              "name": "Application not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-accounts-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"lenderId\": \"<string>\",\n  \"lenderSessionId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"consumerId\": \"<string>\",\n  \"merchantConsumerId\": \"<string>\",\n  \"storeId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"confirm\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"creditInfo\": {\n    \"availableCredit\": \"<double>\",\n    \"maxAmount\": \"<number,null-double>\"\n  },\n  \"flowType\": \"<string>\",\n  \"promotionDetails\": {\n    \"fundingDate\": \"<string,null-date-time>\",\n    \"merchantPromoType\": \"<string>\",\n    \"merchantPromoCode\": \"<string>\",\n    \"deferredFundingSupportType\": \"<string>\"\n  },\n  \"lenderReturningConsumer\": \"<boolean>\",\n  \"lenderLoanId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\",\n  \"autoAccount\": \"<boolean,null>\",\n  \"accountStatus\": \"<string>\",\n  \"accountStatusReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e12a5bf-5a84-42d2-a084-7f1e1027f0bd",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-accounts-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"lenderId\": \"<string>\",\n  \"lenderSessionId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"consumerId\": \"<string>\",\n  \"merchantConsumerId\": \"<string>\",\n  \"storeId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"confirm\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"creditInfo\": {\n    \"availableCredit\": \"<double>\",\n    \"maxAmount\": \"<number,null-double>\"\n  },\n  \"flowType\": \"<string>\",\n  \"promotionDetails\": {\n    \"fundingDate\": \"<string,null-date-time>\",\n    \"merchantPromoType\": \"<string>\",\n    \"merchantPromoCode\": \"<string>\",\n    \"deferredFundingSupportType\": \"<string>\"\n  },\n  \"lenderReturningConsumer\": \"<boolean>\",\n  \"lenderLoanId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\",\n  \"autoAccount\": \"<boolean,null>\",\n  \"accountStatus\": \"<string>\",\n  \"accountStatusReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e193b46-5369-4e80-a9b1-7fe762d466e8",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v2-accounts-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"lenderId\": \"<string>\",\n  \"lenderSessionId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"consumerId\": \"<string>\",\n  \"merchantConsumerId\": \"<string>\",\n  \"storeId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"confirm\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"creditInfo\": {\n    \"availableCredit\": \"<double>\",\n    \"maxAmount\": \"<number,null-double>\"\n  },\n  \"flowType\": \"<string>\",\n  \"promotionDetails\": {\n    \"fundingDate\": \"<string,null-date-time>\",\n    \"merchantPromoType\": \"<string>\",\n    \"merchantPromoCode\": \"<string>\",\n    \"deferredFundingSupportType\": \"<string>\"\n  },\n  \"lenderReturningConsumer\": \"<boolean>\",\n  \"lenderLoanId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\",\n  \"autoAccount\": \"<boolean,null>\",\n  \"accountStatus\": \"<string>\",\n  \"accountStatusReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49c053a0-b555-484f-b2c4-549124dd285e",
+          "name": "Lookup for account id by provided credit card details or account details.",
+          "request": {
+            "name": "Lookup for account id by provided credit card details or account details.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                "lookup",
+                "account-id"
+              ],
+              "host": [
+                "{{v2-accounts-lookup-account-id-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"<string>\",\n  \"creditCard\": {\n    \"pan\": \"<string>\",\n    \"name\": \"<string,null>\",\n    \"expirationDate\": \"<string,null>\",\n    \"svc\": \"<string,null>\",\n    \"cvv\": \"<string,null>\",\n    \"pvv\": \"<string,null>\",\n    \"track1\": \"<string,null>\",\n    \"track2\": \"<string,null>\"\n  },\n  \"account\": {\n    \"lenderId\": \"<string>\",\n    \"lenderToken\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"storeId\": \"<string>\",\n  \"skipAccountCreation\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cdfac6ec-f4d6-4573-ab14-aad71df905f0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-account-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"E_COMMERCE\",\n  \"creditCard\": {\n    \"pan\": \"<string>\",\n    \"name\": \"<string,null>\",\n    \"expirationDate\": \"<string,null>\",\n    \"svc\": \"<string,null>\",\n    \"cvv\": \"<string,null>\",\n    \"pvv\": \"<string,null>\",\n    \"track1\": \"<string,null>\",\n    \"track2\": \"<string,null>\"\n  },\n  \"account\": {\n    \"lenderId\": \"65650abe4f457d08b9710584\",\n    \"lenderToken\": \"7692fecf9d077414d77eb5a9a1904ccf\",\n    \"name\": \"Awesome Co.\"\n  },\n  \"storeId\": \"store1\",\n  \"skipAccountCreation\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57f84296-a1cc-40d4-8d1b-9793b814f202",
+              "name": "Bad Request:<br/><ul><li><i>1110</i> - &lt;validation error&gt;</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-account-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"E_COMMERCE\",\n  \"creditCard\": {\n    \"pan\": \"<string>\",\n    \"name\": \"<string,null>\",\n    \"expirationDate\": \"<string,null>\",\n    \"svc\": \"<string,null>\",\n    \"cvv\": \"<string,null>\",\n    \"pvv\": \"<string,null>\",\n    \"track1\": \"<string,null>\",\n    \"track2\": \"<string,null>\"\n  },\n  \"account\": {\n    \"lenderId\": \"65650abe4f457d08b9710584\",\n    \"lenderToken\": \"7692fecf9d077414d77eb5a9a1904ccf\",\n    \"name\": \"Awesome Co.\"\n  },\n  \"storeId\": \"store1\",\n  \"skipAccountCreation\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1110\",\n      \"description\": \"<validation error>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2548c9cd-4b7d-42b5-8dcc-04a1c9676485",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-account-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"E_COMMERCE\",\n  \"creditCard\": {\n    \"pan\": \"<string>\",\n    \"name\": \"<string,null>\",\n    \"expirationDate\": \"<string,null>\",\n    \"svc\": \"<string,null>\",\n    \"cvv\": \"<string,null>\",\n    \"pvv\": \"<string,null>\",\n    \"track1\": \"<string,null>\",\n    \"track2\": \"<string,null>\"\n  },\n  \"account\": {\n    \"lenderId\": \"65650abe4f457d08b9710584\",\n    \"lenderToken\": \"7692fecf9d077414d77eb5a9a1904ccf\",\n    \"name\": \"Awesome Co.\"\n  },\n  \"storeId\": \"store1\",\n  \"skipAccountCreation\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "428d8a00-8401-4a68-8060-e78e8ec81baa",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-account-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"E_COMMERCE\",\n  \"creditCard\": {\n    \"pan\": \"<string>\",\n    \"name\": \"<string,null>\",\n    \"expirationDate\": \"<string,null>\",\n    \"svc\": \"<string,null>\",\n    \"cvv\": \"<string,null>\",\n    \"pvv\": \"<string,null>\",\n    \"track1\": \"<string,null>\",\n    \"track2\": \"<string,null>\"\n  },\n  \"account\": {\n    \"lenderId\": \"65650abe4f457d08b9710584\",\n    \"lenderToken\": \"7692fecf9d077414d77eb5a9a1904ccf\",\n    \"name\": \"Awesome Co.\"\n  },\n  \"storeId\": \"store1\",\n  \"skipAccountCreation\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeca251c-8728-4990-b768-f23c391155e4",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-account-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"E_COMMERCE\",\n  \"creditCard\": {\n    \"pan\": \"<string>\",\n    \"name\": \"<string,null>\",\n    \"expirationDate\": \"<string,null>\",\n    \"svc\": \"<string,null>\",\n    \"cvv\": \"<string,null>\",\n    \"pvv\": \"<string,null>\",\n    \"track1\": \"<string,null>\",\n    \"track2\": \"<string,null>\"\n  },\n  \"account\": {\n    \"lenderId\": \"65650abe4f457d08b9710584\",\n    \"lenderToken\": \"7692fecf9d077414d77eb5a9a1904ccf\",\n    \"name\": \"Awesome Co.\"\n  },\n  \"storeId\": \"store1\",\n  \"skipAccountCreation\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4d83100-fc4c-4829-a6f6-851c8a4f8a1b",
+          "name": "Create confirmation with application and cart details",
+          "request": {
+            "name": "Create confirmation with application and cart details",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                "confirmation"
+              ],
+              "host": [
+                "{{v2-accounts-confirmation-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountToken\": \"<string>\",\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": \"<number,null-double>\",\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": \"<double>\",\n    \"shippingTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\"\n  },\n  \"channel\": \"<string>\",\n  \"storeId\": \"<string>\",\n  \"promoCode\": \"<string,null>\",\n  \"tags\": \"<object,null>\",\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "32d15a83-eb4d-495b-81d5-6f5c15928e99",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "confirmation"
+                  ],
+                  "host": [
+                    "{{v2-accounts-confirmation-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": \"<number,null-double>\",\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": \"<double>\",\n    \"shippingTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\"\n  },\n  \"channel\": \"E_COMMERCE\",\n  \"storeId\": \"store1\",\n  \"promoCode\": \"<string,null>\",\n  \"tags\": \"<object,null>\",\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"confirmationToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18c40095-211d-42c8-bb07-f7df734b68fc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "confirmation"
+                  ],
+                  "host": [
+                    "{{v2-accounts-confirmation-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": \"<number,null-double>\",\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": \"<double>\",\n    \"shippingTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\"\n  },\n  \"channel\": \"E_COMMERCE\",\n  \"storeId\": \"store1\",\n  \"promoCode\": \"<string,null>\",\n  \"tags\": \"<object,null>\",\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39525251-27af-47f6-9bb7-ce6947f9747a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "confirmation"
+                  ],
+                  "host": [
+                    "{{v2-accounts-confirmation-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": \"<number,null-double>\",\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": \"<double>\",\n    \"shippingTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\"\n  },\n  \"channel\": \"E_COMMERCE\",\n  \"storeId\": \"store1\",\n  \"promoCode\": \"<string,null>\",\n  \"tags\": \"<object,null>\",\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "096e7abd-9f21-479f-942f-4df2e38e0894",
+              "name": "Application for credit card not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "confirmation"
+                  ],
+                  "host": [
+                    "{{v2-accounts-confirmation-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": \"<number,null-double>\",\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": \"<double>\",\n    \"shippingTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\"\n  },\n  \"channel\": \"E_COMMERCE\",\n  \"storeId\": \"store1\",\n  \"promoCode\": \"<string,null>\",\n  \"tags\": \"<object,null>\",\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fbb39619-33db-469f-96d8-88a82d813c78",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "confirmation"
+                  ],
+                  "host": [
+                    "{{v2-accounts-confirmation-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": \"<number,null-double>\",\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": \"<double>\",\n    \"shippingTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\"\n  },\n  \"channel\": \"E_COMMERCE\",\n  \"storeId\": \"store1\",\n  \"promoCode\": \"<string,null>\",\n  \"tags\": \"<object,null>\",\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c028ea6c-300d-4ff0-97a7-95133de8fdaa",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "confirmation"
+                  ],
+                  "host": [
+                    "{{v2-accounts-confirmation-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountToken\": \"65650abe4f457d08b9710584\",\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": \"<number,null-double>\",\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": \"<double>\",\n    \"shippingTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\"\n  },\n  \"channel\": \"E_COMMERCE\",\n  \"storeId\": \"store1\",\n  \"promoCode\": \"<string,null>\",\n  \"tags\": \"<object,null>\",\n  \"autoConfirmation\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "138fdbe2-a242-4ae5-8710-645d54e0d5ce",
+          "name": "Get information about credit card based on account id",
+          "request": {
+            "name": "Get information about credit card based on account id",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                ":accountToken",
+                "creditcard"
+              ],
+              "host": [
+                "{{v2-accounts-accountToken-creditcard-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "storeId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "channel",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2a43fe7-2c43-44fa-8c4b-26678c67d4f1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "creditcard"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-creditcard-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"creditCard\": {\n    \"pan\": \"<string>\",\n    \"name\": \"<string,null>\",\n    \"expirationDate\": \"<string,null>\",\n    \"svc\": \"<string,null>\",\n    \"cvv\": \"<string,null>\",\n    \"pvv\": \"<string,null>\",\n    \"track1\": \"<string,null>\",\n    \"track2\": \"<string,null>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07867a14-6996-4454-9c2a-acd6538bc1fa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "creditcard"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-creditcard-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1698f878-2666-4a1c-a6e1-b04674131986",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "creditcard"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-creditcard-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0d187c4-8aef-483e-b87b-f5f01b2ca493",
+              "name": "Confirmation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "creditcard"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-creditcard-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef41f214-0f1f-4d1a-b0ff-e5c4a352e383",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "creditcard"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-creditcard-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c8530ec-0449-4ea1-9fe5-630cae019db5",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "creditcard"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-creditcard-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "255a86ab-c0e0-4d99-bb89-70d9c9696f42",
+          "name": "Get information about credit based on account id",
+          "request": {
+            "name": "Get information about credit based on account id",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                ":accountToken",
+                "credit"
+              ],
+              "host": [
+                "{{v2-accounts-accountToken-credit-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "storeId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "channel",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f9e3f3a-5b2c-42cd-b084-ba6fdab033f2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "credit"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-credit-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"availableAmount\": null,\n  \"originalAmount\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c80c1fed-0036-4cc7-be47-475fbb4496f0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "credit"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-credit-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01df0118-f90e-40f9-991b-bec4d2bfbbcb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "credit"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-credit-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd3cdbd4-bf94-4961-aa0b-97c713b6a3fb",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "credit"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-credit-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3916951d-4497-46b4-8d02-e77bcd9a73d8",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken",
+                    "credit"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-credit-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29d60c0c-7dd3-4bdd-8637-2fb8268b7b96",
+          "name": "Get information about account based on account id",
+          "request": {
+            "name": "Get information about account based on account id",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                ":accountToken"
+              ],
+              "host": [
+                "{{v2-accounts-accountToken-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d88f519-458a-43eb-8652-1942f8a3a08e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"consumerId\": \"string\",\n  \"lender\": {\n    \"id\": \"\",\n    \"name\": \"Finara\"\n  },\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": \"BiWeek\",\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": \"Ineligible\",\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mimeType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"confirm\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mimeType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"applicationId\": \"string\",\n  \"status\": \"Deprecated\",\n  \"lenderSessionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d839b474-343f-4199-b567-612590b27af1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0c27893-91d5-4d90-8ba4-f2e770b5cb22",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "73ef0577-3e47-41f0-8a87-df5759d1fb4a",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7679afd9-1344-4449-ae95-cd1b9751313c",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":accountToken"
+                  ],
+                  "host": [
+                    "{{v2-accounts-accountToken-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "120f54e3-716a-42a3-83f9-687a2c9434d8",
+          "name": "Get lender by personal account number",
+          "request": {
+            "name": "Get lender by personal account number",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                "lookup",
+                "lender",
+                "account-id"
+              ],
+              "host": [
+                "{{v2-accounts-lookup-lender-account-id-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e9cc9ba-c10f-4c01-bf17-bbc2849bdf80",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "lender",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-lender-account-id-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"\",\n  \"name\": \"Finara\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33b78876-39e2-46b1-8a6e-ddedb5dca8fa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "lender",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-lender-account-id-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "763f4b0c-627a-4855-8dd1-e09291b8fc11",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "lender",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-lender-account-id-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d1beb36-6ddf-4fe0-8e65-3ec20a288aff",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "lender",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-lender-account-id-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b74365a-998e-4a36-b2e9-874203804002",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "lookup",
+                    "lender",
+                    "account-id"
+                  ],
+                  "host": [
+                    "{{v2-accounts-lookup-lender-account-id-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe91fad8-b773-4e21-b52e-9f16aaac6430",
+          "name": "Deprecate account based on lender loan id",
+          "request": {
+            "name": "Deprecate account based on lender loan id",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                "deprecate"
+              ],
+              "host": [
+                "{{v2-accounts-deprecate-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "594b12c2-637b-46be-8f0e-58259f31eff6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "deprecate"
+                  ],
+                  "host": [
+                    "{{v2-accounts-deprecate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"consumerId\": \"string\",\n  \"lender\": {\n    \"id\": \"\",\n    \"name\": \"Finara\"\n  },\n  \"offer\": {\n    \"amount\": \"<double>\",\n    \"code\": \"<string>\",\n    \"defaultAPR\": \"<double>\",\n    \"financialProductType\": \"<string>\",\n    \"promoSettings\": {\n      \"isPromo\": \"<boolean>\",\n      \"numberOfPeriods\": \"<integer,null-int32>\",\n      \"periodicPayment\": \"<number,null-double>\",\n      \"periodType\": \"BiWeek\",\n      \"apr\": \"<number,null-double>\",\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    \"metadata\": {\n      \"key_0\": {}\n    },\n    \"expirationDate\": \"<string,null-date-time>\",\n    \"checkoutMinimumAmount\": \"<number,null-double>\",\n    \"description\": \"<string>\",\n    \"eligibility\": {\n      \"status\": \"Ineligible\",\n      \"ineligibilityReason\": \"<string>\"\n    },\n    \"tags\": \"<object,null>\",\n    \"disclosures\": {\n      \"apply\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mimeType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"confirm\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mimeType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"offerType\": \"<string>\",\n    \"texts\": \"<object,null>\"\n  },\n  \"applicationId\": \"string\",\n  \"status\": \"Deprecated\",\n  \"lenderSessionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a57f5acf-3e5b-4a08-bf8b-42171a4b8a35",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "deprecate"
+                  ],
+                  "host": [
+                    "{{v2-accounts-deprecate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f88f7a19-c159-46d2-a99b-18618daedaea",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "deprecate"
+                  ],
+                  "host": [
+                    "{{v2-accounts-deprecate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3bd27dc9-0940-41aa-9a46-44e9008a52b0",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "deprecate"
+                  ],
+                  "host": [
+                    "{{v2-accounts-deprecate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34af2b9a-7b60-41d8-917a-3ef148cdce9d",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "deprecate"
+                  ],
+                  "host": [
+                    "{{v2-accounts-deprecate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationId\": \"<string>\",\n  \"lenderAccountId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "642ef1d3-eb3e-4e24-9a58-5606c8489780",
+          "name": "Get lender accounts and offers",
+          "request": {
+            "name": "Get lender accounts and offers",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "session",
+                "accounts"
+              ],
+              "host": [
+                "{{v3-session-accounts-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lookupOnly",
+                  "value": "<boolean>",
+                  "description": "Optional flag to indicate that only lookup should be performed"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3706d6d0-6f07-410f-9daa-a85cea34c22e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v3-session-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lookupOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accounts\": [\n    \"\",\n    \"\"\n  ],\n  \"failures\": null,\n  \"consumerId\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a8d5341-0c1c-42fe-9af3-121c0f270cce",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v3-session-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lookupOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82a95afc-1eb7-4782-9691-7211796027f1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v3-session-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lookupOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db72fe65-afe4-43e4-83c3-63433da45b7a",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v3-session-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lookupOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4d0b87f-b2a3-40ab-8b80-f58762e05277",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{v3-session-accounts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lookupOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-accounts-charge-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-accounts-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-accounts-lookup-account-id-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-accounts-confirmation-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-accounts-accountToken-creditcard-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-accounts-accountToken-credit-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-accounts-accountToken-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-accounts-lookup-lender-account-id-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-accounts-deprecate-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v3-session-accounts-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dc673f74-508f-427b-a553-90986690ba74",
+    "name": "Chargeafter Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Accounts across 2 of this provider's published API definitions: chargeafter-charge-api-openapi.yml, chargeafter-checkout-session-accounts-openapi.yml. Each path carries the servers of the definition it was published in.\n\nContact Support:\n Name: Customer Support\n Email: support@chargeafter.com",
+      "type": "text/plain"
+    }
+  }
+}

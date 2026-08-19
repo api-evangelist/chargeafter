@@ -1,0 +1,238 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Disputes Management Lenders API",
+    "version": "lenders"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lenders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.ca-dev.co/api/disputes/lenders",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "dispute",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "documents",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Returns: New/Existing ChargeAfter Dispute `id`<br />\nAfter successful dispute creation, the dispute is automatically assigned to the Merchant.<br />\nThis call is idempotent. If there is an existing dispute with the same `lenderDisputeId` sent in a request, its ChargeAfter dispute `id` will be returned.<br />\nThis call is a <a href=\"https://swagger.io/docs/specification/describing-request-body/multipart-requests/\">multipart</a> request, which combines the new dispute payload with its supporting d"
+        },
+        {
+          "info": {
+            "name": "Resolve a dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/api/disputes/lenders/:id/resolve",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\nIf you use the `LenderDisputeId`, you must also send the `useLenderDisputeId` parameter with the value of `true`."
+              },
+              {
+                "name": "useLenderDisputeId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the corresponding `ChargeAfterTransactionId` when the chargeback is provided, otherwise it is null.<br />\nWhen a dispute is resolved, it becomes read-only.<br />\nThe `resolve` call can only be performed to change the `status` of a dispute to:<br />\n* `ResolvedMerchantFavor`<br />\n* `ResolvedCancelled`<br />\n* `ResolvedCustomerFavorFull`<br />\n* `ResolvedCustomerFavorPartial`<br /><br />\nThe `status` of `PendingMerchant` or `PendingLender` is invalid."
+        },
+        {
+          "info": {
+            "name": "Reopen a resolved dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/api/disputes/lenders/:id/reopen",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\nIf you use the `LenderDisputeId`, you must also send the `useLenderDisputeId` parameter with the value of `true`."
+              },
+              {
+                "name": "useLenderDisputeId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If the reopen status is `PendingLender`, a lender should `update` the dispute by providing additional documents and/or notes and then `assign` the dispute to the Merchant.<br />\nThis call can only be performed successfully on a dispute that initially has the status of `ResolvedMerchantFavor`, `ResolvedCancelled`, `ResolvedCustomerFavorFull`, `ResolvedCustomerFavorPartial`."
+        },
+        {
+          "info": {
+            "name": "Reverse the chargeback transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.ca-dev.co/api/disputes/lenders/:id/reverse",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\nIf you use the `LenderDisputeId`, you must also send the `useLenderDisputeId` parameter with the value of `true`."
+              },
+              {
+                "name": "useLenderDisputeId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If a dispute was resolved with a chargeback to the customer, this call cancels the chargeback.<br />\nReturns the corresponding `ChargeAfterTransactionId`.<br />  \nAfter successfully sending this request, the Lender also needs to either `reopen` or re-`resolve` the dispute with the returned `ChargebackReversal` in a separate call."
+        },
+        {
+          "info": {
+            "name": "Add notes and/or upload supporting documents for a dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/api/disputes/lenders/:id/update",
+            "params": [
+              {
+                "name": "assign",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\nIf you use the `LenderDisputeId`, you must also send the `useLenderDisputeId` parameter with the value of `true`."
+              },
+              {
+                "name": "useLenderDisputeId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "update",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "documents",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This call is a <a href=\"https://swagger.io/docs/specification/describing-request-body/multipart-requests/\">multipart</a> request, which combines the new dispute payload with its supporting documents in a single request to let the SLA start immediately.<br />\nWith curl, a file can be passed using the `-F` option.<br />\nSupported files extensions: .jpg, .jpeg, .png, .svg, .pdf, .doc, .docx, .txt, .csv, .xls, .xlsx<br />\nMax files per upload operation: 10<br />\nMax document size: 10mb"
+        },
+        {
+          "info": {
+            "name": "Assign the dispute to Merchant or Lender",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.ca-dev.co/api/disputes/lenders/:id/assign",
+            "params": [
+              {
+                "name": "party",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\nIf you use the `LenderDisputeId`, you must also send the `useLenderDisputeId` parameter with the value of `true`."
+              },
+              {
+                "name": "useLenderDisputeId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "After successfully sending this call, the dispute's status becomes `PendingMerchant` or `PendingLender` accordingly."
+        },
+        {
+          "info": {
+            "name": "Get dispute details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/api/disputes/lenders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Can be either the `LenderDisputeId` or the ChargeAfter dispute `id`.\nIf you use the `LenderDisputeId`, you must also send the `useLenderDisputeId` parameter with the value of `true`."
+              },
+              {
+                "name": "useLenderDisputeId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get dispute details for a given ChargeAfter dispute `id` or `LenderDisputeId`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

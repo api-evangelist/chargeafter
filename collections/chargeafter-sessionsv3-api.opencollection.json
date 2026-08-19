@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Checkout Management Sessions V3 API",
+    "version": "3.0.22+7e1a9d5f054dd9d981fc916bc81e7d98826a01ee"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SessionsV3",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v3/session",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a session with an optional cart, consumer and checkout details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

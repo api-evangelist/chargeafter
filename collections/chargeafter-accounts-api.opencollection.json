@@ -1,0 +1,212 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chargeafter Accounts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create new charge with accountToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/accounts/charge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new charge from an existing approved account with an accountToken."
+        },
+        {
+          "info": {
+            "name": "Create account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create account"
+        },
+        {
+          "info": {
+            "name": "Lookup for account id by provided credit card details or account details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.ca-dev.co/v2/accounts/lookup/account-id",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lookup for account id by provided credit card details or account details."
+        },
+        {
+          "info": {
+            "name": "Create confirmation with application and cart details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/accounts/confirmation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create confirmation with application and cart details"
+        },
+        {
+          "info": {
+            "name": "Get information about credit card based on account id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/accounts/:accountToken/creditcard",
+            "params": [
+              {
+                "name": "accountToken",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get information about credit card based on account id"
+        },
+        {
+          "info": {
+            "name": "Get information about credit based on account id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/accounts/:accountToken/credit",
+            "params": [
+              {
+                "name": "accountToken",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get information about credit based on account id"
+        },
+        {
+          "info": {
+            "name": "Get information about account based on account id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/accounts/:accountToken",
+            "params": [
+              {
+                "name": "accountToken",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get information about account based on account id"
+        },
+        {
+          "info": {
+            "name": "Get lender by personal account number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/accounts/lookup/lender/account-id",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get lender by personal account number"
+        },
+        {
+          "info": {
+            "name": "Deprecate account based on lender loan id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.ca-dev.co/v2/accounts/deprecate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecate account based on lender loan id"
+        },
+        {
+          "info": {
+            "name": "Get lender accounts and offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v3/session/accounts",
+            "params": [
+              {
+                "name": "lookupOnly",
+                "value": "",
+                "type": "query",
+                "description": "Optional flag to indicate that only lookup should be performed"
+              }
+            ]
+          },
+          "docs": "Get lender accounts and offers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

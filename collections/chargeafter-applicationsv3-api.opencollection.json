@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chargeafter Applications V3 API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ApplicationsV3",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get status of an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/checkout/applications/:applicationId/status",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get status of an application"
+        },
+        {
+          "info": {
+            "name": "Get interactive token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/checkout/applications/:applicationId/token",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a time-limited interactive session token to resume the Checkout flow for an account associated with the application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1199 @@
+openapi: 3.2.0
+info:
+  title: Chargeafter Applications V3 API
+  contact:
+    name: Customer Support
+    email: support@chargeafter.com
+  termsOfService: https://chargeafter.com/privacy-policy
+  version: '1.0'
+  description: 'Operations tagged ApplicationsV3 across 2 of this provider''s published API definitions: chargeafter-checkout-application-status-openapi.yml, chargeafter-checkout-application-token-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api-sandbox.ca-dev.co
+  description: Sandbox Environment
+- url: https://api.chargeafter.com
+  description: Production Environment
+security:
+- apiKey: []
+tags:
+- name: ApplicationsV3
+paths:
+  /v2/checkout/applications/{applicationId}/status:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    get:
+      tags:
+      - ApplicationsV3
+      summary: Get status of an application
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.GetSessionStatusResponse'
+              examples:
+                Started:
+                  summary: Started application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: null
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails: null
+                    applicationStatus: null
+                    account: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Prequal not selected:
+                  summary: Prequal application response without selected lender
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails: null
+                    applicationStatus: Prequalified
+                    account: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Prequal:
+                  summary: Prequal application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails:
+                      merchantOrderId: order123
+                      items:
+                      - name: Test Item
+                        price: 23000
+                        sku: SKU123
+                        quantity: 1
+                        leasable: null
+                        productCategory: null
+                        warranty: null
+                        taxAmount: null
+                        discounts: null
+                      discounts: null
+                      taxAmount: 200
+                      shippingTaxAmount: null
+                      shippingAmount: 100
+                      totalAmount: 23300
+                    applicationStatus: Prequalified
+                    account:
+                      lenderName: Testlender
+                      lenderId: 107f1f77bcf86cd799439041
+                      creditInfo:
+                        availableCredit: 23000
+                        maxAmount: null
+                      applicationStatus: null
+                      applicationStatusReason: null
+                      accountStatus: null
+                      accountStatusReason: null
+                      lenderReferenceId: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Approved:
+                  summary: Approved application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails:
+                      merchantOrderId: order123
+                      items:
+                      - name: Test Item
+                        price: 23000
+                        sku: SKU123
+                        quantity: 1
+                        leasable: null
+                        productCategory: null
+                        warranty: null
+                        taxAmount: null
+                        discounts: null
+                      discounts: null
+                      taxAmount: 200
+                      shippingTaxAmount: null
+                      shippingAmount: 100
+                      totalAmount: 23300
+                    applicationStatus: Approved
+                    account:
+                      lenderName: Testlender
+                      lenderId: 107f1f77bcf86cd799439041
+                      creditInfo:
+                        availableCredit: 23000
+                        maxAmount: null
+                      applicationStatus: null
+                      applicationStatusReason: null
+                      accountStatus: null
+                      accountStatusReason: null
+                      lenderReferenceId: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Declined:
+                  summary: Declined application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails: null
+                    applicationStatus: Declined
+                    account: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Approved with account token:
+                  summary: Approved application response with account token
+                  value:
+                    sessionStatus: COMPLETED
+                    confirmationToken: null
+                    accountToken: 66d05ce1b5382eaf262c5d8a
+                    loanId: 66d05993fb750b38327b96ec
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails:
+                      merchantOrderId: order123
+                      items:
+                      - name: Test Item
+                        price: 23000
+                        sku: SKU123
+                        quantity: 1
+                        leasable: null
+                        productCategory: null
+                        warranty: null
+                        taxAmount: null
+                        discounts: null
+                      discounts: null
+                      taxAmount: 200
+                      shippingTaxAmount: null
+                      shippingAmount: 100
+                      totalAmount: 23300
+                    applicationStatus: Approved
+                    account:
+                      lenderName: Testlender
+                      lenderId: 107f1f77bcf86cd799439041
+                      creditInfo:
+                        availableCredit: 23000
+                        maxAmount: null
+                      applicationStatus: null
+                      applicationStatusReason: null
+                      accountStatus: null
+                      accountStatusReason: null
+                      lenderReferenceId: null
+                    confirmedOffer: null
+                    offers:
+                    - code: PR01
+                      financialProductType: LineOfCredit
+                      amount: 23000
+                      defaultAPR: 0
+                      promoSettings: null
+                      description: Test offer description
+                    merchantConsumerId: null
+                    linkId: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.GetSessionStatusResponse'
+              examples:
+                Started:
+                  summary: Started application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: null
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails: null
+                    applicationStatus: null
+                    account: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Prequal not selected:
+                  summary: Prequal application response without selected lender
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails: null
+                    applicationStatus: Prequalified
+                    account: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Prequal:
+                  summary: Prequal application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails:
+                      merchantOrderId: order123
+                      items:
+                      - name: Test Item
+                        price: 23000
+                        sku: SKU123
+                        quantity: 1
+                        leasable: null
+                        productCategory: null
+                        warranty: null
+                        taxAmount: null
+                        discounts: null
+                      discounts: null
+                      taxAmount: 200
+                      shippingTaxAmount: null
+                      shippingAmount: 100
+                      totalAmount: 23300
+                    applicationStatus: Prequalified
+                    account:
+                      lenderName: Testlender
+                      lenderId: 107f1f77bcf86cd799439041
+                      creditInfo:
+                        availableCredit: 23000
+                        maxAmount: null
+                      applicationStatus: null
+                      applicationStatusReason: null
+                      accountStatus: null
+                      accountStatusReason: null
+                      lenderReferenceId: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Approved:
+                  summary: Approved application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails:
+                      merchantOrderId: order123
+                      items:
+                      - name: Test Item
+                        price: 23000
+                        sku: SKU123
+                        quantity: 1
+                        leasable: null
+                        productCategory: null
+                        warranty: null
+                        taxAmount: null
+                        discounts: null
+                      discounts: null
+                      taxAmount: 200
+                      shippingTaxAmount: null
+                      shippingAmount: 100
+                      totalAmount: 23300
+                    applicationStatus: Approved
+                    account:
+                      lenderName: Testlender
+                      lenderId: 107f1f77bcf86cd799439041
+                      creditInfo:
+                        availableCredit: 23000
+                        maxAmount: null
+                      applicationStatus: null
+                      applicationStatusReason: null
+                      accountStatus: null
+                      accountStatusReason: null
+                      lenderReferenceId: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Declined:
+                  summary: Declined application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails: null
+                    applicationStatus: Declined
+                    account: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Approved with account token:
+                  summary: Approved application response with account token
+                  value:
+                    sessionStatus: COMPLETED
+                    confirmationToken: null
+                    accountToken: 66d05ce1b5382eaf262c5d8a
+                    loanId: 66d05993fb750b38327b96ec
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails:
+                      merchantOrderId: order123
+                      items:
+                      - name: Test Item
+                        price: 23000
+                        sku: SKU123
+                        quantity: 1
+                        leasable: null
+                        productCategory: null
+                        warranty: null
+                        taxAmount: null
+                        discounts: null
+                      discounts: null
+                      taxAmount: 200
+                      shippingTaxAmount: null
+                      shippingAmount: 100
+                      totalAmount: 23300
+                    applicationStatus: Approved
+                    account:
+                      lenderName: Testlender
+                      lenderId: 107f1f77bcf86cd799439041
+                      creditInfo:
+                        availableCredit: 23000
+                        maxAmount: null
+                      applicationStatus: null
+                      applicationStatusReason: null
+                      accountStatus: null
+                      accountStatusReason: null
+                      lenderReferenceId: null
+                    confirmedOffer: null
+                    offers:
+                    - code: PR01
+                      financialProductType: LineOfCredit
+                      amount: 23000
+                      defaultAPR: 0
+                      promoSettings: null
+                      description: Test offer description
+                    merchantConsumerId: null
+                    linkId: null
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.GetSessionStatusResponse'
+              examples:
+                Started:
+                  summary: Started application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: null
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails: null
+                    applicationStatus: null
+                    account: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Prequal not selected:
+                  summary: Prequal application response without selected lender
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails: null
+                    applicationStatus: Prequalified
+                    account: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Prequal:
+                  summary: Prequal application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails:
+                      merchantOrderId: order123
+                      items:
+                      - name: Test Item
+                        price: 23000
+                        sku: SKU123
+                        quantity: 1
+                        leasable: null
+                        productCategory: null
+                        warranty: null
+                        taxAmount: null
+                        discounts: null
+                      discounts: null
+                      taxAmount: 200
+                      shippingTaxAmount: null
+                      shippingAmount: 100
+                      totalAmount: 23300
+                    applicationStatus: Prequalified
+                    account:
+                      lenderName: Testlender
+                      lenderId: 107f1f77bcf86cd799439041
+                      creditInfo:
+                        availableCredit: 23000
+                        maxAmount: null
+                      applicationStatus: null
+                      applicationStatusReason: null
+                      accountStatus: null
+                      accountStatusReason: null
+                      lenderReferenceId: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Approved:
+                  summary: Approved application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails:
+                      merchantOrderId: order123
+                      items:
+                      - name: Test Item
+                        price: 23000
+                        sku: SKU123
+                        quantity: 1
+                        leasable: null
+                        productCategory: null
+                        warranty: null
+                        taxAmount: null
+                        discounts: null
+                      discounts: null
+                      taxAmount: 200
+                      shippingTaxAmount: null
+                      shippingAmount: 100
+                      totalAmount: 23300
+                    applicationStatus: Approved
+                    account:
+                      lenderName: Testlender
+                      lenderId: 107f1f77bcf86cd799439041
+                      creditInfo:
+                        availableCredit: 23000
+                        maxAmount: null
+                      applicationStatus: null
+                      applicationStatusReason: null
+                      accountStatus: null
+                      accountStatusReason: null
+                      lenderReferenceId: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Declined:
+                  summary: Declined application response
+                  value:
+                    sessionStatus: NOT COMPLETED
+                    confirmationToken: null
+                    accountToken: null
+                    loanId: null
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails: null
+                    applicationStatus: Declined
+                    account: null
+                    confirmedOffer: null
+                    offers: null
+                    merchantConsumerId: null
+                    linkId: null
+                Approved with account token:
+                  summary: Approved application response with account token
+                  value:
+                    sessionStatus: COMPLETED
+                    confirmationToken: null
+                    accountToken: 66d05ce1b5382eaf262c5d8a
+                    loanId: 66d05993fb750b38327b96ec
+                    consumerId: 807f1f77bcf86cd799439049
+                    flowType: Apply
+                    storeId: store1
+                    cartDetails:
+                      merchantOrderId: order123
+                      items:
+                      - name: Test Item
+                        price: 23000
+                        sku: SKU123
+                        quantity: 1
+                        leasable: null
+                        productCategory: null
+                        warranty: null
+                        taxAmount: null
+                        discounts: null
+                      discounts: null
+                      taxAmount: 200
+                      shippingTaxAmount: null
+                      shippingAmount: 100
+                      totalAmount: 23300
+                    applicationStatus: Approved
+                    account:
+                      lenderName: Testlender
+                      lenderId: 107f1f77bcf86cd799439041
+                      creditInfo:
+                        availableCredit: 23000
+                        maxAmount: null
+                      applicationStatus: null
+                      applicationStatusReason: null
+                      accountStatus: null
+                      accountStatusReason: null
+                      lenderReferenceId: null
+                    confirmedOffer: null
+                    offers:
+                    - code: PR01
+                      financialProductType: LineOfCredit
+                      amount: 23000
+                      defaultAPR: 0
+                      promoSettings: null
+                      description: Test offer description
+                    merchantConsumerId: null
+                    linkId: null
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+  /v2/checkout/applications/{applicationId}/token:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    get:
+      tags:
+      - ApplicationsV3
+      summary: Get interactive token
+      description: Returns a time-limited interactive session token to resume the Checkout flow for an account associated with the application.
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.GetSessionTokenResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.GetSessionTokenResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.GetSessionTokenResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+components:
+  schemas:
+    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusPromoSettings:
+      type: object
+      properties:
+        numberOfPeriods:
+          type:
+          - integer
+          - 'null'
+          description: Number of period in which promotion is active provided in case isPromo = true
+          format: int32
+          example: 6
+        periodicPayment:
+          type:
+          - number
+          - 'null'
+          description: Periodic payment for each promotion period provided in case isPromo = true
+          format: double
+          example: 100.5
+        periodType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
+          description: Type of period periodic payment and number of periods are defined for provided in case isPromo = true
+          example: Month
+        apr:
+          type:
+          - number
+          - 'null'
+          description: Annual Percentage Rate (APR) during promotional period provided in case isPromo = true
+          format: double
+          example: 10.25
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount:
+      required:
+      - amount
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the discount.
+          example: Birthday discount
+        amount:
+          type: number
+          description: Amount of the discount.
+          format: double
+          example: 20
+      additionalProperties: false
+      description: Discount details.
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
+      enum:
+      - Apply
+      - Checkout
+      type: string
+      description: FlowType.<p>Description:</p><ul><li><i>Apply</i> - Consumer checks if cart eligible.</li><li><i>Checkout</i> - Consumer makes purchasing in merchant.</li></ul>
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
+      enum:
+      - LineOfCredit
+      - Installments
+      - LeaseToOwn
+      - MerchantSelfFinancing
+      type: string
+    ChargeAfter.BFF.WebApi.Contracts.GetSessionTokenResponse:
+      type: object
+      properties:
+        sessionToken:
+          type:
+          - string
+          - 'null'
+          description: Session token which can be used to open modal in context of existing session
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.PeriodType:
+      enum:
+      - Day
+      - Month
+      - Week
+      - BiWeek
+      type: string
+    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusAccount:
+      required:
+      - lenderId
+      - lenderName
+      type: object
+      properties:
+        lenderName:
+          minLength: 1
+          type: string
+          description: Lender display name.<br /><b>Note:</b> Because this value may change, customers should not bind to this parameter. Instead, bind to the lenderId and set the lenderName in your system.
+          example: Test Lender
+        lenderId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the lender
+          example: 66cdb92ed0038406592430c1
+        creditInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo'
+          description: Credit amount details
+        applicationStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ConsumerApplicationStatus'
+          description: Gets or sets the application status.
+        applicationStatusReason:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ApplicationStatusReason'
+          description: Gets or sets the application status reason.
+        accountStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.LenderAccountStatus'
+          description: Gets or sets the account status.
+        accountStatusReason:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.AccountStatusReason'
+          description: Gets or sets the account status reason.
+        lenderReferenceId:
+          type:
+          - string
+          - 'null'
+          description: The lender reference ID
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails:
+      required:
+      - items
+      - totalAmount
+      type: object
+      properties:
+        merchantOrderId:
+          type:
+          - string
+          - 'null'
+          description: Optional merchant order identifier.
+          example: '12345'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item'
+          description: Line items.
+        discounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
+          description: Optional discounts.
+        taxAmount:
+          type: number
+          description: Total tax amount.
+          format: double
+          example: 199
+        shippingTaxAmount:
+          type:
+          - number
+          - 'null'
+          description: Shipping tax amount.
+          format: double
+          example: 1.9
+        shippingAmount:
+          type:
+          - number
+          - 'null'
+          description: Shipping amount.
+          format: double
+          example: 19
+        totalAmount:
+          type: number
+          description: 'Total amount.<br />
+
+            Must be equal to the sum of all items - discounts + tax and shipping.'
+          format: double
+          example: 4297.9
+      additionalProperties: false
+      description: Order cart details. Mandatory for checkout, optional for apply flow.
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item:
+      required:
+      - price
+      - quantity
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Item name.
+          example: Awesome Product
+        price:
+          type: number
+          description: Price of a single item.
+          format: double
+          example: 1999
+        sku:
+          type:
+          - string
+          - 'null'
+          description: Item SKU.
+          example: AWSMPRDCT
+        quantity:
+          type: integer
+          description: Number of items.
+          format: int32
+          example: 2
+        leasable:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if the item is leasable (i.e. can be financed by LTO lender).
+          example: true
+        productCategory:
+          type:
+          - string
+          - 'null'
+          description: Optional product category.
+          example: Product category
+        warranty:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty'
+          description: Optional warranty for the item.
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          description: Optional tax amount.
+          format: double
+          example: 199
+        discounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
+          description: Optional discounts.
+      additionalProperties: false
+      description: Item details.
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
+      required:
+      - price
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the name.
+          example: Awesome Warranty
+        sku:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the sku.
+          example: AWSMWRNTY
+        price:
+          type: number
+          description: Gets or sets the price.
+          format: double
+          example: 100
+      additionalProperties: false
+      description: Warranty.
+    ChargeAfter.Libraries.Entities.AccountStatusReason:
+      enum:
+      - ApplicationNotCompleted
+      - MissingStips
+      - MissingESign
+      - MissingConfirmation
+      - MissingStipsVerification
+      - MissingStipsReview
+      - LoanAlreadyUsed
+      - NoCreditAvailable
+      - CardValidationFailed
+      - CardValidationExpired
+      type: string
+    ChargeAfter.Libraries.Entities.ApplicationStatusReason:
+      enum:
+      - ApplicationNotCompleted
+      - AccountFrozen
+      - ConsumerBanned
+      - MissingESign
+      - UnderReview
+      - Error
+      - CallLenderToResolve
+      - DocumentUploadRequired
+      type: string
+    ChargeAfter.BFF.WebApi.Contracts.GetSessionStatusResponse:
+      required:
+      - flowType
+      - sessionStatus
+      type: object
+      properties:
+        sessionStatus:
+          minLength: 1
+          type: string
+          description: 'Status indicating if the flow was completed successfully
+
+            Possible values:
+
+            COMPLETED
+
+            NOT COMPLETED'
+          example: COMPLETED
+          deprecated: true
+        confirmationToken:
+          type:
+          - string
+          - 'null'
+          description: Used for charge creation.
+          example: 00a6dafc32d34ddd95497f89c362fba6
+        accountToken:
+          type:
+          - string
+          - 'null'
+          description: Used for charge creation for lenders supporting multiple charges for a single account.
+          example: 66d05ce1b5382eaf262c5d8a
+        loanId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier used to retrieve specific a lender application with its associated offers, orders, and transactions.
+          example: 66d05993fb750b38327b96ec
+        consumerId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the consumer
+          example: 807f1f77bcf86cd799439049
+        flowType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType'
+          description: FlowType.
+          example: Apply
+        storeId:
+          type:
+          - string
+          - 'null'
+          description: The store identifier
+          example: store13
+        cartDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails'
+          description: Order cart details. Mandatory for checkout, optional for apply flow.
+        applicationStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ConsumerApplicationStatus'
+          description: 'The latest status of the application corresponding to the lender account to which the consumer was redirected in ChargeAfter''s Checkout flow.<br />
+
+            Possible values <ul><li>Prequalified</li><li>PendingConsumer</li><li>PendingLender</li><li>Approved</li><li>Authorized</li><li>Declined</li></ul>'
+          example: Prequalified
+        account:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusAccount'
+          description: The latest lender account to which the consumer was redirected in ChargeAfter's Checkout flow with the details of the lender and the remaining credit info.
+        confirmedOffer:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer'
+          description: The confirmed offer which was used for checkout
+        offers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer'
+          description: Offers, confirmed by lender
+        merchantConsumerId:
+          type:
+          - string
+          - 'null'
+          description: The merchant's consumer ID, if provided in the session
+        linkId:
+          type:
+          - string
+          - 'null'
+          description: The Omni-link linkId, if session created via omni-link
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
+      type: object
+      properties:
+        availableCredit:
+          type: number
+          description: Amount available for the consumer. Max amount with used amount subtracted. Obligatory field if credit info is provided
+          format: double
+        maxAmount:
+          type:
+          - number
+          - 'null'
+          description: Maximum credit amount available on account. Optional if credit info provided
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.LenderAccountStatus:
+      enum:
+      - Inactive
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Active
+      type: string
+    ChargeAfter.Libraries.Entities.ConsumerApplicationStatus:
+      enum:
+      - New
+      - Prequalified
+      - CheckoutInProgress
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Approved
+      - Authorized
+      - Declined
+      - Expired
+      - Cancelled
+      type: string
+    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer:
+      required:
+      - amount
+      - code
+      - defaultAPR
+      - financialProductType
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+          description: Promotion code
+          example: PR01
+        financialProductType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
+          description: Financial product type
+          example: LineOfCredit
+        amount:
+          type: number
+          description: Maximum amount of the offer
+          format: double
+          example: 10
+        defaultAPR:
+          type: number
+          description: Offer Annual Percentage Rate (APR)
+          format: double
+          example: 15.25
+        promoSettings:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusPromoSettings'
+          description: Promotion settings
+        description:
+          type:
+          - string
+          - 'null'
+          description: Offer description
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      description: ChargeAfter API supports an API key based authentication, provided in the `apiKey` HTTP header.
+      name: Authorization
+      in: header
+x-refined-from:
+- chargeafter-checkout-application-status-openapi.yml
+- chargeafter-checkout-application-token-openapi.yml

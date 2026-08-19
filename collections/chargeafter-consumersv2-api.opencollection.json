@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chargeafter Consumers V2 API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ConsumersV2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get consumer details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/consumers/:consumerId",
+            "params": [
+              {
+                "name": "consumerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Optional Channel. If not provided, the E_COMMERCE channel will be used.<br />\nOther options are IN_STORE / CALL_CENTER / IN_HOME"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "query",
+                "description": "The store identifier"
+              },
+              {
+                "name": "posId",
+                "value": "",
+                "type": "query",
+                "description": "The point of sale identifier"
+              },
+              {
+                "name": "posType",
+                "value": "",
+                "type": "query",
+                "description": "The point of sale type"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Optional ISO 4217 currency code. If not provided, the USD currency will be used."
+              }
+            ]
+          },
+          "docs": "Returns consumer details"
+        },
+        {
+          "info": {
+            "name": "Get accounts by consumerId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/consumers/:consumerId/accounts",
+            "params": [
+              {
+                "name": "consumerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Optional Channel. If not provided, the E_COMMERCE channel will be used.<br />\nOther options are IN_STORE / CALL_CENTER / IN_HOME"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "query",
+                "description": "The store identifier"
+              },
+              {
+                "name": "posId",
+                "value": "",
+                "type": "query",
+                "description": "The point of sale identifier"
+              },
+              {
+                "name": "posType",
+                "value": "",
+                "type": "query",
+                "description": "The point of sale type"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Optional ISO 4217 currency code. If not provided, the USD currency will be used."
+              }
+            ]
+          },
+          "docs": "Lookup existing accounts by consumerId"
+        },
+        {
+          "info": {
+            "name": "Credit Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/consumers/credit/lookup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the consumer's available credit based on limited PII info"
+        },
+        {
+          "info": {
+            "name": "Get accounts and account token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/consumers/consumer-details",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Combines account lookup and account token creation for approved accounts"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

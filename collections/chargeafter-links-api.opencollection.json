@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OmniLink Links API",
+    "version": "1.11.8-310191-1-12-0+708877d18ffcdbb1c401c591f87af6a07c842632"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate consumer application link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/omni-link/consumer/application",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint generates a unique URL for a given consumer context that can be used to launch ChargeAfter's Apply experience."
+        },
+        {
+          "info": {
+            "name": "Generate consumer checkout link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/omni-link/consumer/checkout",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint generates a unique URL for a given consumer context that can be used to launch ChargeAfter's Checkout experience."
+        },
+        {
+          "info": {
+            "name": "Get link data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/omni-link/consumer/:linkId",
+            "params": [
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enables retrieval of link data for the consumer-associated context."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

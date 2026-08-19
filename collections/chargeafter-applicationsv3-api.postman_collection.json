@@ -1,0 +1,692 @@
+{
+  "item": [
+    {
+      "id": "3ae0ab53-b8db-4e0f-b6a9-cda237aceadf",
+      "name": "ApplicationsV3",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4c82e24-4cec-48d6-827f-f3fcc9ff362f",
+          "name": "Get status of an application",
+          "request": {
+            "name": "Get status of an application",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "checkout",
+                "applications",
+                ":applicationId",
+                "status"
+              ],
+              "host": [
+                "{{v2-checkout-applications-applicationId-status-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d74677c-43b3-40ab-96a6-9eecc2e9fae9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessionStatus\": \"NOT COMPLETED\",\n  \"confirmationToken\": null,\n  \"accountToken\": null,\n  \"loanId\": null,\n  \"consumerId\": null,\n  \"flowType\": \"Apply\",\n  \"storeId\": \"store1\",\n  \"cartDetails\": null,\n  \"applicationStatus\": null,\n  \"account\": null,\n  \"confirmedOffer\": null,\n  \"offers\": null,\n  \"merchantConsumerId\": null,\n  \"linkId\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bfcc32e-5041-4342-b8ef-82702771fd47",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "898442f1-a218-453d-a2a4-b0bba5adc054",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "203cd8a8-8332-406b-be73-c385405d8d4b",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "909a7c17-f64e-413c-9a10-d2cd3125fe50",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af31aac4-a57b-41f0-be5e-5fb2e010f155",
+          "name": "Get interactive token",
+          "request": {
+            "name": "Get interactive token",
+            "description": {
+              "content": "Returns a time-limited interactive session token to resume the Checkout flow for an account associated with the application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "checkout",
+                "applications",
+                ":applicationId",
+                "token"
+              ],
+              "host": [
+                "{{v2-checkout-applications-applicationId-token-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5057f8d7-5c56-43c7-b35c-40706acfabc7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "token"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-token-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessionToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3adfdfd-7b65-46fb-b372-2abb47202874",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "token"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-token-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7218ada9-3476-498a-aa48-f7f47bf372fc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "token"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-token-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27ab4f8b-8aa1-4cbc-beb1-2c770edff7a4",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "token"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-token-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f69312b-687d-4ff0-b492-f40b559733e8",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout",
+                    "applications",
+                    ":applicationId",
+                    "token"
+                  ],
+                  "host": [
+                    "{{v2-checkout-applications-applicationId-token-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-checkout-applications-applicationId-status-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "v2-checkout-applications-applicationId-token-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dd0a6e44-6803-4c5a-a588-1589614d6bcd",
+    "name": "Chargeafter Applications V3 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged ApplicationsV3 across 2 of this provider's published API definitions: chargeafter-checkout-application-status-openapi.yml, chargeafter-checkout-application-token-openapi.yml. Each path carries the servers of the definition it was published in.\n\nContact Support:\n Name: Customer Support\n Email: support@chargeafter.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "provider": "chargeafter",
+  "sources": [
+    "chargeafter-accounts-api-openapi.yml",
+    "chargeafter-applicationsv3-api-openapi.yml",
+    "chargeafter-charges-api-openapi.yml",
+    "chargeafter-checkout-api-openapi.yml",
+    "chargeafter-consumer-management-api-openapi.yml",
+    "chargeafter-consumersv2-api-openapi.yml",
+    "chargeafter-fundings-api-openapi.yml",
+    "chargeafter-lenders-api-openapi.yml",
+    "chargeafter-links-api-openapi.yml",
+    "chargeafter-orders-api-openapi.yml",
+    "chargeafter-sessionsv3-api-openapi.yml",
+    "chargeafter-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "chargeafter-accounts-api-openapi.yml",
+    "chargeafter-applicationsv3-api-openapi.yml",
+    "chargeafter-charges-api-openapi.yml",
+    "chargeafter-checkout-api-openapi.yml",
+    "chargeafter-consumer-management-api-openapi.yml",
+    "chargeafter-consumersv2-api-openapi.yml",
+    "chargeafter-fundings-api-openapi.yml",
+    "chargeafter-lenders-api-openapi.yml",
+    "chargeafter-links-api-openapi.yml",
+    "chargeafter-orders-api-openapi.yml",
+    "chargeafter-sessionsv3-api-openapi.yml",
+    "chargeafter-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "chargeafter-accounts-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-applicationsv3-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-charges-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-checkout-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-consumer-management-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-consumersv2-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-fundings-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-lenders-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-links-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-orders-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-sessionsv3-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "chargeafter-transactions-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Charge Orders API",
+    "version": "1.2.45+20181a21407d1df1b163085f2b159570f697241a"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Charge Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "123456789",
+                "type": "path",
+                "description": "The merchant order ID."
+              }
+            ]
+          },
+          "docs": "Get Charge Id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

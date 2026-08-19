@@ -1,0 +1,3415 @@
+{
+  "item": [
+    {
+      "id": "47a6085c-9f74-47c5-8492-573505d1ac5b",
+      "name": "Charges",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f2e56eb-0b80-4bfd-96ec-b4ca935b1a1d",
+          "name": "Create a new Charge",
+          "request": {
+            "name": "Create a new Charge",
+            "description": {
+              "content": "Creates a new charge by initiating a new authorize transaction.\nUse the returned ChargedId for other post-sale operations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "settle",
+                  "value": "<boolean>",
+                  "description": "(Optional)\n            \nA flag indicating whether a settle request should be sent to the lender as well."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"confirmationToken\": \"<string>\",\n  \"merchantOrderId\": \"<string,null>\",\n  \"merchantTransactionId\": \"<string,null>\",\n  \"tags\": \"<object,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "564a8f4e-3f10-41e9-b0d8-f2789d0b140b",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settle",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\",\n  \"merchantOrderId\": \"1a13423d\",\n  \"merchantTransactionId\": \"1a13423d\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationId\": \"6624efdd60c853bc11a56c61\",\n  \"channel\": \"E_COMMERCE\",\n  \"consumerId\": \"66f69f97702dc5226f7acccc\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"9c34bcd1aaf3a1000712da86\",\n  \"merchantOrderId\": \"string\",\n  \"offer\": {\n    \"lender\": {\n      \"id\": \"\",\n      \"name\": \"Finara\"\n    },\n    \"paymentPlan\": {\n      \"creditAmount\": 900\n    }\n  },\n  \"orderReferenceId\": \"104264\",\n  \"state\": \"ChargedBack\",\n  \"totalAmount\": 864.93,\n  \"transactionsData\": {\n    \"lenderAuthorizeReferenceId\": \"123456\",\n    \"lenderSettleReferenceId\": \"123457\"\n  },\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"storeId\": \"store1\",\n  \"approvalCode\": \"385789\",\n  \"metadata\": {\n    \"foo\": \"bar\"\n  },\n  \"transactionState\": \"Accepted\",\n  \"settleTransactionState\": \"Accepted\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20cef67f-2ce4-4be2-a171-c9ce6e65e9e4",
+              "name": "Charge created, failed to settle",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settle",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\",\n  \"merchantOrderId\": \"1a13423d\",\n  \"merchantTransactionId\": \"1a13423d\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationId\": \"6624efdd60c853bc11a56c61\",\n  \"channel\": \"E_COMMERCE\",\n  \"consumerId\": \"66f69f97702dc5226f7acccc\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"9c34bcd1aaf3a1000712da86\",\n  \"merchantOrderId\": \"string\",\n  \"offer\": {\n    \"lender\": {\n      \"id\": \"\",\n      \"name\": \"Finara\"\n    },\n    \"paymentPlan\": {\n      \"creditAmount\": 900\n    }\n  },\n  \"orderReferenceId\": \"104264\",\n  \"state\": \"ChargedBack\",\n  \"totalAmount\": 864.93,\n  \"transactionsData\": {\n    \"lenderAuthorizeReferenceId\": \"123456\",\n    \"lenderSettleReferenceId\": \"123457\"\n  },\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"storeId\": \"store1\",\n  \"approvalCode\": \"385789\",\n  \"metadata\": {\n    \"foo\": \"bar\"\n  },\n  \"transactionState\": \"Accepted\",\n  \"settleTransactionState\": \"Accepted\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43b7e826-1aaa-46d6-bf68-15655056529c",
+              "name": "Bad Request:<br/><ul><li><i>2002</i> - charge already has assigned confirmation</li><li><i>2004</i> - confirmation not found</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settle",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\",\n  \"merchantOrderId\": \"1a13423d\",\n  \"merchantTransactionId\": \"1a13423d\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"2002\",\n      \"description\": \"charge already has assigned confirmation\"\n    },\n    {\n      \"code\": \"2004\",\n      \"description\": \"confirmation not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ebcc9bf-addb-4809-bb46-b73a0fe63e74",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settle",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\",\n  \"merchantOrderId\": \"1a13423d\",\n  \"merchantTransactionId\": \"1a13423d\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb8f1e54-06c2-4a3d-a97f-89d3d84a377e",
+              "name": "Confirmation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settle",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\",\n  \"merchantOrderId\": \"1a13423d\",\n  \"merchantTransactionId\": \"1a13423d\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f9a6f6e0-1be3-4b79-8e57-51d858716c8a",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settle",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\",\n  \"merchantOrderId\": \"1a13423d\",\n  \"merchantTransactionId\": \"1a13423d\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa7d7e42-04d0-4ee9-82e0-dee50e4f03ef",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settle",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\",\n  \"merchantOrderId\": \"1a13423d\",\n  \"merchantTransactionId\": \"1a13423d\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9630d2ba-af80-4cda-9d3c-be9107761a81",
+          "name": "Get details of a Charge",
+          "request": {
+            "name": "Get details of a Charge",
+            "description": {
+              "content": "Fetching updated information of an existing Charge",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "charges",
+                ":chargeid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chargeid",
+                  "description": "(Required) The charge ID as received in the response of the original charge operation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97f24f82-5976-42b3-821e-94f53715927a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationId\": \"6624efdd60c853bc11a56c61\",\n  \"channel\": \"E_COMMERCE\",\n  \"consumerId\": \"66f69f97702dc5226f7acccc\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"9c34bcd1aaf3a1000712da86\",\n  \"lender\": {\n    \"id\": \"\",\n    \"name\": \"Finara\"\n  },\n  \"merchantOrderId\": \"string\",\n  \"paymentPlan\": {\n    \"creditAmount\": 900\n  },\n  \"refundedAmount\": 164.93,\n  \"settledAmount\": 264.93,\n  \"state\": \"AUTHORIZED\",\n  \"totalAmount\": 864.93,\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"storeId\": \"store1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be34d5a1-63df-429b-b412-3c3ae07a82d1",
+              "name": "Bad Request:<br/><ul><li><i>2001</i> - charge not found</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"2001\",\n      \"description\": \"charge not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "569db656-bdcc-41ea-a42d-803c2e7087d6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c4ca4a91-53dd-488b-9429-db12fd9e1738",
+              "name": "Charge not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f46d8ad-c36f-42dd-9134-cb409cb52105",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca58d358-b727-4018-8f72-63e6e92e3b77",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d6ed64d-149a-4da2-9a0d-2fb3672c2f42",
+          "name": "Update a Charge",
+          "request": {
+            "name": "Update a Charge",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "charges",
+                ":chargeid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chargeid",
+                  "description": "(Required) The charge ID as received in the response of the original charge operation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantOrderId\": \"<string>\",\n  \"tags\": \"<object,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "00e74457-be08-4186-b407-5a8bdd7f1e2d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantOrderId\": \"<string>\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationId\": \"6624efdd60c853bc11a56c61\",\n  \"channel\": \"E_COMMERCE\",\n  \"consumerId\": \"66f69f97702dc5226f7acccc\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"9c34bcd1aaf3a1000712da86\",\n  \"lender\": {\n    \"id\": \"\",\n    \"name\": \"Finara\"\n  },\n  \"merchantOrderId\": \"string\",\n  \"paymentPlan\": {\n    \"creditAmount\": 900\n  },\n  \"refundedAmount\": 164.93,\n  \"settledAmount\": 264.93,\n  \"state\": \"AUTHORIZED\",\n  \"totalAmount\": 864.93,\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"storeId\": \"store1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c113a1fd-328e-4c8e-93ce-94eaeea9d91b",
+              "name": "Bad Request:<br/><ul><li><i>2001</i> - charge not found</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantOrderId\": \"<string>\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"2001\",\n      \"description\": \"charge not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee0d51df-fba1-4ff2-b992-6e3558a257a9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantOrderId\": \"<string>\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3013bbc-0470-42f0-8e5c-1791254602df",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantOrderId\": \"<string>\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b05b4ad-d4d3-4979-b748-1006f71923dd",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantOrderId\": \"<string>\",\n  \"tags\": \"<object,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "133122f8-0cf7-4741-ae47-db77fd08e993",
+          "name": "Settle a Charge",
+          "request": {
+            "name": "Settle a Charge",
+            "description": {
+              "content": "Complete a payment transaction by settling a charge.\nThis action confirms the secure transfer of funds according to the authorized terms.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "charges",
+                ":chargeid",
+                "settles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chargeid",
+                  "description": "(Required) The charge ID as received in the response of the original charge operation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<double>\",\n  \"merchantTransactionId\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e1bb01a-bde6-4a6c-8cc9-2e0ceefb7fb2",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "settles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 164.93,\n  \"chargeId\": \"9c34bcd1aaf3a1000712da86\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"65650abe4f457d08b9710584\",\n  \"lenderId\": \"62c6a4e8f2c5dab96d1f1fa3\",\n  \"merchantId\": \"651d621c1f1cc3298ef9b878\",\n  \"merchantOrderId\": \"string\",\n  \"status\": \"Settled\",\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"type\": \"SETTLE\",\n  \"storeId\": \"store1\",\n  \"lenderReferenceId\": \"654e684a5a3487942359537f_935AC8088\",\n  \"transactionState\": \"Accepted\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef04b276-f06b-44b7-bf1c-042b5bbc3717",
+              "name": "Bad Request:<br/><ul><li><i>2001</i> - charge not found</li><li><i>2006</i> - Operation is not permitted at this stage</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "settles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"2001\",\n      \"description\": \"charge not found\"\n    },\n    {\n      \"code\": \"2006\",\n      \"description\": \"Operation is not permitted at this stage\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "580fdca5-6c70-4d6d-96d7-999116ccb381",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "settles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "580c9a48-9498-4079-80ae-fe038c91f52b",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "settles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa5b4b5f-492f-4c44-a34d-c4934228d4cd",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "settles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6244a39-da4a-4221-9804-ad2683ce7571",
+          "name": "Refund a Charge",
+          "request": {
+            "name": "Refund a Charge",
+            "description": {
+              "content": "Process a refund for a previously settled amount.\nThis action facilitates the return of funds to the customer for various reasons, such as returned goods or canceled services.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "charges",
+                ":chargeid",
+                "refunds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chargeid",
+                  "description": "(Required) The charge ID as received in the response of the original charge operation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<double>\",\n  \"merchantTransactionId\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "728a3e71-9eb5-4479-a462-44b955230a90",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 164.93,\n  \"chargeId\": \"9c34bcd1aaf3a1000712da86\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"65650abe4f457d08b9710584\",\n  \"lenderId\": \"62c6a4e8f2c5dab96d1f1fa3\",\n  \"merchantId\": \"651d621c1f1cc3298ef9b878\",\n  \"merchantOrderId\": \"string\",\n  \"status\": \"PartiallySettledRefunded\",\n  \"type\": \"REFUND\",\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"approvalCode\": \"string\",\n  \"storeId\": \"store1\",\n  \"lenderReferenceId\": \"654e684a5a3487942359537f_935AC8088\",\n  \"transactionState\": \"Accepted\",\n  \"metadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c466e2e-ff06-4225-aeaa-96d1336fc7f1",
+              "name": "Bad Request:<br/><ul><li><i>2001</i> - charge not found</li><li><i>2006</i> - Operation is not permitted at this stage</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"2001\",\n      \"description\": \"charge not found\"\n    },\n    {\n      \"code\": \"2006\",\n      \"description\": \"Operation is not permitted at this stage\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c98970c5-df5b-4d4a-a74d-2be468a3ece0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f326f2ce-a0ee-4f6d-b5b7-f5f22d9e8e1c",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0d5e2be-ccc1-4553-acd1-3f897c0a18c1",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f13c111c-f935-4c52-ab86-5c39d1644139",
+          "name": "Void a Charge",
+          "request": {
+            "name": "Void a Charge",
+            "description": {
+              "content": "Cancel and invalidate an authorized charge before it is settled.\nThis action prevents the charge from being completed or appearing on the customer's statement.\nUse voiding for transactions that need to be canceled early in the process.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "charges",
+                ":chargeid",
+                "voids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chargeid",
+                  "description": "(Required) The charge ID as received in the response of the original charge operation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<number,null-double>\",\n  \"merchantTransactionId\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "649c6c7c-aba1-4a86-a7fe-61fed3d93246",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "voids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number,null-double>\",\n  \"merchantTransactionId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 164.93,\n  \"chargeId\": \"9c34bcd1aaf3a1000712da86\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"65650abe4f457d08b9710584\",\n  \"lenderId\": \"62c6a4e8f2c5dab96d1f1fa3\",\n  \"merchantId\": \"651d621c1f1cc3298ef9b878\",\n  \"merchantOrderId\": \"string\",\n  \"status\": \"Voided\",\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"type\": \"VOID\",\n  \"storeId\": \"store1\",\n  \"lenderReferenceId\": \"654e684a5a3487942359537f_935AC8088\",\n  \"transactionState\": \"Accepted\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5b5c75b-57a5-4a25-bcdf-341c9ed7c731",
+              "name": "Bad Request:<br/><ul><li><i>2001</i> - charge not found</li><li><i>2006</i> - Operation is not permitted at this stage</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "voids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number,null-double>\",\n  \"merchantTransactionId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"2001\",\n      \"description\": \"charge not found\"\n    },\n    {\n      \"code\": \"2006\",\n      \"description\": \"Operation is not permitted at this stage\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3308499f-6b2f-4d40-b5c3-16154aba204a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "voids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number,null-double>\",\n  \"merchantTransactionId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7352593d-2a74-46ae-afc5-70280e96ae3b",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "voids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number,null-double>\",\n  \"merchantTransactionId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40408f28-9540-48b9-bb8f-00db8e70aeab",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "voids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number,null-double>\",\n  \"merchantTransactionId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bad7d1a2-be8c-4690-ae67-c128c0918155",
+          "name": "/v2/post-sale/charges/voids/async",
+          "request": {
+            "name": "/v2/post-sale/charges/voids/async",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "charges",
+                "voids",
+                "async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"confirmationToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e7de24f2-d52e-4b77-b5d4-707732b164f8",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    "voids",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Charge for confirmation will be cancelled\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "335ddca3-e800-4466-8a1f-556c0964eb01",
+              "name": "Bad Request:<br/><ul><li><i>2001</i> - charge not found</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    "voids",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"2001\",\n      \"description\": \"charge not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9550d22-196d-4671-8f4b-d90b4101d579",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    "voids",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ceae98c-585a-4170-abb2-ab2776d64329",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    "voids",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d54c9de0-2cc3-4f12-999b-f24d31e834ba",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    "voids",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmationToken\": \"d4fbb3e2aeb2476b99cf9aa6dc13cb78\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac24d5e7-59c1-4a0f-b3b1-2919648d6233",
+          "name": "Create a synthetic transaction",
+          "request": {
+            "name": "Create a synthetic transaction",
+            "description": {
+              "content": "Creating a transaction without communication with lender",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "charges",
+                ":chargeid",
+                "transactions",
+                "synthetic"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chargeid",
+                  "description": "(Required) The charge ID as received in the response of the original charge operation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionType\": \"<string>\",\n  \"amount\": \"<number,null-double>\",\n  \"merchantTransactionId\": \"<string,null>\",\n  \"reconciliationId\": \"<string,null>\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"reason\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1dc49cf8-e61d-4f28-87b8-899480cbafef",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "transactions",
+                    "synthetic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionType\": \"Settle\",\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\",\n  \"reconciliationId\": \"654e684a5a3487942359537f_935AC8088\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"reason\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 164.93,\n  \"chargeId\": \"9c34bcd1aaf3a1000712da86\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"65650abe4f457d08b9710584\",\n  \"lenderId\": \"62c6a4e8f2c5dab96d1f1fa3\",\n  \"merchantId\": \"651d621c1f1cc3298ef9b878\",\n  \"merchantOrderId\": \"string\",\n  \"status\": \"Voided\",\n  \"type\": \"VOID\",\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"storeId\": \"store1\",\n  \"lenderReferenceId\": \"654e684a5a3487942359537f_935AC8088\",\n  \"transactionState\": \"Accepted\",\n  \"metadata\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab164aad-beaf-4ff1-82b5-7aee752293ce",
+              "name": "Bad Request:<br/><ul><li><i>2001</i> - charge not found</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "transactions",
+                    "synthetic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionType\": \"Settle\",\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\",\n  \"reconciliationId\": \"654e684a5a3487942359537f_935AC8088\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"reason\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"2001\",\n      \"description\": \"charge not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a05f77d-d105-4ef7-9a3f-c36e6fdb3b15",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "transactions",
+                    "synthetic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionType\": \"Settle\",\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\",\n  \"reconciliationId\": \"654e684a5a3487942359537f_935AC8088\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"reason\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "355ee851-9c2f-424b-a4ff-30f06594f63c",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "transactions",
+                    "synthetic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionType\": \"Settle\",\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\",\n  \"reconciliationId\": \"654e684a5a3487942359537f_935AC8088\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"reason\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54e1b4f8-81fb-470f-ba2f-125cc9881fe1",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "transactions",
+                    "synthetic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionType\": \"Settle\",\n  \"amount\": 864.93,\n  \"merchantTransactionId\": \"1a13423d\",\n  \"reconciliationId\": \"654e684a5a3487942359537f_935AC8088\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"reason\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf1ae1ba-a939-43cb-8467-ee40b51e6db5",
+          "name": "Update delivery data",
+          "request": {
+            "name": "Update delivery data",
+            "description": {
+              "content": "Update delivery data for items in an existing Charge",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "post-sale",
+                "charges",
+                ":chargeid",
+                "items",
+                "delivery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chargeid",
+                  "description": "(Required) The charge ID as received in the response of the original charge operation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"quantity\": \"<integer>\",\n      \"sku\": \"<string>\",\n      \"deliveryDate\": \"<dateTime>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "93af60d0-15fb-4e9b-840e-2e24586917ff",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "items",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"quantity\": \"<integer>\",\n      \"sku\": \"<string>\",\n      \"deliveryDate\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chargeId\": \"9c34bcd1aaf3a1000712da86\",\n  \"createdAt\": \"2023-11-13T10:21:12.9277886Z\",\n  \"id\": \"64aeb2d155665acdc3f64784\",\n  \"items\": [\n    {\n      \"sku\": \"PAINT01\",\n      \"quantity\": 1,\n      \"deliveryDate\": \"2023-11-13T10:21:12.9277886Z\"\n    },\n    {\n      \"sku\": \"PAINT01\",\n      \"quantity\": 1,\n      \"deliveryDate\": \"2023-11-13T10:21:12.9277886Z\"\n    }\n  ],\n  \"updatedAt\": \"2023-11-13T10:21:12.9277886Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "355921a9-8df7-4a9f-96f1-3ac1fff9bc4f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "items",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"quantity\": \"<integer>\",\n      \"sku\": \"<string>\",\n      \"deliveryDate\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10e55833-3b60-4c1c-834b-4b22a2ae6e36",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "items",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"quantity\": \"<integer>\",\n      \"sku\": \"<string>\",\n      \"deliveryDate\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4082fc4-6f86-4b77-ab9a-a9308d545746",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "items",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"quantity\": \"<integer>\",\n      \"sku\": \"<string>\",\n      \"deliveryDate\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bfae8c9-e05d-462d-b940-069eb5ad9487",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "post-sale",
+                    "charges",
+                    ":chargeid",
+                    "items",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeid",
+                      "description": "(Required) The charge ID as received in the response of the original charge operation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"quantity\": \"<integer>\",\n      \"sku\": \"<string>\",\n      \"deliveryDate\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"1000\",\n      \"description\": \"Unknown error occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "109d7a06-8e80-4230-b1b7-8f665387b5c9",
+    "name": "Charge Charges API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to ChargeAfter API reference! This API is implemented in a RESTful state of mind, it has straight-forward, resource-oriented endpoints, and produces standard HTTP response codes to communicate back the result of operations. To get started please contact ChargeAfter support to get your API keys, and get an access to your testing and live environments.\n\nContact Support:\n Name: Customer Support\n Email: support@chargeafter.com",
+      "type": "text/plain"
+    }
+  }
+}

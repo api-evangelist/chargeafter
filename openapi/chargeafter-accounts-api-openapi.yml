@@ -1,0 +1,2431 @@
+openapi: 3.2.0
+info:
+  title: Chargeafter Accounts API
+  contact:
+    name: Customer Support
+    email: support@chargeafter.com
+  termsOfService: https://chargeafter.com/privacy-policy
+  version: '1.0'
+  description: 'Operations tagged Accounts across 2 of this provider''s published API definitions: chargeafter-charge-api-openapi.yml, chargeafter-checkout-session-accounts-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api-sandbox.ca-dev.co
+  description: Sandbox Environment
+- url: https://api.chargeafter.com
+  description: Production Environment
+security:
+- apiKey: []
+tags:
+- name: Accounts
+paths:
+  /v2/accounts/charge:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    post:
+      tags:
+      - Accounts
+      summary: Create new charge with accountToken
+      description: Creates a new charge from an existing approved account with an accountToken.
+      parameters: []
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateChargeFromAccountRequestBody'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateChargeFromAccountRequestBody'
+          text/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateChargeFromAccountRequestBody'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateChargeFromAccountRequestBody'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.ChargeCreationResponseDto'
+        '202':
+          description: Charge created, failed to settle
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.ChargeCreationResponseDto'
+        '400':
+          description: Bad Request:<br/><ul><li><i>1110</i> - &lt;validation error&gt;</li><li><i>2002</i> - charge already has assigned confirmation</li><li><i>2004</i> - confirmation not found</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1110'
+                    description: <validation error>
+                  - code: '2002'
+                    description: charge already has assigned confirmation
+                  - code: '2004'
+                    description: confirmation not found
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account not found
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1000'
+                    description: Unknown error occurred
+  /v2/accounts:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    post:
+      tags:
+      - Accounts
+      summary: Create account
+      parameters: []
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateAccountRequestBody'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateAccountRequestBody'
+          text/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateAccountRequestBody'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateAccountRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateAccountResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateAccountResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateAccountResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '404':
+          description: Application not found
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1000'
+                    description: Unknown error occurred
+  /v2/accounts/lookup/account-id:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    put:
+      tags:
+      - Accounts
+      summary: Lookup for account id by provided credit card details or account details.
+      parameters: []
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.LookupByAccountIdRequestBody'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.LookupByAccountIdRequestBody'
+          text/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.LookupByAccountIdRequestBody'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.LookupByAccountIdRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.ApplicationLookupResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.ApplicationLookupResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.ApplicationLookupResponse'
+        '400':
+          description: Bad Request:<br/><ul><li><i>1110</i> - &lt;validation error&gt;</li></ul>
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1110'
+                    description: <validation error>
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1000'
+                    description: Unknown error occurred
+  /v2/accounts/confirmation:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    post:
+      tags:
+      - Accounts
+      summary: Create confirmation with application and cart details
+      parameters: []
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateConfirmationRequestBody'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateConfirmationRequestBody'
+          text/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateConfirmationRequestBody'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateConfirmationRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateConfirmationResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateConfirmationResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateConfirmationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '404':
+          description: Application for credit card not found
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1000'
+                    description: Unknown error occurred
+  /v2/accounts/{accountToken}/creditcard:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    get:
+      tags:
+      - Accounts
+      summary: Get information about credit card based on account id
+      parameters:
+      - name: accountToken
+        in: path
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      - name: storeId
+        in: query
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      - name: channel
+        in: query
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreditCardInfoResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreditCardInfoResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreditCardInfoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '404':
+          description: Confirmation not found
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1000'
+                    description: Unknown error occurred
+  /v2/accounts/{accountToken}/credit:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    get:
+      tags:
+      - Accounts
+      summary: Get information about credit based on account id
+      parameters:
+      - name: accountToken
+        in: path
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      - name: storeId
+        in: query
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      - name: channel
+        in: query
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreditInfoResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreditInfoResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreditInfoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1000'
+                    description: Unknown error occurred
+  /v2/accounts/{accountToken}:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    get:
+      tags:
+      - Accounts
+      summary: Get information about account based on account id
+      parameters:
+      - name: accountToken
+        in: path
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountInfoResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountInfoResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountInfoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1000'
+                    description: Unknown error occurred
+  /v2/accounts/lookup/lender/account-id:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    get:
+      tags:
+      - Accounts
+      summary: Get lender by personal account number
+      parameters:
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.LenderDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.LenderDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.LenderDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1000'
+                    description: Unknown error occurred
+  /v2/accounts/deprecate:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    patch:
+      tags:
+      - Accounts
+      summary: Deprecate account based on lender loan id
+      parameters: []
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.DeprecateAccountRequestBody'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.DeprecateAccountRequestBody'
+          text/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.DeprecateAccountRequestBody'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.DeprecateAccountRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountInfoResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountInfoResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountInfoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  requestId:
+                    type: string
+                    description: Associated request id
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error code
+                        description:
+                          type: string
+                          description: Error description
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1000'
+                    description: Unknown error occurred
+  /v3/session/accounts:
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
+    get:
+      tags:
+      - Accounts
+      summary: Get lender accounts and offers
+      parameters:
+      - name: lookupOnly
+        in: query
+        description: Optional flag to indicate that only lookup should be performed
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.GetAccountsResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.GetAccountsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.GetAccountsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: Unique RequestId
+                  message:
+                    type: string
+                    example: Message Describing The Error
+        '401':
+          description: Unauthorized
+        '422':
+          description: Input Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        validationState:
+                          type: string
+                        error:
+                          type: string
+                example:
+                  RequestId: Unique RequestId
+                  Message: Input Validation Failure
+                  Errors:
+                  - Field: RequestField1
+                    ValidationState: Invalid
+                    Error: RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.
+        '500':
+          description: General Server Error
+          content:
+            application/json:
+              schema:
+                example:
+                  requestId: Unique RequestId
+                  errors:
+                  - code: '1'
+                    description: Internal unknown error occurred
+components:
+  schemas:
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountStatus:
+      enum:
+      - Deprecated
+      type: string
+    ChargeAfter.Postsale.WebApi.Contracts.CreditCardDetails:
+      required:
+      - pan
+      type: object
+      properties:
+        pan:
+          minLength: 1
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        expirationDate:
+          type:
+          - string
+          - 'null'
+        svc:
+          type:
+          - string
+          - 'null'
+        cvv:
+          type:
+          - string
+          - 'null'
+        pvv:
+          type:
+          - string
+          - 'null'
+        track1:
+          type:
+          - string
+          - 'null'
+        track2:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureDisclosures:
+      type: object
+      properties:
+        decline:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure_2'
+          description: Decline disclosure. If not provided, the disclosure is not required
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.TransactionState:
+      enum:
+      - Scheduled
+      - Pending
+      - PendingConsumer
+      - PendingMerchant
+      - Accepted
+      - Completed
+      - Failed
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure_2:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType'
+          description: 'Type of disclosure
+
+            Link - disclosure accessable by url
+
+            Hosted - presented on lender screen or similar'
+        url:
+          type:
+          - string
+          - 'null'
+          description: Link to the disclosure
+        mimeType:
+          type:
+          - string
+          - 'null'
+          description: Mime type of the document linked (e.g. HTML/PDF/plain text, ...)
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus:
+      enum:
+      - Eligible
+      - Ineligible
+      type: string
+    ChargeAfter.Libraries.Lender.Integration.Entities.Enums.DeferredFundingSupportType:
+      enum:
+      - None
+      - SemiNatively
+      type: string
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateConfirmationResponse:
+      required:
+      - confirmationToken
+      type: object
+      properties:
+        confirmationToken:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountLookupDetails:
+      required:
+      - lenderId
+      - lenderToken
+      type: object
+      properties:
+        name:
+          type: string
+          description: The merchant provided name for the account.
+          example: Awesome Co.
+        lenderId:
+          minLength: 1
+          type: string
+          description: The CA lender id.
+          example: 65650abe4f457d08b9710584
+        lenderToken:
+          minLength: 1
+          type: string
+          description: The lender provided token for the account.
+          example: 7692fecf9d077414d77eb5a9a1904ccf
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings_2:
+      type: object
+      properties:
+        isPromo:
+          type: boolean
+          description: Is promotion active
+        numberOfPeriods:
+          type:
+          - integer
+          - 'null'
+          description: Number of period in which promotion is active provided in case isPromo = true
+          format: int32
+        periodicPayment:
+          type:
+          - number
+          - 'null'
+          description: Periodic payment for each promotion period provided in case isPromo = true
+          format: double
+        periodType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
+          description: Type of period periodic payment and number of periods are defined for provided in case isPromo = true
+        apr:
+          type:
+          - number
+          - 'null'
+          description: Annual Percentage Rate (APR) during promotional period provided in case isPromo = true
+          format: double
+        type:
+          type:
+          - string
+          - 'null'
+          description: 'Type of promotion
+
+            Possible values:
+
+            WPDI - With paid deferred interest
+
+            FPWI - Fixed payment, with interest
+
+            EPNI - Equal payment, no interest'
+        description:
+          type:
+          - string
+          - 'null'
+          description: Additional text describing the offer in the marketplace offer selection screen
+      additionalProperties: false
+      description: Special conditions for APR that will be in use for specified period
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings:
+      type: object
+      properties:
+        isPromo:
+          type: boolean
+        numberOfPeriods:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        periodicPayment:
+          type:
+          - number
+          - 'null'
+          format: double
+        periodType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
+        apr:
+          type:
+          - number
+          - 'null'
+          format: double
+        type:
+          type: string
+        description:
+          type: string
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateAccountRequestBody:
+      required:
+      - channel
+      - lenderId
+      - lenderSessionId
+      - sessionId
+      type: object
+      properties:
+        sessionId:
+          minLength: 1
+          type: string
+        lenderSessionId:
+          minLength: 1
+          type: string
+        consumerId:
+          type: string
+        merchantConsumerId:
+          type: string
+        lenderId:
+          minLength: 1
+          type: string
+        storeId:
+          type: string
+        channel:
+          minLength: 1
+          type: string
+        currency:
+          type: string
+        organizationId:
+          type: string
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer'
+        creditInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo'
+        flowType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.FlowType'
+        promotionDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.PromotionDetails'
+        lenderReturningConsumer:
+          type: boolean
+        lenderLoanId:
+          type: string
+        lenderAccountId:
+          type: string
+        autoAccount:
+          type:
+          - boolean
+          - 'null'
+          description: Account was created on async update
+        accountStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.LenderAccountStatus'
+        accountStatusReason:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.AccountStatusReason'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account:
+      required:
+      - id
+      - lenderId
+      - lenderName
+      - offers
+      - status
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+        lenderId:
+          minLength: 1
+          type: string
+        lenderName:
+          minLength: 1
+          type: string
+          description: Name of the lender.<br /><b>Note:</b> Because this value may change, customers should not bind to this parameter. Instead, bind to the lenderId and set the lenderName in your system.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Contracts.AccountStatus'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer'
+        creditInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo'
+        applicationStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ConsumerApplicationStatus'
+        applicationStatusReason:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ApplicationStatusReason'
+        accountStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.LenderAccountStatus'
+        accountStatusReason:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.AccountStatusReason'
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.Models.CheckoutDetails:
+      required:
+      - cartDetails
+      - channel
+      type: object
+      properties:
+        cartDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails'
+          description: Order cart details.
+        channel:
+          minLength: 1
+          type: string
+          description: 'The channel of the original purchase. If not provided, E_COMMERCE will be used. Other values are<br />
+
+            IN_STORE<br />
+
+            CALL_CENTER<br />
+
+            IN_HOME'
+          example: E_COMMERCE
+        promoCode:
+          type:
+          - string
+          - 'null'
+          description: The promo code sent by the merchant indicates which approved offer is selected.
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: Optional additional information provided by the merchant.
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateAccountResponse:
+      type: object
+      properties:
+        accountToken:
+          type: string
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer'
+        account:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType:
+      enum:
+      - Link
+      - Hosted
+      - Template
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferType:
+      enum:
+      - Regular
+      - Sample
+      type: string
+    ChargeAfter.Contracts.AccountStatus:
+      enum:
+      - None
+      - New
+      - NotFound
+      - PreApproved
+      - Approved
+      - Banned
+      - Declined
+      - Error
+      - Pending
+      - PartiallyApproved
+      - Frozen
+      - PreDeclined
+      - PendingConsumer
+      - Cancelled
+      type: string
+    ChargeAfter.Libraries.Entities.PeriodType:
+      enum:
+      - Day
+      - Month
+      - Week
+      - BiWeek
+      type: string
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.PaymentPlanDto:
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          description: The credit amount.
+          format: double
+          example: 900
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures:
+      type: object
+      properties:
+        apply:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+        confirm:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item:
+      required:
+      - price
+      - quantity
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+          format: double
+        sku:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+        leasable:
+          type:
+          - boolean
+          - 'null'
+        productCategory:
+          type:
+          - string
+          - 'null'
+        warranty:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty'
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        discounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.ChargeStatus:
+      enum:
+      - Created
+      - Authorized
+      - PartiallySettled
+      - Settled
+      - PartiallyRefunded
+      - PartiallySettledPartiallyRefunded
+      - SettledPartiallyRefunded
+      - Refunded
+      - PartiallySettledRefunded
+      - Voided
+      - ChargedBack
+      type: string
+      description: 'The transaction status.
+
+        Please refer to Charge states page in order to review possible statuses of the action.<p>Description:</p><ul><li><i>Created</i> - [Deprecated]</li><li><i>Authorized</i> - Charge is authorized</li><li><i>PartiallySettled</i> - Charge is partially settled</li><li><i>Settled</i> - Charge is fully settled</li><li><i>PartiallyRefunded</i> - Charge is partially refunded</li><li><i>PartiallySettledPartiallyRefunded</i> - Charge is partially settled and partially refunded</li><li><i>SettledPartiallyRefunded</i> - Fully settled charge is partially refunded</li><li><i>Refunded</i> - Charge is fully refunded</li><li><i>PartiallySettledRefunded</i> - Partially settled charge is fully refunded</li><li><i>Voided</i> - Charge is voided</li><li><i>ChargedBack</i> - Chargeback is performed</li></ul>'
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.LookupByAccountIdRequestBody:
+      required:
+      - channel
+      type: object
+      properties:
+        creditCard:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Postsale.WebApi.Contracts.CreditCardDetails'
+        account:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountLookupDetails'
+        storeId:
+          type: string
+          description: The CA store ID for the purchase.
+          example: store1
+        channel:
+          minLength: 1
+          type: string
+          description: 'The channel of the original purchase. If not provided, E_COMMERCE will be used. Other values are<br />
+
+            IN_STORE<br />
+
+            CALL_CENTER<br />
+
+            IN_HOME'
+          example: E_COMMERCE
+        skipAccountCreation:
+          type: boolean
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.Models.MerchantDetails:
+      type: object
+      properties:
+        storeId:
+          type: string
+          description: The store ID.
+          example: store1
+        posId:
+          type:
+          - string
+          - 'null'
+          description: The point of sale identifier
+        posType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PosType'
+          description: The point of sale type
+        merchantOrderId:
+          maxLength: 256
+          type:
+          - string
+          - 'null'
+          description: "(Optional)\n            \nThe merchant order ID."
+          example: order123
+        merchantTransactionId:
+          maxLength: 256
+          type:
+          - string
+          - 'null'
+          description: "(Optional)\nMerchant supplied identifier for the authorization transactions.\n            \nShould be unique per merchant request.\nIf authorization transaction with the same merchant transaction identifier exists, original charge will be returned."
+          example: 1a13423d
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.DeprecateAccountRequestBody:
+      required:
+      - applicationId
+      - lenderAccountId
+      type: object
+      properties:
+        lenderAccountId:
+          minLength: 1
+          type: string
+        applicationId:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.ApplicationLookupResponse:
+      required:
+      - accountToken
+      type: object
+      properties:
+        accountToken:
+          minLength: 1
+          type: string
+          description: The CA account token used to create charges.
+          example: 65650abe4f457d08b9710584
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.ConsumerApplicationStatus:
+      enum:
+      - New
+      - Prequalified
+      - CheckoutInProgress
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Approved
+      - Authorized
+      - Declined
+      - Expired
+      - Cancelled
+      type: string
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.PromotionDetails:
+      type: object
+      properties:
+        fundingDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        merchantPromoType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.MerchantPromoType'
+        merchantPromoCode:
+          type: string
+        deferredFundingSupportType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Lender.Integration.Entities.Enums.DeferredFundingSupportType'
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateConfirmationRequestBody:
+      required:
+      - accountToken
+      - cartDetails
+      - channel
+      type: object
+      properties:
+        accountToken:
+          minLength: 1
+          type: string
+          description: Account token provided by CA.
+          example: 65650abe4f457d08b9710584
+        cartDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails'
+          description: Order cart details.
+        channel:
+          minLength: 1
+          type: string
+          description: 'The channel of the original purchase. If not provided, E_COMMERCE will be used. Other values are<br />
+
+            IN_STORE<br />
+
+            CALL_CENTER<br />
+
+            IN_HOME'
+          example: E_COMMERCE
+        storeId:
+          type: string
+          description: The store ID.
+          example: store1
+        promoCode:
+          type:
+          - string
+          - 'null'
+          description: The promo code sent by the merchant indicates which approved offer is selected.
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: Optional additional information provided by the merchant.
+        autoConfirmation:
+          type:
+          - boolean
+          - 'null'
+          description: Confirmation was requested automatically on status change.
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus'
+        ineligibilityReason:
+          type: string
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer_2:
+      required:
+      - amount
+      - code
+      - defaultAPR
+      - financialProductType
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+          description: Promotion code
+        financialProductType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
+          description: Financial product type
+        defaultAPR:
+          type: number
+          description: Offer Annual Percentage Rate (APR)
+          format: double
+        amount:
+          type: number
+          description: Maximum amount of the offer
+          format: double
+        promoSettings:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings_2'
+          description: Promotion settings
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Can be used to pass additional data for offer
+        expirationDate:
+          type:
+          - string
+          - 'null'
+          description: Date at which offer expires
+          format: date-time
+        checkoutMinimumAmount:
+          type:
+          - number
+          - 'null'
+          description: Optional value to validate checkout cart total amount
+          format: double
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description of the offer as provided by the lender
+        eligibility:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility_2'
+          description: Eligibility of the offer
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: Merchant provided Promotion metadata
+        disclosures:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures_2'
+          description: Offer disclosures
+        offerType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferType'
+          description: Type of offer provided by the lender
+        texts:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: Offer dynamic text
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreditCardInfoResponse:
+      required:
+      - creditCard
+      type: object
+      properties:
+        creditCard:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Postsale.WebApi.Contracts.CreditCardDetails'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account_2:
+      required:
+      - id
+      - lenderId
+      - lenderName
+      - offers
+      - status
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+          description: Unique identifier of the account
+        lenderId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the lender
+        lenderName:
+          minLength: 1
+          type: string
+          description: Lender display name.<br /><b>Note:</b> Because this value may change, customers should not bind to this parameter. Instead, bind to the lenderId and set the lenderName in your system.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Contracts.AccountStatus'
+          description: Account status
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer_2'
+          description: Offers associated with the account
+        creditInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo_2'
+          description: Credit amount details. Returned for LineOfCredit financial product type
+        applicationStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ConsumerApplicationStatus'
+          description: Gets or sets the application status.
+        applicationStatusReason:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ApplicationStatusReason'
+          description: Gets or sets the application status reason.
+        accountStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.LenderAccountStatus'
+          description: Gets or sets the account status.
+        accountStatusReason:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.AccountStatusReason'
+          description: Gets or sets the account status reason.
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
+      enum:
+      - LineOfCredit
+      - Installments
+      - LeaseToOwn
+      - MerchantSelfFinancing
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Error:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+          description: Error code
+        description:
+          type:
+          - string
+          - 'null'
+          description: Error description
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Additional data associated with the error
+        applicationType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.ApplicationType'
+          description: Application type associated without the account
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails:
+      required:
+      - items
+      - totalAmount
+      type: object
+      properties:
+        merchantOrderId:
+          type:
+          - string
+          - 'null'
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item'
+        discounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
+        taxAmount:
+          type: number
+          format: double
+        shippingTaxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        shippingAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        totalAmount:
+          type: number
+          format: double
+          exclusiveMinimum: 0
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus:
+      enum:
+      - None
+      - NotFound
+      - PreApproved
+      - Approved
+      - Banned
+      - Declined
+      - NonUsable
+      - Error
+      - Pending
+      - Ineligible
+      - Cancelled
+      type: string
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreateChargeFromAccountRequestBody:
+      required:
+      - accountToken
+      - checkoutDetails
+      type: object
+      properties:
+        checkoutDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.Models.CheckoutDetails'
+          description: Checkout details.
+        merchantDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.Models.MerchantDetails'
+          description: Merchant details.
+        settle:
+          type:
+          - boolean
+          - 'null'
+          description: "(Optional)\n            \nA flag indicating if a settle request should be sent to the lender as well."
+          example: true
+        accountToken:
+          minLength: 1
+          type: string
+          description: Account token provided by ChargeAfter.
+          example: 65650abe4f457d08b9710584
+        autoConfirmation:
+          type:
+          - boolean
+          - 'null'
+          description: Confirmation was requested automatically on status change.
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Failure:
+      required:
+      - lenderId
+      - lenderName
+      type: object
+      properties:
+        lenderId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the lender.
+        lenderName:
+          minLength: 1
+          type: string
+          description: Lender display name.<br /><b>Note:</b> Because this value may change, customers should not bind to this parameter. Instead, bind to the lenderId and set the lenderName in your system.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus'
+          description: Failure status
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Error'
+          description: Failure errors, provided if status is Error
+        disclosures:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureDisclosures'
+          description: Disclosures for failures
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility_2:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus'
+          description: Eligibility status
+        ineligibilityReason:
+          type:
+          - string
+          - 'null'
+          description: Human readable reason for ineligibility
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.LenderAccountStatus:
+      enum:
+      - Inactive
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Active
+      type: string
+    ChargeAfter.Libraries.Entities.ApplicationStatusReason:
+      enum:
+      - ApplicationNotCompleted
+      - AccountFrozen
+      - ConsumerBanned
+      - MissingESign
+      - UnderReview
+      - Error
+      - CallLenderToResolve
+      - DocumentUploadRequired
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType'
+        url:
+          type:
+          - string
+          - 'null'
+        mimeType:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo_2:
+      type: object
+      properties:
+        availableCredit:
+          type: number
+          description: Amount available for the consumer. Max amount with used amount subtracted. Obligatory field if credit info is provided
+          format: double
+        maxAmount:
+          type:
+          - number
+          - 'null'
+          description: Maximum credit amount available on account. Optional if credit info provided
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.MerchantPromoType:
+      enum:
+      - DeferredFunding
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.ApplicationType:
+      enum:
+      - Unknown
+      - New
+      - Prequalification
+      - Application
+      - Error
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount:
+      required:
+      - amount
+      type: object
+      properties:
+        name:
+          type: string
+        amount:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer:
+      required:
+      - amount
+      - code
+      - defaultAPR
+      - financialProductType
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+        financialProductType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
+        defaultAPR:
+          type: number
+          format: double
+        amount:
+          type: number
+          format: double
+        promoSettings:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings'
+        metadata:
+          type: object
+          additionalProperties: {}
+        expirationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        checkoutMinimumAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        description:
+          type: string
+        eligibility:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility'
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        disclosures:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures'
+        offerType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferType'
+        texts:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.LenderDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The lender's ID.
+          example: ''
+        name:
+          type: string
+          description: Name of the lender.<br /><b>Note:</b> Because this value may change, customers should not bind to this parameter. Instead, bind to the lenderId and set the lenderName in your system.
+          example: Finara
+      additionalProperties: false
+      description: Details about the selected lender.
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.GetAccountsResponse:
+      type: object
+      properties:
+        accounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account_2'
+        failures:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Failure'
+        consumerId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.ChargeCreationTransactionsData:
+      type: object
+      properties:
+        lenderAuthorizeReferenceId:
+          type: string
+          description: The lender's ID for the authorization transaction.
+          example: '123456'
+        lenderSettleReferenceId:
+          type: string
+          description: The lender's ID for the settle transaction.
+          example: '123457'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
+      required:
+      - price
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        price:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.AccountStatusReason:
+      enum:
+      - ApplicationNotCompleted
+      - MissingStips
+      - MissingESign
+      - MissingConfirmation
+      - MissingStipsVerification
+      - MissingStipsReview
+      - LoanAlreadyUsed
+      - NoCreditAvailable
+      - CardValidationFailed
+      - CardValidationExpired
+      type: string
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountInfoResponse:
+      required:
+      - consumerId
+      - lender
+      type: object
+      properties:
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer'
+        consumerId:
+          minLength: 1
+          type: string
+        lender:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.LenderDto'
+          description: Details about the selected lender.
+        applicationId:
+          type:
+          - string
+          - 'null'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.AccountStatus'
+        lenderSessionId:
+          type: string
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
+      type: object
+      properties:
+        availableCredit:
+          type: number
+          format: double
+        maxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.CreditInfoResponse:
+      type: object
+      properties:
+        availableAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        originalAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.ChargeCreationResponseDto:
+      required:
+      - applicationId
+      - channel
+      - consumerId
+      - createdAt
+      - id
+      - merchantOrderId
+      - offer
+      - orderReferenceId
+      - state
+      - totalAmount
+      - transactionsData
+      - updatedAt
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+          description: "The charge ID.\n            \nThis should be used for further post-sale operations."
+          example: 9c34bcd1aaf3a1000712da86
+        orderReferenceId:
+          minLength: 1
+          type: string
+          description: An identifier that will be generated in case the merchant didn't supply a merchant order ID.
+          example: '104264'
+        totalAmount:
+          type: number
+          description: The charge amount.
+          format: double
+          example: 864.93
+        merchantOrderId:
+          minLength: 1
+          type: string
+          description: The merchant order ID as provided in the request.
+          example: 0123456789
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.OfferDto'
+          description: Details about the selected offer.
+        transactionsData:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.ChargeCreationTransactionsData'
+          description: Details about lenders specific identifiers for the created transactions.
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.ChargeStatus'
+          description: The state of the charge. It should be Authorized.
+        storeId:
+          type: string
+          description: The store ID of the original purchase.
+          example: store1
+        consumerId:
+          minLength: 1
+          type: string
+          description: The consumer's ID.
+          example: 66f69f97702dc5226f7acccc
+        createdAt:
+          type: string
+          description: The charge creation date.
+          format: date-time
+          example: '2023-11-13T10:21:12.9277886Z'
+        updatedAt:
+          type: string
+          description: The charge update date.
+          format: date-time
+          example: '2023-11-13T10:21:12.9277886Z'
+        channel:
+          minLength: 1
+          type: string
+          description: The channel of the original purchase.
+          example: E_COMMERCE
+        approvalCode:
+          type: string
+          description: Approval code, generated by lender.
+          example: '385789'
+        applicationId:
+          minLength: 1
+          type: string
+          description: The CA application id of the original purchase.
+          example: 6624efdd60c853bc11a56c61
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: Metadata provided by the lender.
+          example:
+            foo: bar
+        transactionState:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.TransactionState'
+          description: The transaction state.
+          example: Accepted
+        settleTransactionState:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.TransactionState'
+          description: Settle transaction state in case of autosettle.
+          example: Accepted
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures_2:
+      type: object
+      properties:
+        apply:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure_2'
+          description: Optional apply disclosure
+        confirm:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure_2'
+          description: Optional confirm disclosure
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.PosType:
+      enum:
+      - Kiosk
+      - Retail
+      - GenericMerchantDevice
+      - GenericConsumerDevice
+      - SelfServiceTerminal
+      type: string
+    ChargeAfter.PostsaleAdapter.WebApi.Contracts.OfferDto:
+      type: object
+      properties:
+        lender:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.LenderDto'
+          description: Details about the selected lender.
+        paymentPlan:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.PostsaleAdapter.WebApi.Contracts.PaymentPlanDto'
+          description: Details about the selected payment plan.
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.FlowType:
+      enum:
+      - Apply
+      - Checkout
+      type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      description: ChargeAfter API supports an API key based authentication, provided in the `apiKey` HTTP header.
+      name: Authorization
+      in: header
+x-refined-from:
+- chargeafter-charge-api-openapi.yml
+- chargeafter-checkout-session-accounts-openapi.yml

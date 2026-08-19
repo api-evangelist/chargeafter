@@ -1,0 +1,1195 @@
+{
+  "item": [
+    {
+      "id": "8b355bd5-7caf-40ef-bd63-8015390a90a0",
+      "name": "Links",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3d98676-e566-4ea0-9b5d-d8dbcb22080e",
+          "name": "Generate consumer application link",
+          "request": {
+            "name": "Generate consumer application link",
+            "description": {
+              "content": "This endpoint generates a unique URL for a given consumer context that can be used to launch ChargeAfter's Apply experience.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "omni-link",
+                "consumer",
+                "application"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e3d71a2-4d4b-4429-abf2-e17a9e40db13",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": null,\n  \"qrCode\": \"string\",\n  \"linkId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2ca1d3f-d132-485f-b206-828a3be807a0",
+              "name": "Bad Request:<br/><ul><li><i>10000</i> - Invalid request payload</li><li><i>10001</i> - Field value is required</li><li><i>10002</i> - Field value is invalid</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6b111eb-b72d-4fba-b423-542ab8224785",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fbf4e169-8f3f-4d0a-b4f9-3d14296b6efb",
+              "name": "Forbidden:<br/><ul><li><i>10101</i> - The selected option is not enabled</li><li><i>10201</i> - The specified consumer has opted-out</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"10101\",\n      \"description\": \"The selected option is not enabled\"\n    },\n    {\n      \"code\": \"10201\",\n      \"description\": \"The specified consumer has opted-out\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1986b05-55a1-48ca-83de-4cb24e18c60d",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7f02ca8-3332-459c-a801-14b5789c8e9e",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "543ea89e-8c5d-4d1c-90a8-e7371b0167d9",
+          "name": "Generate consumer checkout link",
+          "request": {
+            "name": "Generate consumer checkout link",
+            "description": {
+              "content": "This endpoint generates a unique URL for a given consumer context that can be used to launch ChargeAfter's Checkout experience.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "omni-link",
+                "consumer",
+                "checkout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"totalTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\"\n  },\n  \"checkoutOptions\": {\n    \"charge\": \"<boolean>\",\n    \"settle\": \"<boolean>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "517e9649-1a8c-4034-9845-69f82a1f79c2",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"totalTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\"\n  },\n  \"checkoutOptions\": {\n    \"charge\": \"<boolean>\",\n    \"settle\": \"<boolean>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": null,\n  \"qrCode\": \"string\",\n  \"linkId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebf754d7-d07a-4ed6-8ae2-0283dfd75cd6",
+              "name": "Bad Request:<br/><ul><li><i>10000</i> - Invalid request payload</li><li><i>10001</i> - Field value is required</li><li><i>10002</i> - Field value is invalid</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"totalTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\"\n  },\n  \"checkoutOptions\": {\n    \"charge\": \"<boolean>\",\n    \"settle\": \"<boolean>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36903e06-f8e6-4a44-8d47-3bf3c0be8e13",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"totalTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\"\n  },\n  \"checkoutOptions\": {\n    \"charge\": \"<boolean>\",\n    \"settle\": \"<boolean>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f448bbfe-db9f-4085-87f5-3218e4e1e7f8",
+              "name": "Forbidden:<br/><ul><li><i>10101</i> - The selected option is not enabled</li><li><i>10201</i> - The specified consumer has opted-out</li></ul>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"totalTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\"\n  },\n  \"checkoutOptions\": {\n    \"charge\": \"<boolean>\",\n    \"settle\": \"<boolean>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"errors\": [\n    {\n      \"code\": \"10101\",\n      \"description\": \"The selected option is not enabled\"\n    },\n    {\n      \"code\": \"10201\",\n      \"description\": \"The specified consumer has opted-out\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cede0b29-777d-49e4-a202-77bb2e572a59",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"totalTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\"\n  },\n  \"checkoutOptions\": {\n    \"charge\": \"<boolean>\",\n    \"settle\": \"<boolean>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fc86d91-4af2-42cd-8e03-0b84a77566eb",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationDetails\": {\n    \"channel\": \"<string>\",\n    \"tags\": \"<object,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"currency\": \"<string,null>\",\n    \"creditTiers\": \"<array,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"language\": \"<string,null>\"\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"totalTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\"\n  },\n  \"checkoutOptions\": {\n    \"charge\": \"<boolean>\",\n    \"settle\": \"<boolean>\"\n  },\n  \"consumer\": {\n    \"merchantConsumerId\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"linkOptions\": {\n    \"linkFormat\": \"<string>\",\n    \"deliveryMethod\": \"<string>\",\n    \"onSuccessRedirectUrl\": \"<string,null>\",\n    \"onFailureRedirectUrl\": \"<string,null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4de8a5e9-4e32-454a-8ee0-894baa907a69",
+          "name": "Get link data",
+          "request": {
+            "name": "Get link data",
+            "description": {
+              "content": "Enables retrieval of link data for the consumer-associated context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "omni-link",
+                "consumer",
+                ":linkId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "linkId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "572515ff-4c5e-49b8-a50f-9300c9a46548",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1990-09-18T19:35:18.127Z\",\n  \"updatedAt\": \"1961-12-10T04:33:17.598Z\",\n  \"linkType\": \"ConsumerCheckout\",\n  \"linkStatus\": \"New\",\n  \"applicationDetails\": {\n    \"channel\": \"string\",\n    \"tags\": null,\n    \"currency\": \"string\",\n    \"creditTiers\": [\n      \"\",\n      \"\"\n    ],\n    \"correlationId\": \"string\",\n    \"language\": null\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posType\": \"<string>\",\n    \"posId\": \"<string,null>\",\n    \"externalUserId\": \"<string,null>\"\n  },\n  \"applications\": [\n    {\n      \"createdAt\": \"1949-10-01T18:13:17.853Z\",\n      \"updatedAt\": \"1977-04-02T16:17:41.245Z\",\n      \"applicationId\": \"string\",\n      \"applicationStatus\": \"Declined\",\n      \"consumerId\": null,\n      \"accounts\": [\n        \"\",\n        \"\"\n      ],\n      \"checkoutDetails\": {\n        \"lenderId\": \"string\",\n        \"lenderName\": \"string\",\n        \"confirmationToken\": \"string\"\n      }\n    },\n    {\n      \"createdAt\": \"2011-12-03T16:26:31.272Z\",\n      \"updatedAt\": \"1994-12-30T19:12:37.742Z\",\n      \"applicationId\": \"string\",\n      \"applicationStatus\": \"Started\",\n      \"consumerId\": \"string\",\n      \"accounts\": null,\n      \"checkoutDetails\": {\n        \"lenderId\": \"string\",\n        \"lenderName\": \"string\",\n        \"confirmationToken\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a6e030a-6043-4cdf-9780-b19c7ca08547",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce85d4a9-3ffc-46ba-91ac-7bd59b7f03ab",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd3d3961-7ba6-426b-96c9-fd8b41a98457",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3902345-c412-4445-9e9a-0d4cc6c6d139",
+              "name": "The specified link ID was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5914e4ee-59a7-4066-8efb-769809c16676",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0094d21f-6bfb-4b54-ba43-f68888668080",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "omni-link",
+                    "consumer",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3d0b45de-c991-4875-a405-feda0dd757d7",
+    "name": "OmniLink Links API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to ChargeAfter API reference! This API is implemented in a RESTful state of mind, it has straight-forward, resource-oriented endpoints, and produces standard HTTP response codes to communicate back the result of operations. To get started please contact ChargeAfter support to get your API keys, and get an access to your testing and live environments.\n\nContact Support:\n Name: Customer Support\n Email: support@chargeafter.com",
+      "type": "text/plain"
+    }
+  }
+}

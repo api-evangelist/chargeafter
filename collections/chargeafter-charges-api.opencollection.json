@@ -1,0 +1,220 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Charge Charges API",
+    "version": "1.2.45+20181a21407d1df1b163085f2b159570f697241a"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/charges",
+            "params": [
+              {
+                "name": "settle",
+                "value": "",
+                "type": "query",
+                "description": "(Optional)\n            \nA flag indicating whether a settle request should be sent to the lender as well."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new charge by initiating a new authorize transaction.\nUse the returned ChargedId for other post-sale operations"
+        },
+        {
+          "info": {
+            "name": "Get details of a Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/charges/:chargeid",
+            "params": [
+              {
+                "name": "chargeid",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID as received in the response of the original charge operation."
+              }
+            ]
+          },
+          "docs": "Fetching updated information of an existing Charge"
+        },
+        {
+          "info": {
+            "name": "Update a Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/charges/:chargeid",
+            "params": [
+              {
+                "name": "chargeid",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID as received in the response of the original charge operation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Charge"
+        },
+        {
+          "info": {
+            "name": "Settle a Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/charges/:chargeid/settles",
+            "params": [
+              {
+                "name": "chargeid",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID as received in the response of the original charge operation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Complete a payment transaction by settling a charge.\nThis action confirms the secure transfer of funds according to the authorized terms."
+        },
+        {
+          "info": {
+            "name": "Refund a Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/charges/:chargeid/refunds",
+            "params": [
+              {
+                "name": "chargeid",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID as received in the response of the original charge operation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a refund for a previously settled amount.\nThis action facilitates the return of funds to the customer for various reasons, such as returned goods or canceled services."
+        },
+        {
+          "info": {
+            "name": "Void a Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/charges/:chargeid/voids",
+            "params": [
+              {
+                "name": "chargeid",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID as received in the response of the original charge operation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel and invalidate an authorized charge before it is settled.\nThis action prevents the charge from being completed or appearing on the customer's statement.\nUse voiding for transactions that need to be canceled early in the process."
+        },
+        {
+          "info": {
+            "name": "POST /v2/post-sale/charges/voids/async",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/charges/voids/async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Create a synthetic transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/charges/:chargeid/transactions/synthetic",
+            "params": [
+              {
+                "name": "chargeid",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID as received in the response of the original charge operation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a transaction without communication with lender"
+        },
+        {
+          "info": {
+            "name": "Update delivery data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.ca-dev.co/v2/post-sale/charges/:chargeid/items/delivery",
+            "params": [
+              {
+                "name": "chargeid",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID as received in the response of the original charge operation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update delivery data for items in an existing Charge"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,354 @@
+{
+  "item": [
+    {
+      "id": "d80ce2ac-a9bc-4e28-9867-5dd4c4f9beed",
+      "name": "SessionsV3",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed19288f-a921-4e76-97ef-e2ec1387190d",
+          "name": "Create a new session",
+          "request": {
+            "name": "Create a new session",
+            "description": {
+              "content": "Creates a session with an optional cart, consumer and checkout details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "session"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"flowType\": \"<string>\",\n    \"channel\": \"<string,null>\",\n    \"source\": \"<string>\",\n    \"tokens\": \"<object,null>\",\n    \"promoCode\": \"<string,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"tags\": \"<object,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"merchantPromoCode\": \"<string,null>\",\n    \"intent\": \"<string>\"\n  },\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"dateOfBirth\": \"<dateTime>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"netMonthlyIncome\": \"<double>\",\n    \"shippingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipCode\": \"<string>\",\n      \"line2\": \"<string,null>\"\n    },\n    \"id\": \"<string,null>\",\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"<string,null>\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"<string,null>\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"name\": \"<string,null>\",\n        \"sku\": \"<string,null>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": \"<number,null-double>\",\n        \"discounts\": \"<array,null>\"\n      },\n      {\n        \"price\": \"<double>\",\n        \"quantity\": \"<integer>\",\n        \"name\": \"<string,null>\",\n        \"sku\": \"<string,null>\",\n        \"leasable\": \"<boolean,null>\",\n        \"productCategory\": \"<string,null>\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": \"<number,null-double>\",\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": \"<double>\",\n    \"merchantOrderId\": \"<string,null>\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": \"<double>\",\n    \"shippingTaxAmount\": \"<number,null-double>\",\n    \"shippingAmount\": \"<number,null-double>\"\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  },\n  \"userId\": \"<string,null>\",\n  \"linkId\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3cc19c76-a87e-4389-ac64-daeacbe8ae34",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"flowType\": \"<string>\",\n    \"channel\": \"<string,null>\",\n    \"source\": \"<string>\",\n    \"tokens\": \"<object,null>\",\n    \"promoCode\": \"<string,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"tags\": \"<object,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"merchantPromoCode\": \"<string,null>\",\n    \"intent\": \"<string>\"\n  },\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"email\": \"john.doe@gmail.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"netMonthlyIncome\": 5000,\n    \"shippingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"id\": \"<string,null>\",\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"2125555555\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      },\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": 4297.9,\n    \"merchantOrderId\": \"12345\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": 199,\n    \"shippingTaxAmount\": 1.9,\n    \"shippingAmount\": 19\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  },\n  \"userId\": \"<string,null>\",\n  \"linkId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationId\": \"string\",\n  \"expirationDate\": \"string\",\n  \"id\": \"string\",\n  \"isContinuation\": false,\n  \"deviceSessionId\": null,\n  \"merchantDetails\": {\n    \"storeId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f48522f2-b3ed-40b5-8d1d-cf6fab912c8b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"flowType\": \"<string>\",\n    \"channel\": \"<string,null>\",\n    \"source\": \"<string>\",\n    \"tokens\": \"<object,null>\",\n    \"promoCode\": \"<string,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"tags\": \"<object,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"merchantPromoCode\": \"<string,null>\",\n    \"intent\": \"<string>\"\n  },\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"email\": \"john.doe@gmail.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"netMonthlyIncome\": 5000,\n    \"shippingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"id\": \"<string,null>\",\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"2125555555\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      },\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": 4297.9,\n    \"merchantOrderId\": \"12345\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": 199,\n    \"shippingTaxAmount\": 1.9,\n    \"shippingAmount\": 19\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  },\n  \"userId\": \"<string,null>\",\n  \"linkId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"Unique RequestId\",\n  \"message\": \"Message Describing The Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "170544a9-e023-49af-b9d0-e9642a87bf70",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"flowType\": \"<string>\",\n    \"channel\": \"<string,null>\",\n    \"source\": \"<string>\",\n    \"tokens\": \"<object,null>\",\n    \"promoCode\": \"<string,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"tags\": \"<object,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"merchantPromoCode\": \"<string,null>\",\n    \"intent\": \"<string>\"\n  },\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"email\": \"john.doe@gmail.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"netMonthlyIncome\": 5000,\n    \"shippingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"id\": \"<string,null>\",\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"2125555555\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      },\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": 4297.9,\n    \"merchantOrderId\": \"12345\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": 199,\n    \"shippingTaxAmount\": 1.9,\n    \"shippingAmount\": 19\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  },\n  \"userId\": \"<string,null>\",\n  \"linkId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "856673c7-4405-4a96-b070-a50528e360a3",
+              "name": "Input Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"flowType\": \"<string>\",\n    \"channel\": \"<string,null>\",\n    \"source\": \"<string>\",\n    \"tokens\": \"<object,null>\",\n    \"promoCode\": \"<string,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"tags\": \"<object,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"merchantPromoCode\": \"<string,null>\",\n    \"intent\": \"<string>\"\n  },\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"email\": \"john.doe@gmail.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"netMonthlyIncome\": 5000,\n    \"shippingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"id\": \"<string,null>\",\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"2125555555\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      },\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": 4297.9,\n    \"merchantOrderId\": \"12345\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": 199,\n    \"shippingTaxAmount\": 1.9,\n    \"shippingAmount\": 19\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  },\n  \"userId\": \"<string,null>\",\n  \"linkId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RequestId\": \"Unique RequestId\",\n  \"Message\": \"Input Validation Failure\",\n  \"Errors\": [\n    {\n      \"Field\": \"RequestField1\",\n      \"ValidationState\": \"Invalid\",\n      \"Error\": \"RequestField1 should be up to 150 characters, and can contain a-z, A-Z, _ characters.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b6582c9-36f8-4916-8b15-dab1884572ce",
+              "name": "General Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"checkoutDetails\": {\n    \"currency\": \"<string,null>\",\n    \"flowType\": \"<string>\",\n    \"channel\": \"<string,null>\",\n    \"source\": \"<string>\",\n    \"tokens\": \"<object,null>\",\n    \"promoCode\": \"<string,null>\",\n    \"requestedLoanAmount\": \"<number,null-double>\",\n    \"tags\": \"<object,null>\",\n    \"correlationId\": \"<string,null>\",\n    \"merchantPromoCode\": \"<string,null>\",\n    \"intent\": \"<string>\"\n  },\n  \"consumerDetails\": {\n    \"billingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"dateOfBirth\": \"1994-05-12T00:00:00Z\",\n    \"email\": \"john.doe@gmail.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"netMonthlyIncome\": 5000,\n    \"shippingAddress\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"3 My Street\",\n      \"state\": \"NY\",\n      \"zipCode\": \"10019\",\n      \"line2\": \"My Building, 4th floor\"\n    },\n    \"id\": \"<string,null>\",\n    \"spouseInfo\": {\n      \"spouseSameAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"spouseFirstName\": \"<string,null>\",\n      \"spouseLastName\": \"<string,null>\"\n    },\n    \"marriageStatus\": \"<string>\",\n    \"annualNetIncome\": \"<number,null-double>\",\n    \"annualGrossIncome\": \"<number,null-double>\",\n    \"updatedIncomeType\": \"<string>\",\n    \"monthlyHousingPaymentIncome\": \"<number,null-double>\",\n    \"grossMonthlyIncome\": \"<number,null-double>\",\n    \"socialSecurityNumber\": \"123456789\",\n    \"additionalIds\": {\n      \"socialInsuranceNumber\": \"<string,null>\"\n    },\n    \"mobilePhoneNumber\": \"2125555555\",\n    \"housingStatus\": \"<string>\",\n    \"preferences\": {\n      \"language\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"marketingOptIn\": \"<boolean,null>\"\n    },\n    \"merchantConsumerId\": \"<string,null>\"\n  },\n  \"cartDetails\": {\n    \"items\": [\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      },\n      {\n        \"price\": 1999,\n        \"quantity\": 2,\n        \"name\": \"Awesome Product\",\n        \"sku\": \"AWSMPRDCT\",\n        \"leasable\": true,\n        \"productCategory\": \"Product category\",\n        \"warranty\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"taxAmount\": 199,\n        \"discounts\": \"<array,null>\"\n      }\n    ],\n    \"totalAmount\": 4297.9,\n    \"merchantOrderId\": \"12345\",\n    \"discounts\": \"<array,null>\",\n    \"taxAmount\": 199,\n    \"shippingTaxAmount\": 1.9,\n    \"shippingAmount\": 19\n  },\n  \"merchantDetails\": {\n    \"storeId\": \"<string,null>\",\n    \"posId\": \"<string,null>\",\n    \"posType\": \"<string>\"\n  },\n  \"userId\": \"<string,null>\",\n  \"linkId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.ca-dev.co",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ee7ec128-627c-4b19-b073-fc5f02f71eca",
+    "name": "Checkout Management Sessions V3 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to ChargeAfter API reference! This API is implemented in a RESTful state of mind, it has straight-forward, resource-oriented endpoints, and produces standard HTTP response codes to communicate back the result of operations. To get started please contact ChargeAfter support to get your API keys, and get an access to your testing and live environments.\n\nContact Support:\n Name: Customer Support\n Email: support@chargeafter.com",
+      "type": "text/plain"
+    }
+  }
+}
