@@ -13,7 +13,7 @@ url: https://raw.githubusercontent.com/api-evangelist/chargeafter/refs/heads/mai
 image: https://chargeafter.com/wp-content/uploads/2025/08/OG-Images.png
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-09'
 modified: '2026-08-09'
 tags:
