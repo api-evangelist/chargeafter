@@ -10,6 +10,18 @@ description: >-
   consumer lookup, funding reconciliation reports, omni-link generation, and lender dispute management.
   The merchant back office is Operate, and event notifications are delivered as webhooks.
 url: https://raw.githubusercontent.com/api-evangelist/chargeafter/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://chargeafter.com/wp-content/uploads/2025/08/OG-Images.png
 x-type: company
 x-source: harvest:secondary-market
