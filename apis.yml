@@ -183,6 +183,9 @@ apis:
   - type: OpenAPI
     url: openapi/chargeafter-transactions-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/chargeafter-capability-edges.yml
+  name: ChargeAfter Business Capability Map
 - type: Overlay
   url: overlays/chargeafter-charge-api-overlay.yaml
 - type: Website
