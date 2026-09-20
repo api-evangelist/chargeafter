@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 2
+edge_count: 3
 edges:
 - tag: Accounts
   spec_file: chargeafter-accounts-api-openapi.yml
@@ -35,3 +35,14 @@ edges:
     ConsumerApplicationStatus, ApplicationStatusReason, CreditInfo
   reason: Tracks the state of a consumer credit application through the checkout financing flow, i.e.
     credit application intake/origination workflow status. Token endpoint is plumbing, so 0.7.
+- tag: Charges
+  spec_file: chargeafter-charges-api-openapi.yml
+  capability_id: BC-2320.20
+  capability_id_l1: BC-2320
+  capability_name: Tender and Payment Acceptance Management
+  confidence: 0.7
+  evidence: POST /v2/post-sale/charges 'Create a new Charge'; 'Settle a Charge'; 'Refund a Charge'; 'Void
+    a Charge'
+  reason: Authorisation, settlement, refund and void of consumer purchase transactions funded by point-of-sale
+    financing — payment/tender acceptance and post-sale transaction handling for a merchant.
+  recovered_from: vertical-retail-consumer-goods-edges.json
