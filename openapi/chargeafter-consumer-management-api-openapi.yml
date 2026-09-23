@@ -78,6 +78,8 @@ paths:
                   message:
                     type: string
                     example: Message Describing The Error
+      operationId: getV2PostSaleConsumersByConsumerid
+      x-operation-id-source: derived
   /v2/post-sale/consumers/{consumerid}/legal-info:
     get:
       tags:
@@ -163,6 +165,8 @@ paths:
                   message:
                     type: string
                     example: Message Describing The Error
+      operationId: getV2PostSaleConsumersByConsumeridLegalInfo
+      x-operation-id-source: derived
   /v2/post-sale/consumers/{consumerid}/charges:
     post:
       tags:
@@ -232,47 +236,71 @@ paths:
                   message:
                     type: string
                     example: Message Describing The Error
+      operationId: postV2PostSaleConsumersByConsumeridCharges
+      x-operation-id-source: derived
 components:
   schemas:
-    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetConsumerResponse:
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address:
       type: object
       properties:
-        availableCredit:
+        city:
+          type:
+          - string
+          - 'null'
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        zipCode:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Contracts.BuyerType:
+      enum:
+      - Consumer
+      - Organization
+      type: string
+    ChargeAfter.Libraries.Entities.Channel:
+      type: object
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetLegalDocsResponse:
+      type: object
+      properties:
+        documents:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCredit'
-        billingAddress:
-          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
-        email:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Document'
+        lenderId:
           type:
           - string
           - 'null'
-        firstName:
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Document:
+      type: object
+      properties:
+        mimetype:
           type:
           - string
           - 'null'
-        id:
+        blob:
           type:
           - string
           - 'null'
-        lastName:
+        filename:
           type:
           - string
           - 'null'
-        mobilePhoneNumber:
-          type:
-          - string
-          - 'null'
-        shippingAddress:
-          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
       additionalProperties: false
     ChargeAfter.ConsumersV1.WebApi.Contracts.Requests.CreateChargeRequestBody:
       type: object
@@ -317,38 +345,6 @@ components:
         channel:
           $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.Channel'
       additionalProperties: false
-    ChargeAfter.Contracts.BuyerType:
-      enum:
-      - Consumer
-      - Organization
-      type: string
-    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Document:
-      type: object
-      properties:
-        mimetype:
-          type:
-          - string
-          - 'null'
-        blob:
-          type:
-          - string
-          - 'null'
-        filename:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ChargeAfter.BFF.Domain.Entities.Discount:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        amount:
-          type: number
-          format: double
-      additionalProperties: false
     ChargeAfter.BFF.Domain.Entities.Warranty:
       type: object
       properties:
@@ -361,100 +357,6 @@ components:
           - string
           - 'null'
         price:
-          type: number
-          format: double
-      additionalProperties: false
-    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address:
-      type: object
-      properties:
-        city:
-          type:
-          - string
-          - 'null'
-        line1:
-          type:
-          - string
-          - 'null'
-        line2:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        zipCode:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCredit:
-      type: object
-      properties:
-        creditAmount:
-          type: number
-          format: double
-        lender:
-          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender'
-      additionalProperties: false
-    ChargeAfter.BFF.Domain.Entities.Item:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        price:
-          type: number
-          format: double
-        sku:
-          type:
-          - string
-          - 'null'
-        quantity:
-          type: integer
-          format: int32
-        leasable:
-          type:
-          - boolean
-          - 'null'
-        productCategory:
-          type:
-          - string
-          - 'null'
-        warranty:
-          $ref: '#/components/schemas/ChargeAfter.BFF.Domain.Entities.Warranty'
-      additionalProperties: false
-    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetLegalDocsResponse:
-      type: object
-      properties:
-        documents:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Document'
-        lenderId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.PaymentPlan:
-      type: object
-      properties:
-        creditAmount:
           type: number
           format: double
       additionalProperties: false
@@ -504,8 +406,112 @@ components:
           type: string
           format: date-time
       additionalProperties: false
-    ChargeAfter.Libraries.Entities.Channel:
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.GetConsumerResponse:
       type: object
+      properties:
+        availableCredit:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCredit'
+        billingAddress:
+          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
+        email:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        id:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        mobilePhoneNumber:
+          type:
+          - string
+          - 'null'
+        shippingAddress:
+          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Address'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.AvailableCredit:
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          format: double
+        lender:
+          $ref: '#/components/schemas/ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender'
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.PaymentPlan:
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.BFF.Domain.Entities.Discount:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.ConsumersV1.WebApi.Contracts.Responses.Lender:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.BFF.Domain.Entities.Item:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        price:
+          type: number
+          format: double
+        sku:
+          type:
+          - string
+          - 'null'
+        quantity:
+          type: integer
+          format: int32
+        leasable:
+          type:
+          - boolean
+          - 'null'
+        productCategory:
+          type:
+          - string
+          - 'null'
+        warranty:
+          $ref: '#/components/schemas/ChargeAfter.BFF.Domain.Entities.Warranty'
       additionalProperties: false
   securitySchemes:
     bearerAuth:

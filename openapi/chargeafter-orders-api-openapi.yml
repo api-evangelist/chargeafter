@@ -110,6 +110,8 @@ paths:
                   errors:
                   - code: '1000'
                     description: Unknown error occurred
+      operationId: getV2PostSaleOrdersByOrderId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apiKey:

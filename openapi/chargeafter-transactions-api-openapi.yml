@@ -106,6 +106,8 @@ paths:
                   errors:
                   - code: '1000'
                     description: Unknown error occurred
+      operationId: getV2PostSaleTransactionsLookup
+      x-operation-id-source: derived
   /v2/post-sale/transactions/{id}:
     get:
       tags:
@@ -195,8 +197,19 @@ paths:
                   errors:
                   - code: '1000'
                     description: Unknown error occurred
+      operationId: getV2PostSaleTransactionsById
+      x-operation-id-source: derived
 components:
   schemas:
+    ChargeAfter.Postsale.WebApi.Contracts.Dtos.Transactions.TransactionType:
+      enum:
+      - Authorize
+      - Settle
+      - Refund
+      - Void
+      - Chargeback
+      - Reversal
+      type: string
     ChargeAfter.Postsale.WebApi.Contracts.Dtos.Transactions.TransactionDto:
       required:
       - amount
@@ -259,15 +272,6 @@ components:
           additionalProperties:
             type: string
       additionalProperties: false
-    ChargeAfter.Postsale.WebApi.Contracts.Dtos.Transactions.TransactionType:
-      enum:
-      - Authorize
-      - Settle
-      - Refund
-      - Void
-      - Chargeback
-      - Reversal
-      type: string
     ChargeAfter.Libraries.Entities.TransactionState:
       enum:
       - Scheduled

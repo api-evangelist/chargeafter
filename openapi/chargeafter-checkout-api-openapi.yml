@@ -1076,6 +1076,8 @@ paths:
                   errors:
                   - code: '1'
                     description: Internal unknown error occurred
+      operationId: postV2CheckoutAccounts
+      x-operation-id-source: derived
   /v2/checkout/applications/{applicationId}/accounts:
     post:
       tags:
@@ -2118,180 +2120,22 @@ paths:
                   errors:
                   - code: '1'
                     description: Internal unknown error occurred
+      operationId: postV2CheckoutApplicationsByApplicationIdAccounts
+      x-operation-id-source: derived
 components:
   schemas:
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureDisclosures:
+    ChargeAfter.Distribution.WebApi.Contracts.Requests.GetAccountsRequestBody:
       type: object
       properties:
-        decline:
+        consumerDetails:
           allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus:
-      enum:
-      - Eligible
-      - Ineligible
-      type: string
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings:
-      type: object
-      properties:
-        isPromo:
-          type: boolean
-        numberOfPeriods:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        periodicPayment:
-          type:
-          - number
-          - 'null'
-          format: double
-        periodType:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.ConsumerDetails'
+        checkoutDetails:
           allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
-        apr:
-          type:
-          - number
-          - 'null'
-          format: double
-        type:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account:
-      required:
-      - id
-      - lenderId
-      - lenderName
-      - offers
-      - status
-      type: object
-      properties:
-        id:
-          minLength: 1
-          type: string
-        lenderId:
-          minLength: 1
-          type: string
-        lenderName:
-          minLength: 1
-          type: string
-        status:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.CheckoutDetails'
+        merchantDetails:
           allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Contracts.AccountStatus'
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer'
-        creditInfo:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo'
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Language:
-      enum:
-      - En
-      - Fr
-      type: string
-    ChargeAfter.Libraries.WebApi.Contracts.MarriageStatus:
-      enum:
-      - Not Married
-      - Married
-      type: string
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType:
-      enum:
-      - Link
-      - Hosted
-      type: string
-    ChargeAfter.Contracts.AccountStatus:
-      enum:
-      - None
-      - New
-      - NotFound
-      - PreApproved
-      - Approved
-      - Banned
-      - Declined
-      - Error
-      - Pending
-      - PartiallyApproved
-      - Frozen
-      - PreDeclined
-      - PendingConsumer
-      type: string
-    ChargeAfter.Distribution.WebApi.Contracts.Responses.GetAccountsResponse:
-      type: object
-      properties:
-        accountsInfo:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account'
-          description: 'Contain usable accounts with statuses<br />
-
-            Approved<br />
-
-            PreApproved<br />
-
-            Pending<br />
-
-            PendingConsumer<br />
-
-            PartiallyApproved<br />
-
-            New'
-        failures:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Failure'
-          description: 'Contain failures to create or retrieve usable accounts with statuses<br />
-
-            Error<br />
-
-            NotFound<br />
-
-            Declined<br />
-
-            Banned<br />
-
-            Frozen'
-        consumerId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the consumer
-        applicationId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the application
-      additionalProperties: false
-    ChargeAfter.Libraries.Entities.PeriodType:
-      enum:
-      - Day
-      - Month
-      - Week
-      - BiWeek
-      type: string
-    ChargeAfter.Libraries.Entities.ResidenceType:
-      enum:
-      - OWN
-      - RENT
-      - OTHER
-      type: string
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures:
-      type: object
-      properties:
-        apply:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
-        confirm:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails'
       additionalProperties: false
     ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item:
       required:
@@ -2336,18 +2180,211 @@ components:
           items:
             $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
       additionalProperties: false
-    ChargeAfter.Distribution.WebApi.Contracts.Requests.GetAccountsRequestBody:
+    ChargeAfter.Libraries.WebApi.Contracts.MarriageStatus:
+      enum:
+      - Not Married
+      - Married
+      type: string
+    ChargeAfter.Contracts.AccountStatus:
+      enum:
+      - None
+      - New
+      - NotFound
+      - PreApproved
+      - Approved
+      - Banned
+      - Declined
+      - Error
+      - Pending
+      - PartiallyApproved
+      - Frozen
+      - PreDeclined
+      - PendingConsumer
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility:
       type: object
       properties:
-        consumerDetails:
+        status:
           allOf:
-          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.ConsumerDetails'
-        checkoutDetails:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus'
+        ineligibilityReason:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.BFF.WebApi.Contracts.Models.CheckoutDetails:
+      required:
+      - cartDetails
+      - channel
+      - flowType
+      type: object
+      properties:
+        cartDetails:
           allOf:
-          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.CheckoutDetails'
-        merchantDetails:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails'
+        channel:
+          minLength: 1
+          type: string
+        currency:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        flowType:
           allOf:
-          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails'
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType'
+        requestedLoanAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus:
+      enum:
+      - None
+      - NotFound
+      - PreApproved
+      - Approved
+      - Banned
+      - Declined
+      - NonUsable
+      - Error
+      - Pending
+      - Ineligible
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account:
+      required:
+      - id
+      - lenderId
+      - lenderName
+      - offers
+      - status
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+        lenderId:
+          minLength: 1
+          type: string
+        lenderName:
+          minLength: 1
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Contracts.AccountStatus'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer'
+        creditInfo:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
+      type: object
+      properties:
+        availableCredit:
+          type: number
+          format: double
+        maxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.AdditionalIds:
+      type: object
+      properties:
+        socialInsuranceNumber:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer:
+      required:
+      - amount
+      - code
+      - defaultAPR
+      - financialProductType
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+        financialProductType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
+        defaultAPR:
+          type: number
+          format: double
+        amount:
+          type: number
+          format: double
+        promoSettings:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+        expirationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        checkoutMinimumAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        description:
+          type:
+          - string
+          - 'null'
+        eligibility:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility'
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        disclosures:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Failure:
+      required:
+      - lenderId
+      - lenderName
+      type: object
+      properties:
+        lenderId:
+          minLength: 1
+          type: string
+        lenderName:
+          minLength: 1
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus'
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Error'
+        disclosures:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureDisclosures'
       additionalProperties: false
     ChargeAfter.BFF.WebApi.Contracts.Models.ConsumerDetails:
       required:
@@ -2433,31 +2470,101 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility:
+    ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails:
       type: object
       properties:
-        status:
+        storeId:
+          type:
+          - string
+          - 'null'
+        posId:
+          type:
+          - string
+          - 'null'
+        posType:
           allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus'
-        ineligibilityReason:
-          type:
-          - string
-          - 'null'
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PosType'
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.AdditionalIds:
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount:
+      required:
+      - amount
       type: object
       properties:
-        socialInsuranceNumber:
+        name:
           type:
           - string
           - 'null'
+        amount:
+          type: number
+          format: double
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
-      enum:
-      - Prequalify
-      - Apply
-      - Checkout
-      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
+      required:
+      - price
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        sku:
+          type:
+          - string
+          - 'null'
+        price:
+          type: number
+          format: double
+      additionalProperties: false
+    ChargeAfter.Distribution.WebApi.Contracts.Responses.GetAccountsResponse:
+      type: object
+      properties:
+        accountsInfo:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Account'
+          description: 'Contain usable accounts with statuses<br />
+
+            Approved<br />
+
+            PreApproved<br />
+
+            Pending<br />
+
+            PendingConsumer<br />
+
+            PartiallyApproved<br />
+
+            New'
+        failures:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Failure'
+          description: 'Contain failures to create or retrieve usable accounts with statuses<br />
+
+            Error<br />
+
+            NotFound<br />
+
+            Declined<br />
+
+            Banned<br />
+
+            Frozen'
+        consumerId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the consumer
+        applicationId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the application
+      additionalProperties: false
     ChargeAfter.Libraries.WebApi.Contracts.SpouseInfo:
       type: object
       properties:
@@ -2476,12 +2583,24 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
+    ChargeAfter.Libraries.WebApi.Contracts.Preferences:
+      type: object
+      properties:
+        language:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Language'
+        marketingOptIn:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.PosType:
       enum:
-      - LineOfCredit
-      - Installments
-      - LeaseToOwn
-      - MerchantSelfFinancing
+      - Kiosk
+      - Retail
+      - GenericMerchantDevice
+      - GenericConsumerDevice
+      - SelfServiceTerminal
       type: string
     ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Error:
       type: object
@@ -2500,48 +2619,74 @@ components:
           - 'null'
           additionalProperties: {}
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Address:
-      required:
-      - city
-      - country
-      - line1
-      - state
-      - zipCode
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
+      enum:
+      - LineOfCredit
+      - Installments
+      - LeaseToOwn
+      - MerchantSelfFinancing
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings:
       type: object
       properties:
-        country:
-          minLength: 1
-          type: string
-        state:
-          minLength: 1
-          type: string
-        city:
-          minLength: 1
-          type: string
-        line1:
-          minLength: 1
-          type: string
-        line2:
+        isPromo:
+          type: boolean
+        numberOfPeriods:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        periodicPayment:
+          type:
+          - number
+          - 'null'
+          format: double
+        periodType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
+        apr:
+          type:
+          - number
+          - 'null'
+          format: double
+        type:
           type:
           - string
           - 'null'
-        zipCode:
-          minLength: 1
-          type: string
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus:
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
       enum:
-      - None
-      - NotFound
-      - PreApproved
-      - Approved
-      - Banned
-      - Declined
-      - NonUsable
-      - Error
-      - Pending
-      - Ineligible
+      - Prequalify
+      - Apply
+      - Checkout
       type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Language:
+      enum:
+      - En
+      - Fr
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType'
+        url:
+          type:
+          - string
+          - 'null'
+        mimeType:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureDisclosures:
+      type: object
+      properties:
+        decline:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+      additionalProperties: false
     ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails:
       required:
       - items
@@ -2579,213 +2724,72 @@ components:
           type: number
           format: double
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Failure:
-      required:
-      - lenderId
-      - lenderName
-      type: object
-      properties:
-        lenderId:
-          minLength: 1
-          type: string
-        lenderName:
-          minLength: 1
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureStatus'
-        errors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Error'
-        disclosures:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FailureDisclosures'
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure:
-      type: object
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType'
-        url:
-          type:
-          - string
-          - 'null'
-        mimeType:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ChargeAfter.BFF.WebApi.Contracts.Models.CheckoutDetails:
-      required:
-      - cartDetails
-      - channel
-      - flowType
-      type: object
-      properties:
-        cartDetails:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails'
-        channel:
-          minLength: 1
-          type: string
-        currency:
-          type:
-          - string
-          - 'null'
-        tags:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-        flowType:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType'
-        requestedLoanAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Preferences:
-      type: object
-      properties:
-        language:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Language'
-        marketingOptIn:
-          type:
-          - boolean
-          - 'null'
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount:
-      required:
-      - amount
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        amount:
-          type: number
-          format: double
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Offer:
-      required:
-      - amount
-      - code
-      - defaultAPR
-      - financialProductType
-      type: object
-      properties:
-        code:
-          minLength: 1
-          type: string
-        financialProductType:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
-        defaultAPR:
-          type: number
-          format: double
-        amount:
-          type: number
-          format: double
-        promoSettings:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.PromoSettings'
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-        expirationDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        checkoutMinimumAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        description:
-          type:
-          - string
-          - 'null'
-        eligibility:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Eligibility'
-        tags:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-        disclosures:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures'
-      additionalProperties: false
-    ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails:
-      type: object
-      properties:
-        storeId:
-          type:
-          - string
-          - 'null'
-        posId:
-          type:
-          - string
-          - 'null'
-        posType:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PosType'
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
-      required:
-      - price
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        sku:
-          type:
-          - string
-          - 'null'
-        price:
-          type: number
-          format: double
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
-      type: object
-      properties:
-        availableCredit:
-          type: number
-          format: double
-        maxAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-      additionalProperties: false
-    ChargeAfter.Libraries.Entities.PosType:
-      enum:
-      - Kiosk
-      - Retail
-      - GenericMerchantDevice
-      - GenericConsumerDevice
-      - SelfServiceTerminal
-      type: string
     ChargeAfter.Libraries.WebApi.Contracts.BoolType:
       enum:
       - 'NO'
       - 'YES'
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.DisclosureType:
+      enum:
+      - Link
+      - Hosted
+      type: string
+    ChargeAfter.Libraries.Entities.PeriodType:
+      enum:
+      - Day
+      - Month
+      - Week
+      - BiWeek
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Address:
+      required:
+      - city
+      - country
+      - line1
+      - state
+      - zipCode
+      type: object
+      properties:
+        country:
+          minLength: 1
+          type: string
+        state:
+          minLength: 1
+          type: string
+        city:
+          minLength: 1
+          type: string
+        line1:
+          minLength: 1
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        zipCode:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.OfferDisclosures:
+      type: object
+      properties:
+        apply:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+        confirm:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.Disclosure'
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.EligibilityStatus:
+      enum:
+      - Eligible
+      - Ineligible
+      type: string
+    ChargeAfter.Libraries.Entities.ResidenceType:
+      enum:
+      - OWN
+      - RENT
+      - OTHER
       type: string
   securitySchemes:
     apiKey:

@@ -6,7 +6,7 @@ info:
     email: support@chargeafter.com
   termsOfService: https://chargeafter.com/privacy-policy
   version: '1.0'
-  description: 'Operations tagged ApplicationsV3 across 2 of this provider''s published API definitions: chargeafter-checkout-application-status-openapi.yml, chargeafter-checkout-application-token-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged ApplicationsV3 across 2 of this provider''s published API definitions: chargeafter-checkout-application-status-openapi-original.json, chargeafter-checkout-application-token-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api-sandbox.ca-dev.co
   description: Sandbox Environment
@@ -18,11 +18,6 @@ tags:
 - name: ApplicationsV3
 paths:
   /v2/checkout/applications/{applicationId}/status:
-    servers:
-    - url: https://api-sandbox.ca-dev.co
-      description: Sandbox Environment
-    - url: https://api.chargeafter.com
-      description: Production Environment
     get:
       tags:
       - ApplicationsV3
@@ -660,12 +655,14 @@ paths:
                   errors:
                   - code: '1'
                     description: Internal unknown error occurred
-  /v2/checkout/applications/{applicationId}/token:
+      operationId: getV2CheckoutApplicationsByApplicationIdStatus
+      x-operation-id-source: derived
     servers:
     - url: https://api-sandbox.ca-dev.co
       description: Sandbox Environment
     - url: https://api.chargeafter.com
       description: Production Environment
+  /v2/checkout/applications/{applicationId}/token:
     get:
       tags:
       - ApplicationsV3
@@ -743,38 +740,15 @@ paths:
                   errors:
                   - code: '1'
                     description: Internal unknown error occurred
+      operationId: getV2CheckoutApplicationsByApplicationIdToken
+      x-operation-id-source: derived
+    servers:
+    - url: https://api-sandbox.ca-dev.co
+      description: Sandbox Environment
+    - url: https://api.chargeafter.com
+      description: Production Environment
 components:
   schemas:
-    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusPromoSettings:
-      type: object
-      properties:
-        numberOfPeriods:
-          type:
-          - integer
-          - 'null'
-          description: Number of period in which promotion is active provided in case isPromo = true
-          format: int32
-          example: 6
-        periodicPayment:
-          type:
-          - number
-          - 'null'
-          description: Periodic payment for each promotion period provided in case isPromo = true
-          format: double
-          example: 100.5
-        periodType:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
-          description: Type of period periodic payment and number of periods are defined for provided in case isPromo = true
-          example: Month
-        apr:
-          type:
-          - number
-          - 'null'
-          description: Annual Percentage Rate (APR) during promotional period provided in case isPromo = true
-          format: double
-          example: 10.25
-      additionalProperties: false
     ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount:
       required:
       - amount
@@ -793,35 +767,141 @@ components:
           example: 20
       additionalProperties: false
       description: Discount details.
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
+    ChargeAfter.Libraries.Entities.LenderAccountStatus:
       enum:
-      - Apply
-      - Checkout
+      - Inactive
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Active
       type: string
-      description: FlowType.<p>Description:</p><ul><li><i>Apply</i> - Consumer checks if cart eligible.</li><li><i>Checkout</i> - Consumer makes purchasing in merchant.</li></ul>
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
-      enum:
-      - LineOfCredit
-      - Installments
-      - LeaseToOwn
-      - MerchantSelfFinancing
-      type: string
-    ChargeAfter.BFF.WebApi.Contracts.GetSessionTokenResponse:
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
+      required:
+      - price
       type: object
       properties:
-        sessionToken:
+        name:
           type:
           - string
           - 'null'
-          description: Session token which can be used to open modal in context of existing session
+          description: Gets or sets the name.
+          example: Awesome Warranty
+        sku:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the sku.
+          example: AWSMWRNTY
+        price:
+          type: number
+          description: Gets or sets the price.
+          format: double
+          example: 100
       additionalProperties: false
-    ChargeAfter.Libraries.Entities.PeriodType:
+      description: Warranty.
+    ChargeAfter.Libraries.Entities.AccountStatusReason:
       enum:
-      - Day
-      - Month
-      - Week
-      - BiWeek
+      - ApplicationNotCompleted
+      - MissingStips
+      - MissingESign
+      - MissingConfirmation
+      - MissingStipsVerification
+      - MissingStipsReview
+      - LoanAlreadyUsed
+      - NoCreditAvailable
+      - CardValidationFailed
+      - CardValidationExpired
       type: string
+    ChargeAfter.BFF.WebApi.Contracts.GetSessionStatusResponse:
+      required:
+      - flowType
+      - sessionStatus
+      type: object
+      properties:
+        sessionStatus:
+          minLength: 1
+          type: string
+          description: 'Status indicating if the flow was completed successfully
+
+            Possible values:
+
+            COMPLETED
+
+            NOT COMPLETED'
+          example: COMPLETED
+          deprecated: true
+        confirmationToken:
+          type:
+          - string
+          - 'null'
+          description: Used for charge creation.
+          example: 00a6dafc32d34ddd95497f89c362fba6
+        accountToken:
+          type:
+          - string
+          - 'null'
+          description: Used for charge creation for lenders supporting multiple charges for a single account.
+          example: 66d05ce1b5382eaf262c5d8a
+        loanId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier used to retrieve specific a lender application with its associated offers, orders, and transactions.
+          example: 66d05993fb750b38327b96ec
+        consumerId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the consumer
+          example: 807f1f77bcf86cd799439049
+        flowType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType'
+          description: FlowType.
+          example: Apply
+        storeId:
+          type:
+          - string
+          - 'null'
+          description: The store identifier
+          example: store13
+        cartDetails:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails'
+          description: Order cart details. Mandatory for checkout, optional for apply flow.
+        applicationStatus:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ConsumerApplicationStatus'
+          description: 'The latest status of the application corresponding to the lender account to which the consumer was redirected in ChargeAfter''s Checkout flow.<br />
+
+            Possible values <ul><li>Prequalified</li><li>PendingConsumer</li><li>PendingLender</li><li>Approved</li><li>Authorized</li><li>Declined</li></ul>'
+          example: Prequalified
+        account:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusAccount'
+          description: The latest lender account to which the consumer was redirected in ChargeAfter's Checkout flow with the details of the lender and the remaining credit info.
+        confirmedOffer:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer'
+          description: The confirmed offer which was used for checkout
+        offers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer'
+          description: Offers, confirmed by lender
+        merchantConsumerId:
+          type:
+          - string
+          - 'null'
+          description: The merchant's consumer ID, if provided in the session
+        linkId:
+          type:
+          - string
+          - 'null'
+          description: The Omni-link linkId, if session created via omni-link
+      additionalProperties: false
     ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusAccount:
       required:
       - lenderId
@@ -864,6 +944,54 @@ components:
           - 'null'
           description: The lender reference ID
       additionalProperties: false
+    ChargeAfter.Libraries.Entities.PeriodType:
+      enum:
+      - Day
+      - Month
+      - Week
+      - BiWeek
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
+      enum:
+      - LineOfCredit
+      - Installments
+      - LeaseToOwn
+      - MerchantSelfFinancing
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
+      type: object
+      properties:
+        availableCredit:
+          type: number
+          description: Amount available for the consumer. Max amount with used amount subtracted. Obligatory field if credit info is provided
+          format: double
+        maxAmount:
+          type:
+          - number
+          - 'null'
+          description: Maximum credit amount available on account. Optional if credit info provided
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
+      enum:
+      - Apply
+      - Checkout
+      type: string
+      description: FlowType.<p>Description:</p><ul><li><i>Apply</i> - Consumer checks if cart eligible.</li><li><i>Checkout</i> - Consumer makes purchasing in merchant.</li></ul>
+    ChargeAfter.Libraries.Entities.ConsumerApplicationStatus:
+      enum:
+      - New
+      - Prequalified
+      - CheckoutInProgress
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Approved
+      - Authorized
+      - Declined
+      - Expired
+      - Cancelled
+      type: string
     ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails:
       required:
       - items
@@ -976,43 +1104,36 @@ components:
           description: Optional discounts.
       additionalProperties: false
       description: Item details.
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
-      required:
-      - price
+    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusPromoSettings:
       type: object
       properties:
-        name:
+        numberOfPeriods:
           type:
-          - string
+          - integer
           - 'null'
-          description: Gets or sets the name.
-          example: Awesome Warranty
-        sku:
+          description: Number of period in which promotion is active provided in case isPromo = true
+          format: int32
+          example: 6
+        periodicPayment:
           type:
-          - string
+          - number
           - 'null'
-          description: Gets or sets the sku.
-          example: AWSMWRNTY
-        price:
-          type: number
-          description: Gets or sets the price.
+          description: Periodic payment for each promotion period provided in case isPromo = true
           format: double
-          example: 100
+          example: 100.5
+        periodType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
+          description: Type of period periodic payment and number of periods are defined for provided in case isPromo = true
+          example: Month
+        apr:
+          type:
+          - number
+          - 'null'
+          description: Annual Percentage Rate (APR) during promotional period provided in case isPromo = true
+          format: double
+          example: 10.25
       additionalProperties: false
-      description: Warranty.
-    ChargeAfter.Libraries.Entities.AccountStatusReason:
-      enum:
-      - ApplicationNotCompleted
-      - MissingStips
-      - MissingESign
-      - MissingConfirmation
-      - MissingStipsVerification
-      - MissingStipsReview
-      - LoanAlreadyUsed
-      - NoCreditAvailable
-      - CardValidationFailed
-      - CardValidationExpired
-      type: string
     ChargeAfter.Libraries.Entities.ApplicationStatusReason:
       enum:
       - ApplicationNotCompleted
@@ -1023,132 +1144,6 @@ components:
       - Error
       - CallLenderToResolve
       - DocumentUploadRequired
-      type: string
-    ChargeAfter.BFF.WebApi.Contracts.GetSessionStatusResponse:
-      required:
-      - flowType
-      - sessionStatus
-      type: object
-      properties:
-        sessionStatus:
-          minLength: 1
-          type: string
-          description: 'Status indicating if the flow was completed successfully
-
-            Possible values:
-
-            COMPLETED
-
-            NOT COMPLETED'
-          example: COMPLETED
-          deprecated: true
-        confirmationToken:
-          type:
-          - string
-          - 'null'
-          description: Used for charge creation.
-          example: 00a6dafc32d34ddd95497f89c362fba6
-        accountToken:
-          type:
-          - string
-          - 'null'
-          description: Used for charge creation for lenders supporting multiple charges for a single account.
-          example: 66d05ce1b5382eaf262c5d8a
-        loanId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier used to retrieve specific a lender application with its associated offers, orders, and transactions.
-          example: 66d05993fb750b38327b96ec
-        consumerId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the consumer
-          example: 807f1f77bcf86cd799439049
-        flowType:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType'
-          description: FlowType.
-          example: Apply
-        storeId:
-          type:
-          - string
-          - 'null'
-          description: The store identifier
-          example: store13
-        cartDetails:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails'
-          description: Order cart details. Mandatory for checkout, optional for apply flow.
-        applicationStatus:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.ConsumerApplicationStatus'
-          description: 'The latest status of the application corresponding to the lender account to which the consumer was redirected in ChargeAfter''s Checkout flow.<br />
-
-            Possible values <ul><li>Prequalified</li><li>PendingConsumer</li><li>PendingLender</li><li>Approved</li><li>Authorized</li><li>Declined</li></ul>'
-          example: Prequalified
-        account:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusAccount'
-          description: The latest lender account to which the consumer was redirected in ChargeAfter's Checkout flow with the details of the lender and the remaining credit info.
-        confirmedOffer:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer'
-          description: The confirmed offer which was used for checkout
-        offers:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer'
-          description: Offers, confirmed by lender
-        merchantConsumerId:
-          type:
-          - string
-          - 'null'
-          description: The merchant's consumer ID, if provided in the session
-        linkId:
-          type:
-          - string
-          - 'null'
-          description: The Omni-link linkId, if session created via omni-link
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
-      type: object
-      properties:
-        availableCredit:
-          type: number
-          description: Amount available for the consumer. Max amount with used amount subtracted. Obligatory field if credit info is provided
-          format: double
-        maxAmount:
-          type:
-          - number
-          - 'null'
-          description: Maximum credit amount available on account. Optional if credit info provided
-          format: double
-      additionalProperties: false
-    ChargeAfter.Libraries.Entities.LenderAccountStatus:
-      enum:
-      - Inactive
-      - PendingConsumer
-      - PendingLender
-      - PendingMerchant
-      - Active
-      type: string
-    ChargeAfter.Libraries.Entities.ConsumerApplicationStatus:
-      enum:
-      - New
-      - Prequalified
-      - CheckoutInProgress
-      - PendingConsumer
-      - PendingLender
-      - PendingMerchant
-      - Approved
-      - Authorized
-      - Declined
-      - Expired
-      - Cancelled
       type: string
     ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer:
       required:
@@ -1188,6 +1183,15 @@ components:
           - 'null'
           description: Offer description
       additionalProperties: false
+    ChargeAfter.BFF.WebApi.Contracts.GetSessionTokenResponse:
+      type: object
+      properties:
+        sessionToken:
+          type:
+          - string
+          - 'null'
+          description: Session token which can be used to open modal in context of existing session
+      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey
@@ -1195,5 +1199,5 @@ components:
       name: Authorization
       in: header
 x-refined-from:
-- chargeafter-checkout-application-status-openapi.yml
-- chargeafter-checkout-application-token-openapi.yml
+- chargeafter-checkout-application-status-openapi-original.json
+- chargeafter-checkout-application-token-openapi-original.json
