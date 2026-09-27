@@ -841,193 +841,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ChargeAfter.Disputes.WebApi.Contracts.DisputeDetails:
-      required:
-      - currency
-      - description
-      - items
-      - totalAmount
-      type: object
-      properties:
-        currency:
-          minLength: 1
-          type: string
-          description: ISO 4217, alphabetic code. If specified, must match the currency of the corresponding Charge
-        totalAmount:
-          type: number
-          format: double
-          exclusiveMinimum: 0
-        totalTaxAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        description:
-          maxLength: 2048
-          minLength: 1
-          type: string
-        items:
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputedItem'
-      additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.DisputeStatus:
-      enum:
-      - PendingMerchant
-      - PendingLender
-      - ResolvedMerchantFavor
-      - ResolvedCancelled
-      - ResolvedCustomerFavorFull
-      - ResolvedCustomerFavorPartial
-      type: string
-      description: '* `PendingMerchant` - pending merchant response
-
-        * `PendingLender` - pending lender response or decision. The lender should `assign` or `resolve` the dispute to change the status.
-
-        * `ResolvedMerchantFavor` -  in favor of merchant
-
-        * `ResolvedCancelled` -  in favor of merchant
-
-        * `ResolvedCustomerFavorFull` -  in favor of consumer
-
-        * `ResolvedCustomerFavorPartial` -  in favor of consumer'
-    ChargeAfter.Disputes.WebApi.Contracts.Chargeback:
-      required:
-      - lenderTransactionId
-      - reason
-      - totalAmount
-      type: object
-      properties:
-        transactionId:
-          type:
-          - string
-          - 'null'
-          description: ChargeAfter transaction Id associated with the Chargeback
-        totalTaxAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        reason:
-          maxLength: 2048
-          minLength: 1
-          type: string
-        totalAmount:
-          type: number
-          format: double
-        lenderTransactionId:
-          maxLength: 128
-          minLength: 1
-          type: string
-          description: Lender transaction Id associated with this transaction
-      additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.Document:
-      required:
-      - header
-      - name
-      - url
-      type: object
-      properties:
-        name:
-          maxLength: 128
-          minLength: 1
-          type: string
-          description: Unique within a dispute
-        mimeType:
-          maxLength: 32
-          type:
-          - string
-          - 'null'
-        url:
-          maxLength: 512
-          minLength: 1
-          type: string
-        header:
-          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DataHeader'
-      additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.Note:
-      required:
-      - header
-      - text
-      type: object
-      properties:
-        header:
-          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DataHeader'
-        sku:
-          type:
-          - string
-          - 'null'
-        text:
-          maxLength: 2048
-          minLength: 1
-          type: string
-      additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.Reversal:
-      required:
-      - lenderTransactionId
-      - totalAmount
-      type: object
-      properties:
-        totalAmount:
-          type: number
-          format: double
-          exclusiveMinimum: 0
-        lenderTransactionId:
-          maxLength: 128
-          minLength: 1
-          type: string
-          description: Lender transaction Id associated with this transaction
-      additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.SLA:
-      required:
-      - end
-      type: object
-      properties:
-        start:
-          type:
-          - string
-          - 'null'
-          description: If set, must be now or in the future. In ISO 8601.
-          format: date-time
-        end:
-          type: string
-          description: In ISO 8601.
-          format: date-time
-      additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.DisputeSubReason:
-      enum:
-      - Duplicate
-      - AlternativePayment
-      type: string
-      description: '* `Duplicate` - duplicate charge or loan
-
-        * `AlternativePayment` - the payment was provided in external system'
-    ChargeAfter.Disputes.WebApi.Contracts.DisputedItem:
-      required:
-      - amount
-      - name
-      type: object
-      properties:
-        sku:
-          type:
-          - string
-          - 'null'
-        name:
-          maxLength: 256
-          minLength: 1
-          type: string
-        amount:
-          type: number
-          description: Amount without taxes. The total amount = Amount + TaxAmount
-          format: double
-          exclusiveMinimum: 0
-        taxAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-      additionalProperties: false
     ChargeAfter.Disputes.WebApi.Contracts.NoteContent:
       required:
       - text
@@ -1042,92 +855,6 @@ components:
           minLength: 1
           type: string
       additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.ChargebackBase:
-      required:
-      - lenderTransactionId
-      - reason
-      - totalAmount
-      type: object
-      properties:
-        totalTaxAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        reason:
-          maxLength: 2048
-          minLength: 1
-          type: string
-        totalAmount:
-          type: number
-          format: double
-          exclusiveMinimum: 0
-        lenderTransactionId:
-          maxLength: 128
-          minLength: 1
-          type: string
-          description: Lender transaction Id associated with this transaction
-      additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.DataHeader:
-      required:
-      - createdAt
-      - origin
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-        origin:
-          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Party'
-      additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.ReopenDispute:
-      required:
-      - sla
-      - status
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeStatus'
-        sla:
-          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SLA'
-        lenderNotes:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.NoteContent'
-      additionalProperties: false
-    ChargeAfter.Disputes.WebApi.Contracts.DisputeReason:
-      enum:
-      - CancelledByUser
-      - IncorrectAmount
-      - IncorrectLoan
-      - GoodsNeverReceived
-      - GoodsNotAsExpected
-      - GoodsDamaged
-      - GoodsReturned
-      - Other
-      type: string
-      description: '* `CancelledByUser` - user cancelled the purchase according to cancellation policy
-
-        * `IncorrectAmount` - user was charged or refunded by a wrong amount. Additional details can be specified in `subReason`
-
-        * `IncorrectLoan` - user does not recognize the loan. Additional details can be specified in `subReason`
-
-        * `GoodsNeverReceived` - user did not receive the goods
-
-        * `GoodsNotAsExpected` - user received unexpected goods
-
-        * `GoodsDamaged` - user received damaged goods
-
-        * `GoodsReturned` - user received and returned the goods according to return policy
-
-        * `Other` - any other reason not mentioned above'
-    ChargeAfter.Disputes.WebApi.Contracts.Party:
-      enum:
-      - Lender
-      - Merchant
-      type: string
     ChargeAfter.Disputes.WebApi.Contracts.Dispute:
       required:
       - createdAt
@@ -1214,6 +941,279 @@ components:
           additionalProperties:
             type: string
           description: Lender metadata can be used extend the dispute with additional information
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.DisputeReason:
+      enum:
+      - CancelledByUser
+      - IncorrectAmount
+      - IncorrectLoan
+      - GoodsNeverReceived
+      - GoodsNotAsExpected
+      - GoodsDamaged
+      - GoodsReturned
+      - Other
+      type: string
+      description: '* `CancelledByUser` - user cancelled the purchase according to cancellation policy
+
+        * `IncorrectAmount` - user was charged or refunded by a wrong amount. Additional details can be specified in `subReason`
+
+        * `IncorrectLoan` - user does not recognize the loan. Additional details can be specified in `subReason`
+
+        * `GoodsNeverReceived` - user did not receive the goods
+
+        * `GoodsNotAsExpected` - user received unexpected goods
+
+        * `GoodsDamaged` - user received damaged goods
+
+        * `GoodsReturned` - user received and returned the goods according to return policy
+
+        * `Other` - any other reason not mentioned above'
+    ChargeAfter.Disputes.WebApi.Contracts.Note:
+      required:
+      - header
+      - text
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DataHeader'
+        sku:
+          type:
+          - string
+          - 'null'
+        text:
+          maxLength: 2048
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.DisputeStatus:
+      enum:
+      - PendingMerchant
+      - PendingLender
+      - ResolvedMerchantFavor
+      - ResolvedCancelled
+      - ResolvedCustomerFavorFull
+      - ResolvedCustomerFavorPartial
+      type: string
+      description: '* `PendingMerchant` - pending merchant response
+
+        * `PendingLender` - pending lender response or decision. The lender should `assign` or `resolve` the dispute to change the status.
+
+        * `ResolvedMerchantFavor` -  in favor of merchant
+
+        * `ResolvedCancelled` -  in favor of merchant
+
+        * `ResolvedCustomerFavorFull` -  in favor of consumer
+
+        * `ResolvedCustomerFavorPartial` -  in favor of consumer'
+    ChargeAfter.Disputes.WebApi.Contracts.ReopenDispute:
+      required:
+      - sla
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputeStatus'
+        sla:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.SLA'
+        lenderNotes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.NoteContent'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.DisputeSubReason:
+      enum:
+      - Duplicate
+      - AlternativePayment
+      type: string
+      description: '* `Duplicate` - duplicate charge or loan
+
+        * `AlternativePayment` - the payment was provided in external system'
+    ChargeAfter.Disputes.WebApi.Contracts.DisputeDetails:
+      required:
+      - currency
+      - description
+      - items
+      - totalAmount
+      type: object
+      properties:
+        currency:
+          minLength: 1
+          type: string
+          description: ISO 4217, alphabetic code. If specified, must match the currency of the corresponding Charge
+        totalAmount:
+          type: number
+          format: double
+          exclusiveMinimum: 0
+        totalTaxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        description:
+          maxLength: 2048
+          minLength: 1
+          type: string
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DisputedItem'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.SLA:
+      required:
+      - end
+      type: object
+      properties:
+        start:
+          type:
+          - string
+          - 'null'
+          description: If set, must be now or in the future. In ISO 8601.
+          format: date-time
+        end:
+          type: string
+          description: In ISO 8601.
+          format: date-time
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.ChargebackBase:
+      required:
+      - lenderTransactionId
+      - reason
+      - totalAmount
+      type: object
+      properties:
+        totalTaxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        reason:
+          maxLength: 2048
+          minLength: 1
+          type: string
+        totalAmount:
+          type: number
+          format: double
+          exclusiveMinimum: 0
+        lenderTransactionId:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Lender transaction Id associated with this transaction
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.DataHeader:
+      required:
+      - createdAt
+      - origin
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        origin:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.Party'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.Document:
+      required:
+      - header
+      - name
+      - url
+      type: object
+      properties:
+        name:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Unique within a dispute
+        mimeType:
+          maxLength: 32
+          type:
+          - string
+          - 'null'
+        url:
+          maxLength: 512
+          minLength: 1
+          type: string
+        header:
+          $ref: '#/components/schemas/ChargeAfter.Disputes.WebApi.Contracts.DataHeader'
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.Reversal:
+      required:
+      - lenderTransactionId
+      - totalAmount
+      type: object
+      properties:
+        totalAmount:
+          type: number
+          format: double
+          exclusiveMinimum: 0
+        lenderTransactionId:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Lender transaction Id associated with this transaction
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.Party:
+      enum:
+      - Lender
+      - Merchant
+      type: string
+    ChargeAfter.Disputes.WebApi.Contracts.Chargeback:
+      required:
+      - lenderTransactionId
+      - reason
+      - totalAmount
+      type: object
+      properties:
+        transactionId:
+          type:
+          - string
+          - 'null'
+          description: ChargeAfter transaction Id associated with the Chargeback
+        totalTaxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        reason:
+          maxLength: 2048
+          minLength: 1
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        lenderTransactionId:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Lender transaction Id associated with this transaction
+      additionalProperties: false
+    ChargeAfter.Disputes.WebApi.Contracts.DisputedItem:
+      required:
+      - amount
+      - name
+      type: object
+      properties:
+        sku:
+          type:
+          - string
+          - 'null'
+        name:
+          maxLength: 256
+          minLength: 1
+          type: string
+        amount:
+          type: number
+          description: Amount without taxes. The total amount = Amount + TaxAmount
+          format: double
+          exclusiveMinimum: 0
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
       additionalProperties: false
   securitySchemes:
     apiKey:

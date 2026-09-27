@@ -127,25 +127,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
-      enum:
-      - LineOfCredit
-      - Installments
-      - LeaseToOwn
-      - MerchantSelfFinancing
-      type: string
-    ChargeAfter.Postsale.WebApi.Contracts.Dtos.Fundings.FundingStatus:
-      enum:
-      - RECONCILED
-      - UNRECONCILED
-      - MISMATCHED
-      - TYPE_MISMATCH
-      - AMOUNT_MISMATCH
-      - ORIGINAL_TRANSACTION_MISSING
-      - MISSING
-      - CHARGEBACK
-      type: string
-      description: <p>Description:</p><ul><li><i>RECONCILED</i> - Funding report matches actual transaction.</li><li><i>UNRECONCILED</i> - Funding report does not match actual transaction. This is a legacy status.</li><li><i>MISMATCHED</i> - Funding report does not match actual transaction. This is a legacy status.</li><li><i>TYPE_MISMATCH</i> - Funding report has a different transaction type from the actual transaction.</li><li><i>AMOUNT_MISMATCH</i> - Funding report has a different transaction type from the actual transaction.</li><li><i>ORIGINAL_TRANSACTION_MISSING</i> - Funding report can&#39;t be matched to a known transaction.</li><li><i>MISSING</i> - Funding report can&#39;t be matched to a known transaction. This is a legacy status.</li><li><i>CHARGEBACK</i> - Chargeback funding report. This is a legacy status.</li></ul>
     ChargeAfter.Postsale.WebApi.Contracts.Dtos.Transactions.TransactionType:
       enum:
       - Authorize
@@ -155,14 +136,13 @@ components:
       - Chargeback
       - Reversal
       type: string
-    ? ChargeAfter.Postsale.WebApi.Contracts.Dtos.RecordSetDto.Of.ChargeAfter.Postsale.WebApi.Contracts.Dtos.Fundings.FundingDtoV2
-    : type: object
-      properties:
-        records:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Postsale.WebApi.Contracts.Dtos.Fundings.FundingDtoV2'
-      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
+      enum:
+      - LineOfCredit
+      - Installments
+      - LeaseToOwn
+      - MerchantSelfFinancing
+      type: string
     ChargeAfter.Postsale.WebApi.Contracts.Dtos.Fundings.FundingDtoV2:
       required:
       - discountAmount
@@ -264,6 +244,26 @@ components:
           format: date-time
           example: '2023-11-03T00:00:00Z'
       additionalProperties: false
+    ? ChargeAfter.Postsale.WebApi.Contracts.Dtos.RecordSetDto.Of.ChargeAfter.Postsale.WebApi.Contracts.Dtos.Fundings.FundingDtoV2
+    : type: object
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Postsale.WebApi.Contracts.Dtos.Fundings.FundingDtoV2'
+      additionalProperties: false
+    ChargeAfter.Postsale.WebApi.Contracts.Dtos.Fundings.FundingStatus:
+      enum:
+      - RECONCILED
+      - UNRECONCILED
+      - MISMATCHED
+      - TYPE_MISMATCH
+      - AMOUNT_MISMATCH
+      - ORIGINAL_TRANSACTION_MISSING
+      - MISSING
+      - CHARGEBACK
+      type: string
+      description: <p>Description:</p><ul><li><i>RECONCILED</i> - Funding report matches actual transaction.</li><li><i>UNRECONCILED</i> - Funding report does not match actual transaction. This is a legacy status.</li><li><i>MISMATCHED</i> - Funding report does not match actual transaction. This is a legacy status.</li><li><i>TYPE_MISMATCH</i> - Funding report has a different transaction type from the actual transaction.</li><li><i>AMOUNT_MISMATCH</i> - Funding report has a different transaction type from the actual transaction.</li><li><i>ORIGINAL_TRANSACTION_MISSING</i> - Funding report can&#39;t be matched to a known transaction.</li><li><i>MISSING</i> - Funding report can&#39;t be matched to a known transaction. This is a legacy status.</li><li><i>CHARGEBACK</i> - Chargeback funding report. This is a legacy status.</li></ul>
   securitySchemes:
     apiKey:
       type: apiKey

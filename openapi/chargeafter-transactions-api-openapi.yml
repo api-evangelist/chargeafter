@@ -210,6 +210,16 @@ components:
       - Chargeback
       - Reversal
       type: string
+    ChargeAfter.Libraries.Entities.TransactionState:
+      enum:
+      - Scheduled
+      - Pending
+      - PendingConsumer
+      - PendingMerchant
+      - Accepted
+      - Completed
+      - Failed
+      type: string
     ChargeAfter.Postsale.WebApi.Contracts.Dtos.Transactions.TransactionDto:
       required:
       - amount
@@ -272,16 +282,6 @@ components:
           additionalProperties:
             type: string
       additionalProperties: false
-    ChargeAfter.Libraries.Entities.TransactionState:
-      enum:
-      - Scheduled
-      - Pending
-      - PendingConsumer
-      - PendingMerchant
-      - Accepted
-      - Completed
-      - Failed
-      type: string
   securitySchemes:
     apiKey:
       type: apiKey

@@ -46,7 +46,7 @@ x-docs-platform: readme
 x-docs-platform-confidence: high
 x-docs-platform-checked: 2026-09-21
 tags:
-- Financial-Services
+- Financial Services
 - Payments
 - Lending
 - Buy Now Pay Later
@@ -67,6 +67,7 @@ tags_raw:
 - Checkout
 - Consumer Credit
 - Retail
+- Financial-Services
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
