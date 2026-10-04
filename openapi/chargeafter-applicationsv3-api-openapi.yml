@@ -749,256 +749,6 @@ paths:
       description: Production Environment
 components:
   schemas:
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
-      required:
-      - price
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Gets or sets the name.
-          example: Awesome Warranty
-        sku:
-          type:
-          - string
-          - 'null'
-          description: Gets or sets the sku.
-          example: AWSMWRNTY
-        price:
-          type: number
-          description: Gets or sets the price.
-          format: double
-          example: 100
-      additionalProperties: false
-      description: Warranty.
-    ChargeAfter.Libraries.Entities.ConsumerApplicationStatus:
-      enum:
-      - New
-      - Prequalified
-      - CheckoutInProgress
-      - PendingConsumer
-      - PendingLender
-      - PendingMerchant
-      - Approved
-      - Authorized
-      - Declined
-      - Expired
-      - Cancelled
-      type: string
-    ChargeAfter.Libraries.Entities.PeriodType:
-      enum:
-      - Day
-      - Month
-      - Week
-      - BiWeek
-      type: string
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
-      enum:
-      - Apply
-      - Checkout
-      type: string
-      description: FlowType.<p>Description:</p><ul><li><i>Apply</i> - Consumer checks if cart eligible.</li><li><i>Checkout</i> - Consumer makes purchasing in merchant.</li></ul>
-    ChargeAfter.Libraries.Entities.ApplicationStatusReason:
-      enum:
-      - ApplicationNotCompleted
-      - AccountFrozen
-      - ConsumerBanned
-      - MissingESign
-      - UnderReview
-      - Error
-      - CallLenderToResolve
-      - DocumentUploadRequired
-      type: string
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails:
-      required:
-      - items
-      - totalAmount
-      type: object
-      properties:
-        merchantOrderId:
-          type:
-          - string
-          - 'null'
-          description: Optional merchant order identifier.
-          example: '12345'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item'
-          description: Line items.
-        discounts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
-          description: Optional discounts.
-        taxAmount:
-          type: number
-          description: Total tax amount.
-          format: double
-          example: 199
-        shippingTaxAmount:
-          type:
-          - number
-          - 'null'
-          description: Shipping tax amount.
-          format: double
-          example: 1.9
-        shippingAmount:
-          type:
-          - number
-          - 'null'
-          description: Shipping amount.
-          format: double
-          example: 19
-        totalAmount:
-          type: number
-          description: 'Total amount.<br />
-
-            Must be equal to the sum of all items - discounts + tax and shipping.'
-          format: double
-          example: 4297.9
-      additionalProperties: false
-      description: Order cart details. Mandatory for checkout, optional for apply flow.
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item:
-      required:
-      - price
-      - quantity
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Item name.
-          example: Awesome Product
-        price:
-          type: number
-          description: Price of a single item.
-          format: double
-          example: 1999
-        sku:
-          type:
-          - string
-          - 'null'
-          description: Item SKU.
-          example: AWSMPRDCT
-        quantity:
-          type: integer
-          description: Number of items.
-          format: int32
-          example: 2
-        leasable:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if the item is leasable (i.e. can be financed by LTO lender).
-          example: true
-        productCategory:
-          type:
-          - string
-          - 'null'
-          description: Optional product category.
-          example: Product category
-        warranty:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty'
-          description: Optional warranty for the item.
-        taxAmount:
-          type:
-          - number
-          - 'null'
-          description: Optional tax amount.
-          format: double
-          example: 199
-        discounts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
-          description: Optional discounts.
-      additionalProperties: false
-      description: Item details.
-    ChargeAfter.Libraries.Entities.AccountStatusReason:
-      enum:
-      - ApplicationNotCompleted
-      - MissingStips
-      - MissingESign
-      - MissingConfirmation
-      - MissingStipsVerification
-      - MissingStipsReview
-      - LoanAlreadyUsed
-      - NoCreditAvailable
-      - CardValidationFailed
-      - CardValidationExpired
-      type: string
-    ChargeAfter.Libraries.Entities.LenderAccountStatus:
-      enum:
-      - Inactive
-      - PendingConsumer
-      - PendingLender
-      - PendingMerchant
-      - Active
-      type: string
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount:
-      required:
-      - amount
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the discount.
-          example: Birthday discount
-        amount:
-          type: number
-          description: Amount of the discount.
-          format: double
-          example: 20
-      additionalProperties: false
-      description: Discount details.
-    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusPromoSettings:
-      type: object
-      properties:
-        numberOfPeriods:
-          type:
-          - integer
-          - 'null'
-          description: Number of period in which promotion is active provided in case isPromo = true
-          format: int32
-          example: 6
-        periodicPayment:
-          type:
-          - number
-          - 'null'
-          description: Periodic payment for each promotion period provided in case isPromo = true
-          format: double
-          example: 100.5
-        periodType:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
-          description: Type of period periodic payment and number of periods are defined for provided in case isPromo = true
-          example: Month
-        apr:
-          type:
-          - number
-          - 'null'
-          description: Annual Percentage Rate (APR) during promotional period provided in case isPromo = true
-          format: double
-          example: 10.25
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
-      enum:
-      - LineOfCredit
-      - Installments
-      - LeaseToOwn
-      - MerchantSelfFinancing
-      type: string
     ChargeAfter.BFF.WebApi.Contracts.GetSessionStatusResponse:
       required:
       - flowType
@@ -1089,6 +839,250 @@ components:
           - 'null'
           description: The Omni-link linkId, if session created via omni-link
       additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType:
+      enum:
+      - LineOfCredit
+      - Installments
+      - LeaseToOwn
+      - MerchantSelfFinancing
+      type: string
+    ChargeAfter.Libraries.Entities.ApplicationStatusReason:
+      enum:
+      - ApplicationNotCompleted
+      - AccountFrozen
+      - ConsumerBanned
+      - MissingESign
+      - UnderReview
+      - Error
+      - CallLenderToResolve
+      - DocumentUploadRequired
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item:
+      required:
+      - price
+      - quantity
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Item name.
+          example: Awesome Product
+        price:
+          type: number
+          description: Price of a single item.
+          format: double
+          example: 1999
+        sku:
+          type:
+          - string
+          - 'null'
+          description: Item SKU.
+          example: AWSMPRDCT
+        quantity:
+          type: integer
+          description: Number of items.
+          format: int32
+          example: 2
+        leasable:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if the item is leasable (i.e. can be financed by LTO lender).
+          example: true
+        productCategory:
+          type:
+          - string
+          - 'null'
+          description: Optional product category.
+          example: Product category
+        warranty:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty'
+          description: Optional warranty for the item.
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          description: Optional tax amount.
+          format: double
+          example: 199
+        discounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
+          description: Optional discounts.
+      additionalProperties: false
+      description: Item details.
+    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer:
+      required:
+      - amount
+      - code
+      - defaultAPR
+      - financialProductType
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+          description: Promotion code
+          example: PR01
+        financialProductType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
+          description: Financial product type
+          example: LineOfCredit
+        amount:
+          type: number
+          description: Maximum amount of the offer
+          format: double
+          example: 10
+        defaultAPR:
+          type: number
+          description: Offer Annual Percentage Rate (APR)
+          format: double
+          example: 15.25
+        promoSettings:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusPromoSettings'
+          description: Promotion settings
+        description:
+          type:
+          - string
+          - 'null'
+          description: Offer description
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails:
+      required:
+      - items
+      - totalAmount
+      type: object
+      properties:
+        merchantOrderId:
+          type:
+          - string
+          - 'null'
+          description: Optional merchant order identifier.
+          example: '12345'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item'
+          description: Line items.
+        discounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount'
+          description: Optional discounts.
+        taxAmount:
+          type: number
+          description: Total tax amount.
+          format: double
+          example: 199
+        shippingTaxAmount:
+          type:
+          - number
+          - 'null'
+          description: Shipping tax amount.
+          format: double
+          example: 1.9
+        shippingAmount:
+          type:
+          - number
+          - 'null'
+          description: Shipping amount.
+          format: double
+          example: 19
+        totalAmount:
+          type: number
+          description: 'Total amount.<br />
+
+            Must be equal to the sum of all items - discounts + tax and shipping.'
+          format: double
+          example: 4297.9
+      additionalProperties: false
+      description: Order cart details. Mandatory for checkout, optional for apply flow.
+    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusPromoSettings:
+      type: object
+      properties:
+        numberOfPeriods:
+          type:
+          - integer
+          - 'null'
+          description: Number of period in which promotion is active provided in case isPromo = true
+          format: int32
+          example: 6
+        periodicPayment:
+          type:
+          - number
+          - 'null'
+          description: Periodic payment for each promotion period provided in case isPromo = true
+          format: double
+          example: 100.5
+        periodType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PeriodType'
+          description: Type of period periodic payment and number of periods are defined for provided in case isPromo = true
+          example: Month
+        apr:
+          type:
+          - number
+          - 'null'
+          description: Annual Percentage Rate (APR) during promotional period provided in case isPromo = true
+          format: double
+          example: 10.25
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
+      type: object
+      properties:
+        availableCredit:
+          type: number
+          description: Amount available for the consumer. Max amount with used amount subtracted. Obligatory field if credit info is provided
+          format: double
+        maxAmount:
+          type:
+          - number
+          - 'null'
+          description: Maximum credit amount available on account. Optional if credit info provided
+          format: double
+      additionalProperties: false
+    ChargeAfter.Libraries.Entities.ConsumerApplicationStatus:
+      enum:
+      - New
+      - Prequalified
+      - CheckoutInProgress
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Approved
+      - Authorized
+      - Declined
+      - Expired
+      - Cancelled
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount:
+      required:
+      - amount
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the discount.
+          example: Birthday discount
+        amount:
+          type: number
+          description: Amount of the discount.
+          format: double
+          example: 20
+      additionalProperties: false
+      description: Discount details.
     ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusAccount:
       required:
       - lenderId
@@ -1131,58 +1125,64 @@ components:
           - 'null'
           description: The lender reference ID
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.CreditInfo:
-      type: object
-      properties:
-        availableCredit:
-          type: number
-          description: Amount available for the consumer. Max amount with used amount subtracted. Obligatory field if credit info is provided
-          format: double
-        maxAmount:
-          type:
-          - number
-          - 'null'
-          description: Maximum credit amount available on account. Optional if credit info provided
-          format: double
-      additionalProperties: false
-    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusOffer:
+    ChargeAfter.Libraries.Entities.PeriodType:
+      enum:
+      - Day
+      - Month
+      - Week
+      - BiWeek
+      type: string
+    ChargeAfter.Libraries.Entities.AccountStatusReason:
+      enum:
+      - ApplicationNotCompleted
+      - MissingStips
+      - MissingESign
+      - MissingConfirmation
+      - MissingStipsVerification
+      - MissingStipsReview
+      - LoanAlreadyUsed
+      - NoCreditAvailable
+      - CardValidationFailed
+      - CardValidationExpired
+      type: string
+    ChargeAfter.Libraries.Entities.LenderAccountStatus:
+      enum:
+      - Inactive
+      - PendingConsumer
+      - PendingLender
+      - PendingMerchant
+      - Active
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
+      enum:
+      - Apply
+      - Checkout
+      type: string
+      description: FlowType.<p>Description:</p><ul><li><i>Apply</i> - Consumer checks if cart eligible.</li><li><i>Checkout</i> - Consumer makes purchasing in merchant.</li></ul>
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
       required:
-      - amount
-      - code
-      - defaultAPR
-      - financialProductType
+      - price
       type: object
       properties:
-        code:
-          minLength: 1
-          type: string
-          description: Promotion code
-          example: PR01
-        financialProductType:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Responses.Offers.Models.FinancialProductType'
-          description: Financial product type
-          example: LineOfCredit
-        amount:
-          type: number
-          description: Maximum amount of the offer
-          format: double
-          example: 10
-        defaultAPR:
-          type: number
-          description: Offer Annual Percentage Rate (APR)
-          format: double
-          example: 15.25
-        promoSettings:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionStatusPromoSettings'
-          description: Promotion settings
-        description:
+        name:
           type:
           - string
           - 'null'
-          description: Offer description
+          description: Gets or sets the name.
+          example: Awesome Warranty
+        sku:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the sku.
+          example: AWSMWRNTY
+        price:
+          type: number
+          description: Gets or sets the price.
+          format: double
+          example: 100
       additionalProperties: false
+      description: Warranty.
     ChargeAfter.BFF.WebApi.Contracts.GetSessionTokenResponse:
       type: object
       properties:

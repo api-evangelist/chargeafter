@@ -201,6 +201,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ChargeAfter.Postsale.WebApi.Contracts.Dtos.Transactions.TransactionType:
+      enum:
+      - Authorize
+      - Settle
+      - Refund
+      - Void
+      - Chargeback
+      - Reversal
+      type: string
     ChargeAfter.Libraries.Entities.TransactionState:
       enum:
       - Scheduled
@@ -210,15 +219,6 @@ components:
       - Accepted
       - Completed
       - Failed
-      type: string
-    ChargeAfter.Postsale.WebApi.Contracts.Dtos.Transactions.TransactionType:
-      enum:
-      - Authorize
-      - Settle
-      - Refund
-      - Void
-      - Chargeback
-      - Reversal
       type: string
     ChargeAfter.Postsale.WebApi.Contracts.Dtos.Transactions.TransactionDto:
       required:

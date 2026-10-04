@@ -112,16 +112,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ChargeAfter.Libraries.WebApi.Contracts.AdditionalIds:
-      type: object
-      properties:
-        socialInsuranceNumber:
-          type:
-          - string
-          - 'null'
-          description: Canadian Social Insurance Number
-      additionalProperties: false
-      description: Additional IDs
     ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Item:
       required:
       - price
@@ -182,13 +172,7 @@ components:
           description: Optional discounts.
       additionalProperties: false
       description: Item details.
-    ChargeAfter.Libraries.WebApi.Contracts.MarriageStatus:
-      enum:
-      - Not Married
-      - Married
-      type: string
-      description: This Enum created to match UI select control.
-    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionMerchantDetailsResponse:
+    ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails:
       type: object
       properties:
         storeId:
@@ -196,54 +180,15 @@ components:
           - string
           - 'null'
           description: The store identifier
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
-      required:
-      - price
-      type: object
-      properties:
-        name:
+        posId:
           type:
           - string
           - 'null'
-          description: Gets or sets the name.
-          example: Awesome Warranty
-        sku:
-          type:
-          - string
-          - 'null'
-          description: Gets or sets the sku.
-          example: AWSMWRNTY
-        price:
-          type: number
-          description: Gets or sets the price.
-          format: double
-          example: 100
-      additionalProperties: false
-      description: Warranty.
-    ChargeAfter.Libraries.WebApi.Contracts.Language:
-      enum:
-      - En
-      - Fr
-      type: string
-    ChargeAfter.Libraries.WebApi.Contracts.SpouseInfo:
-      type: object
-      properties:
-        spouseSameAddress:
+          description: The point of sale identifier
+        posType:
           allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.BoolType'
-        spouseAddress:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Address'
-          description: Consumer Address info.
-        spouseFirstName:
-          type:
-          - string
-          - 'null'
-        spouseLastName:
-          type:
-          - string
-          - 'null'
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PosType'
+          description: The point of sale type
       additionalProperties: false
     ChargeAfter.BFF.WebApi.Contracts.CreateSessionRequestBodyV3:
       required:
@@ -277,6 +222,17 @@ components:
           - 'null'
           description: Optional Omni-Link id
       additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.Preferences:
+      type: object
+      properties:
+        language:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Language'
+        marketingOptIn:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
     ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Discount:
       required:
       - amount
@@ -295,155 +251,6 @@ components:
           example: 20
       additionalProperties: false
       description: Discount details.
-    ChargeAfter.Libraries.WebApi.Contracts.Address:
-      required:
-      - city
-      - country
-      - line1
-      - state
-      - zipCode
-      type: object
-      properties:
-        country:
-          minLength: 1
-          type: string
-          description: Gets or sets the country.
-          example: US
-        state:
-          minLength: 1
-          type: string
-          description: Gets or sets the state.
-          example: NY
-        city:
-          minLength: 1
-          type: string
-          description: Gets or sets the city.
-          example: New York
-        line1:
-          minLength: 1
-          type: string
-          description: Gets or sets the line1.
-          example: 3 My Street
-        line2:
-          type:
-          - string
-          - 'null'
-          description: Gets or sets the line2.
-          example: My Building, 4th floor
-        zipCode:
-          minLength: 1
-          type: string
-          description: Gets or sets the zip code.
-          example: '10019'
-      additionalProperties: false
-      description: Consumer Address info.
-    ChargeAfter.BFF.WebApi.Contracts.Models.MerchantDetails:
-      type: object
-      properties:
-        storeId:
-          type:
-          - string
-          - 'null'
-          description: The store identifier
-        posId:
-          type:
-          - string
-          - 'null'
-          description: The point of sale identifier
-        posType:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.PosType'
-          description: The point of sale type
-      additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.BoolType:
-      enum:
-      - 'NO'
-      - 'YES'
-      type: string
-      description: This Enum created to match UI select control
-    ChargeAfter.Contracts.Source:
-      enum:
-      - Api
-      - Dashboard
-      - Sdk
-      - Managed
-      - Consumers
-      - CheckoutApi
-      - Distributor
-      - Widget
-      type: string
-    ChargeAfter.Libraries.Entities.IncomeType:
-      enum:
-      - MonthlyNet
-      - MonthlyGross
-      - AnnualNet
-      - AnnualGross
-      type: string
-    ChargeAfter.BFF.WebApi.Contracts.Models.CheckoutDetailsV3:
-      type: object
-      properties:
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Optional ISO 4217 currency code. If not provided, the USD currency will be used.
-        flowType:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType'
-          description: Optional flow type. If not provided, the Checkout flow type will be used.
-        channel:
-          type:
-          - string
-          - 'null'
-          description: 'Optional Channel. If not provided, the E_COMMERCE channel will be used.<br />
-
-            Other options are IN_STORE / CALL_CENTER / IN_HOME'
-        source:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Contracts.Source'
-          description: Source of the request. Api should be specified for all requests coming from the API.
-        tokens:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-          description: Optional security tokens
-        promoCode:
-          type:
-          - string
-          - 'null'
-          description: Optional promo code
-        requestedLoanAmount:
-          type:
-          - number
-          - 'null'
-          description: Optional requested loan amount, if supported by the underlying lenders.
-          format: double
-        tags:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-          description: 'Merchant''s tags for this application.<br />
-
-            The tags will be used for marking/analytics purposes.'
-        correlationId:
-          type:
-          - string
-          - 'null'
-          description: Optional merchant's correlation id for this application.
-        merchantPromoCode:
-          type:
-          - string
-          - 'null'
-          description: Optional merchant promo code.
-        intent:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.IntentSafe'
-          description: Optional intent used for initiating specific lender flows.
-      additionalProperties: false
     ChargeAfter.BFF.WebApi.Contracts.Models.ConsumerDetails:
       required:
       - billingAddress
@@ -560,25 +367,111 @@ components:
           - 'null'
           description: Consumer ID in merchant system
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
-      enum:
-      - Apply
-      - Checkout
-      type: string
-      description: FlowType.<p>Description:</p><ul><li><i>Apply</i> - Consumer checks if cart eligible.</li><li><i>Checkout</i> - Consumer makes purchasing in merchant.</li></ul>
-    ChargeAfter.Libraries.Entities.IntentSafe:
-      enum:
-      - ExistingAccount
-      - Authenticate
-      - ConfirmPayment
-      - StandaloneLookup
-      type: string
     ChargeAfter.Libraries.Entities.ResidenceType:
       enum:
       - OWN
       - RENT
       - OTHER
       type: string
+    ChargeAfter.BFF.WebApi.Contracts.Models.CheckoutDetailsV3:
+      type: object
+      properties:
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Optional ISO 4217 currency code. If not provided, the USD currency will be used.
+        flowType:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType'
+          description: Optional flow type. If not provided, the Checkout flow type will be used.
+        channel:
+          type:
+          - string
+          - 'null'
+          description: 'Optional Channel. If not provided, the E_COMMERCE channel will be used.<br />
+
+            Other options are IN_STORE / CALL_CENTER / IN_HOME'
+        source:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Contracts.Source'
+          description: Source of the request. Api should be specified for all requests coming from the API.
+        tokens:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: Optional security tokens
+        promoCode:
+          type:
+          - string
+          - 'null'
+          description: Optional promo code
+        requestedLoanAmount:
+          type:
+          - number
+          - 'null'
+          description: Optional requested loan amount, if supported by the underlying lenders.
+          format: double
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: 'Merchant''s tags for this application.<br />
+
+            The tags will be used for marking/analytics purposes.'
+        correlationId:
+          type:
+          - string
+          - 'null'
+          description: Optional merchant's correlation id for this application.
+        merchantPromoCode:
+          type:
+          - string
+          - 'null'
+          description: Optional merchant promo code.
+        intent:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.Entities.IntentSafe'
+          description: Optional intent used for initiating specific lender flows.
+      additionalProperties: false
+    ChargeAfter.Libraries.WebApi.Contracts.AdditionalIds:
+      type: object
+      properties:
+        socialInsuranceNumber:
+          type:
+          - string
+          - 'null'
+          description: Canadian Social Insurance Number
+      additionalProperties: false
+      description: Additional IDs
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.Warranty:
+      required:
+      - price
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the name.
+          example: Awesome Warranty
+        sku:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the sku.
+          example: AWSMWRNTY
+        price:
+          type: number
+          description: Gets or sets the price.
+          format: double
+          example: 100
+      additionalProperties: false
+      description: Warranty.
     ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.CartDetails:
       required:
       - items
@@ -639,6 +532,43 @@ components:
       - GenericConsumerDevice
       - SelfServiceTerminal
       type: string
+    ChargeAfter.Libraries.WebApi.Contracts.Language:
+      enum:
+      - En
+      - Fr
+      type: string
+    ChargeAfter.Contracts.Source:
+      enum:
+      - Api
+      - Dashboard
+      - Sdk
+      - Managed
+      - Consumers
+      - CheckoutApi
+      - Distributor
+      - Widget
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.BoolType:
+      enum:
+      - 'NO'
+      - 'YES'
+      type: string
+      description: This Enum created to match UI select control
+    ChargeAfter.Libraries.WebApi.Contracts.Requests.Models.FlowType:
+      enum:
+      - Apply
+      - Checkout
+      type: string
+      description: FlowType.<p>Description:</p><ul><li><i>Apply</i> - Consumer checks if cart eligible.</li><li><i>Checkout</i> - Consumer makes purchasing in merchant.</li></ul>
+    ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionMerchantDetailsResponse:
+      type: object
+      properties:
+        storeId:
+          type:
+          - string
+          - 'null'
+          description: The store identifier
+      additionalProperties: false
     ChargeAfter.BFF.WebApi.Contracts.CreateSessionResponse:
       required:
       - applicationId
@@ -668,17 +598,87 @@ components:
           allOf:
           - $ref: '#/components/schemas/ChargeAfter.BFF.WebApi.Contracts.Responses.Models.SessionMerchantDetailsResponse'
       additionalProperties: false
-    ChargeAfter.Libraries.WebApi.Contracts.Preferences:
+    ChargeAfter.Libraries.WebApi.Contracts.Address:
+      required:
+      - city
+      - country
+      - line1
+      - state
+      - zipCode
       type: object
       properties:
-        language:
-          allOf:
-          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Language'
-        marketingOptIn:
+        country:
+          minLength: 1
+          type: string
+          description: Gets or sets the country.
+          example: US
+        state:
+          minLength: 1
+          type: string
+          description: Gets or sets the state.
+          example: NY
+        city:
+          minLength: 1
+          type: string
+          description: Gets or sets the city.
+          example: New York
+        line1:
+          minLength: 1
+          type: string
+          description: Gets or sets the line1.
+          example: 3 My Street
+        line2:
           type:
-          - boolean
+          - string
+          - 'null'
+          description: Gets or sets the line2.
+          example: My Building, 4th floor
+        zipCode:
+          minLength: 1
+          type: string
+          description: Gets or sets the zip code.
+          example: '10019'
+      additionalProperties: false
+      description: Consumer Address info.
+    ChargeAfter.Libraries.WebApi.Contracts.SpouseInfo:
+      type: object
+      properties:
+        spouseSameAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.BoolType'
+        spouseAddress:
+          allOf:
+          - $ref: '#/components/schemas/ChargeAfter.Libraries.WebApi.Contracts.Address'
+          description: Consumer Address info.
+        spouseFirstName:
+          type:
+          - string
+          - 'null'
+        spouseLastName:
+          type:
+          - string
           - 'null'
       additionalProperties: false
+    ChargeAfter.Libraries.Entities.IntentSafe:
+      enum:
+      - ExistingAccount
+      - Authenticate
+      - ConfirmPayment
+      - StandaloneLookup
+      type: string
+    ChargeAfter.Libraries.Entities.IncomeType:
+      enum:
+      - MonthlyNet
+      - MonthlyGross
+      - AnnualNet
+      - AnnualGross
+      type: string
+    ChargeAfter.Libraries.WebApi.Contracts.MarriageStatus:
+      enum:
+      - Not Married
+      - Married
+      type: string
+      description: This Enum created to match UI select control.
   securitySchemes:
     apiKey:
       type: apiKey
