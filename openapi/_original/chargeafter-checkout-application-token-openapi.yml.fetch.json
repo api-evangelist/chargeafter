@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.chargeafter.com/openapi/670376aaf16578005979477e",
+ "requested_url": "https://docs.chargeafter.com/openapi/670376aaf16578005979477e",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 65325,
+ "sha256": "4a7dd8ff1e1b20c55ad66a006486825d0a14fab6b9b4a5f64b87d010c7fb0035",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
