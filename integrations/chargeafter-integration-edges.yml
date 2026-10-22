@@ -11,6 +11,7 @@ checked:
 - https://n8n.io/integrations/chargeafter/
 - https://zapier.com/apps/chargeafter/integrations
 - bigcommerce/integrations/bigcommerce-integration-edges.yml
+- adobe-commerce/integrations/adobe-commerce-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -31,4 +32,21 @@ edges:
   detected: '2026-10-20'
   detected_by: mirror-platform-listings.py
   category: Payments & Security, Payment Processors & Gateways
+- partner_name: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://commercemarketplace.adobe.com/chargeafter1-magento-extention.html
+  mirror_of: adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+  apps:
+  - ChargeAfter Multi Lender Financing Platform
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Adobe Commerce Marketplace extension
 templates: []
