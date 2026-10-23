@@ -684,3 +684,9 @@ components:
       type: apiKey
       name: Authorization
       in: header
+x-provenance:
+  method: harvested
+  publisher: ChargeAfter
+  source: https://docs.chargeafter.com/openapi/679f78a678c8c80011456657
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

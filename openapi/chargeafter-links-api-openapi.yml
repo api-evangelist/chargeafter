@@ -1006,3 +1006,9 @@ components:
       description: ChargeAfter API supports an API key based authentication, provided in the `apiKey` HTTP header.
       scheme: Bearer
       bearerFormat: bearerFormat
+x-provenance:
+  method: harvested
+  publisher: ChargeAfter
+  source: https://docs.chargeafter.com/openapi/6939e623f32cc4f080ef7440
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
